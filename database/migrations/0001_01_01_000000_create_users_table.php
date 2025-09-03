@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('role', ['admin','vendor','customer'])->default('customer')->index();
             // optional vendor profile fields
             $table->string('company_name')->nullable()->index();
-            $table->string('shop_slug')->nullable()->unique();
             $table->boolean('is_active')->default(true)->index();
             $table->rememberToken();
             $table->timestamps();

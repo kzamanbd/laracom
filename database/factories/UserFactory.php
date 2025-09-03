@@ -31,7 +31,6 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'role' => 'customer',
             'company_name' => null,
-            'shop_slug' => null,
             'is_active' => true,
         ];
     }
@@ -56,7 +55,6 @@ class UserFactory extends Factory
             return [
                 'role' => 'vendor',
                 'company_name' => $this->faker->company(),
-                'shop_slug' => Str::slug($this->faker->unique()->company()),
             ];
         });
     }
