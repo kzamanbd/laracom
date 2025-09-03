@@ -8,11 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Tax;
 use App\Models\Category;
-use App\Models\Media;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use SplFileInfo;
+
 
 class ProductSeeder extends Seeder
 {
@@ -32,44 +28,24 @@ class ProductSeeder extends Seeder
                 ]);
             $vendorProducts->each(function (Product $p) use ($allCategoryIds) {
                 // add product images
-                Media::factory()->count(fake()->numberBetween(3, 4))->create($this->getMediaData($p));
+                DatabaseSeeder::createMedia($p, [
+                    'directory' => 'products',
+                    'collection' => 'product_images',
+                    'pattern' => 'product-',
+                    'total' => fake()->numberBetween(3, 4),
+                ]);
+
                 // add feature image
-                Media::factory()->create($this->getMediaData($p, 'product_feature'));
+                DatabaseSeeder::createMedia($p, [
+                    'directory' => 'products',
+                    'collection' => 'product_feature',
+                    'pattern' => 'thumbnail-',
+                ]);
+
                 $attachIds = $allCategoryIds->shuffle()->take(fake()->numberBetween(1, 3))->all();
                 $p->categories()->syncWithoutDetaching($attachIds);
             });
             $allProducts = $allProducts->merge($vendorProducts);
         }
-    }
-
-    public function getMediaData(Product $product, string $collection = 'product_images'): array
-    {
-        $media = $this->productImage();
-        $path = Storage::putFile('products', $media->getRealPath());
-        return [
-            'model_type' => Product::class,
-            'model_id' => $product->id,
-            'collection' => $collection,
-            'directory' => 'products',
-            'filename' => $media->getFilename(),
-            'extension' => $media->getExtension(),
-            'mime_type' => File::mimeType($media->getRealPath()),
-            'path' => $path,
-            'size_bytes' => $media->getSize(),
-        ];
-    }
-
-    public static function productImage(): SplFileInfo
-    {
-        $shopDir = public_path('assets/imgs/shop');
-        $files = File::allFiles($shopDir);
-        $productImages = [];
-        foreach ($files as $file) {
-            $name = $file->getRelativePathname();
-            if (Str::startsWith($name, 'product-')) {
-                $productImages[] = $file;
-            }
-        }
-        return fake()->randomElement($productImages);
     }
 }

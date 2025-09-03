@@ -10,6 +10,13 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = Category::factory()->count(12)->create();
+        $categories->each(function (Category $c) {
+            DatabaseSeeder::createMedia($c, [
+                'directory' => 'categories',
+                'pattern' => 'category-',
+                'collection' => 'category_images',
+            ]);
+        });
         $categories->each(function (Category $root) {
             Category::factory()
                 ->count(fake()->numberBetween(3, 6))
