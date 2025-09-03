@@ -15,8 +15,20 @@ class Product extends Model
         'meta' => 'array',
     ];
 
+    protected $appends = ['feature_image'];
+
     public function categories()
     {
-        return $this->belongsToMany(\App\Models\Category::class, 'category_product');
+        return $this->belongsToMany(Category::class, 'category_product');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Media::class, 'model');
+    }
+
+    public function getFeatureImageAttribute()
+    {
+        return $this->images()->where('collection', 'product_feature')->first();
     }
 }

@@ -28,4 +28,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class, 'category_product');
     }
+
+    public function images()
+    {
+        return $this->morphMany(Media::class, 'model');
+    }
 }
