@@ -75,7 +75,7 @@
                     <ul class="footer-list wow fadeIn animated">
                         <li><a href="my-account.html">My Account</a></li>
                         <li><a href="#">View Cart</a></li>
-                        <li><a href="#">My Wishlist</a></li>
+                        <li><a href="{{ route('wishlist') }}">My Wishlist</a></li>
                         <li><a href="#">Track My Order</a></li>
                         <li><a href="#">Order</a></li>
                     </ul>

@@ -6,6 +6,7 @@ Route::view('/', 'storefront.home')->name('home');
 Route::view('shop', 'storefront.shop')->name('shop');
 Route::view('product/{slug?}', 'storefront.product')->name('product');
 Route::view('cart', 'storefront.cart')->name('cart');
+Route::view('wishlist', 'storefront.wishlist')->name('wishlist');
 Route::view('checkout', 'storefront.checkout')->name('checkout');
 Route::view('my-account', 'storefront.my-account')->name('my-account');
 Route::view('about', 'storefront.about')->name('about');

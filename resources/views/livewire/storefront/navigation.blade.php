@@ -64,7 +64,7 @@
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.php">
+                                    <a href="{{ route('wishlist') }}">
                                         <img class="svgInject" alt="DraftScripts"
                                             src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
                                         <span class="pro-count blue">4</span>
@@ -305,7 +305,7 @@
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.php">
+                                <a href="{{ route('wishlist') }}">
                                     <img alt="DraftScripts"
                                         src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
                                     <span class="pro-count white">4</span>
