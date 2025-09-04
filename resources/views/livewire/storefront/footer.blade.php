@@ -41,7 +41,7 @@
                             <strong>Phone: </strong>+1 0000-000-000
                         </p>
                         <p class="wow fadeIn animated">
-                            <strong>Email: </strong>contact@surfsidemedia.in
+                            <strong>Email: </strong>info@kzaman.me
                         </p>
                         <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
                         <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
@@ -107,10 +107,9 @@
             </div>
             <div class="col-lg-6">
                 <p class="text-lg-end text-start font-sm text-muted mb-0">
-                    &copy; <strong class="text-brand">SurfsideMedia</strong> All rights reserved
+                    &copy; <strong class="text-brand">DraftScripts</strong> All rights reserved
                 </p>
             </div>
         </div>
     </div>
 </footer>
-

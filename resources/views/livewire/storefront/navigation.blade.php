@@ -393,7 +393,8 @@
                                 @foreach ($this->categories as $category)
                                     <li>
                                         <a href="{{ route('shop', ['category' => $category->slug]) }}">
-                                            <i class="surfsidemedia-font-dress"></i>{{ $category->name }}
+                                            {{-- Todo: Category icon  --}}
+                                            {{ $category->name }}
                                         </a>
                                     </li>
                                     {{-- Limit to 10 categories --}}
