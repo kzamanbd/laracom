@@ -20,6 +20,8 @@ Route::get('blog/{slug?}', function ($slug = null) {
 })->name('blog');
 Route::view('privacy-policy', 'storefront.privacy-policy')->name('privacy-policy');
 Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-conditions');
+Route::view('register', 'storefront.register')->name('register');
+Route::view('login', 'storefront.login')->name('login');
 
 
 Route::view('dashboard', 'dashboard')
