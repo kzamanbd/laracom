@@ -9,28 +9,22 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = Category::factory()->count(12)->create();
+        $categories = Category::factory()->count(50)->create();
         $categories->each(function (Category $c) {
             DatabaseSeeder::createMedia($c, [
                 'directory' => 'categories',
                 'pattern' => 'category-',
                 'collection' => 'category_images',
             ]);
-        });
-        $categories->each(function (Category $root) {
-            Category::factory()
-                ->count(fake()->numberBetween(3, 6))
-                ->create(['parent_id' => $root->id]);
-        });
-        Category::query()
-            ->whereNotNull('parent_id')
-            ->inRandomOrder()
-            ->take(20)
-            ->get()
-            ->each(function (Category $child) {
+            $subCategories = Category::factory()
+                ->count(fake()->numberBetween(10, 15))
+                ->create(['parent_id' => $c->id]);
+
+            $subCategories->each(function (Category $c) {
                 Category::factory()
-                    ->count(fake()->numberBetween(1, 3))
-                    ->create(['parent_id' => $child->id]);
+                    ->count(fake()->numberBetween(10, 15))
+                    ->create(['parent_id' => $c->id]);
             });
+        });
     }
 }

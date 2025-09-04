@@ -132,250 +132,80 @@
                             </a>
                             <div class="categori-dropdown-wrap categori-dropdown-active-large">
                                 <ul>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Hot & Trending</span>
-                                                                </li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Dresses</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Blouses & Shirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Hoodies & Sweatshirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Women's Sets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Suits & Blazers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Bodysuits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Tanks & Camis</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Coats & Jackets</a></li>
+                                    @foreach ($this->categories as $category)
+                                        @if ($loop->iteration > 10)
+                                            <!-- More categories -->
+                                            <li>
+                                                <ul class="more_slide_open" style="display: none;">
+                                                    <li>
+                                                        <a href="{{ route('shop', ['category' => $category->slug]) }}">
+                                                            {{ $category->name }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            @continue
+                                        @endif
+                                        <li @class(['has-children' => $category->children->isNotEmpty()])>
+                                            {{-- Todo: Add icon for category --}}
+                                            <a href="{{ route('shop', ['category' => $category->slug]) }}">
+                                                {{ $category->name }}
+                                            </a>
+
+                                            @if ($category->children->isNotEmpty())
+                                                <div class="dropdown-menu">
+                                                    <ul class="mega-menu d-lg-flex">
+                                                        <li class="mega-menu-col col-lg-7">
+                                                            <ul class="d-lg-flex">
+                                                                @foreach ($category->children as $childCategory)
+                                                                    {{-- Limit to 2 columns --}}
+                                                                    @break($loop->iteration == 3)
+                                                                    <li class="mega-menu-col col-lg-6">
+                                                                        <ul>
+                                                                            <li>
+                                                                                <a href="{{ route('shop', ['category' => $childCategory->slug]) }}"
+                                                                                    class="submenu-title">
+                                                                                    {{ $childCategory->name }}
+                                                                                </a>
+                                                                            </li>
+                                                                            @foreach ($childCategory->children as $subChildCategory)
+                                                                                <li>
+                                                                                    <a class="dropdown-item nav-link nav_item"
+                                                                                        href="{{ route('shop', ['category' => $subChildCategory->slug]) }}">
+                                                                                        {{ $subChildCategory->name }}
+                                                                                    </a>
+                                                                                </li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    </li>
+                                                                @endforeach
                                                             </ul>
                                                         </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Bottoms</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Leggings</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Skirts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Shorts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Jeans</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Pants & Capris</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Bikini Sets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Cover-Ups</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Swimwear</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="assets/imgs/banner/menu-banner-2.jpg"
-                                                            alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="header-banner2">
-                                                        <img src="assets/imgs/banner/menu-banner-3.jpg"
-                                                            alt="menu_banner2">
-                                                        <div class="banne_info">
-                                                            <h6>15% Off</h6>
-                                                            <h4>Hot Deals</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's
-                                            Clothing</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Jackets & Coats</span>
-                                                                </li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Down Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Parkas</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Faux Leather Coats</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Trench</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Wool & Blends</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Vests & Waistcoats</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Leather Coats</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Suits & Blazers</span>
-                                                                </li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Blazers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Suit Jackets</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Suit Pants</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Suits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Vests</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Tailor-made Suits</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Cover-Ups</a></li>
-                                                            </ul>
+                                                        <li class="mega-menu-col col-lg-5">
+                                                            <div class="header-banner2">
+                                                                <img src="assets/imgs/banner/menu-banner-2.jpg"
+                                                                    alt="menu_banner1">
+                                                                <div class="banne_info">
+                                                                    <h6>10% Off</h6>
+                                                                    <h4>New Arrival</h4>
+                                                                    <a href="#">Shop now</a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="header-banner2">
+                                                                <img src="assets/imgs/banner/menu-banner-3.jpg"
+                                                                    alt="menu_banner2">
+                                                                <div class="banne_info">
+                                                                    <h6>15% Off</h6>
+                                                                    <h4>Hot Deals</h4>
+                                                                    <a href="#">Shop now</a>
+                                                                </div>
+                                                            </div>
                                                         </li>
                                                     </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="assets/imgs/banner/menu-banner-4.jpg"
-                                                            alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i>
-                                            Cellphones</a>
-                                        <div class="dropdown-menu">
-                                            <ul class="mega-menu d-lg-flex">
-                                                <li class="mega-menu-col col-lg-7">
-                                                    <ul class="d-lg-flex">
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Hot & Trending</span>
-                                                                </li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Cellphones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">iPhones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Refurbished Phones</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Mobile Phone</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Mobile Phone Parts</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Phone Bags & Cases</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Communication Equipments</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Walkie Talkie</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="mega-menu-col col-lg-6">
-                                                            <ul>
-                                                                <li><span class="submenu-title">Accessories</span></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Screen Protectors</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Wire Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Wireless Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Car Chargers</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Power Bank</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Armbands</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Dust Plug</a></li>
-                                                                <li><a class="dropdown-item nav-link nav_item"
-                                                                        href="#">Signal Boosters</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="mega-menu-col col-lg-5">
-                                                    <div class="header-banner2">
-                                                        <img src="assets/imgs/banner/menu-banner-5.jpg"
-                                                            alt="menu_banner1">
-                                                        <div class="banne_info">
-                                                            <h6>10% Off</h6>
-                                                            <h4>New Arrival</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="header-banner2">
-                                                        <img src="assets/imgs/banner/menu-banner-6.jpg"
-                                                            alt="menu_banner2">
-                                                        <div class="banne_info">
-                                                            <h6>15% Off</h6>
-                                                            <h4>Hot Deals</h4>
-                                                            <a href="#">Shop now</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer &
-                                            Office</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer
-                                            Electronics</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-diamond"></i>Jewelry &
-                                            Accessories</a></li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-high-heels"></i>Shoes</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-teddy-bear"></i>Mother &
-                                            Kids</a>
-                                    </li>
-                                    <li><a href="shop.html"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a>
-                                    </li>
-                                    <li>
-                                        <ul class="more_slide_open" style="display: none;">
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Beauty,
-                                                    Health</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Bags and
-                                                    Shoes</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-diamond"></i>Consumer
-                                                    Electronics</a></li>
-                                            <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Automobiles
-                                                    &
-                                                    Motorcycles</a></li>
-                                        </ul>
-                                    </li>
+                                                </div>
+                                            @endif
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <div class="more_categories">Show more...</div>
                             </div>
@@ -387,40 +217,36 @@
                                     <li><a href="{{ route('about') }}">About</a></li>
                                     <li><a href="{{ route('shop') }}">Shop</a></li>
                                     <li class="position-static">
-                                        <a href="#">Our Collections <i class="fi-rs-angle-down"></i></a>
+                                        <a href="{{ route('shop') }}">
+                                            Our Collections <i class="fi-rs-angle-down"></i>
+                                        </a>
                                         <ul class="mega-menu">
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Women's Fashion</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Dresses</a></li>
-                                                    <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                                    <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                                    <li><a href="product-details.html">Wedding Dresses</a></li>
-                                                    <li><a href="product-details.html">Prom Dresses</a></li>
-                                                    <li><a href="product-details.html">Cosplay Costumes</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Men's Fashion</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Jackets</a></li>
-                                                    <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                                    <li><a href="product-details.html">Genuine Leather</a></li>
-                                                    <li><a href="product-details.html">Casual Pants</a></li>
-                                                    <li><a href="product-details.html">Sweatpants</a></li>
-                                                    <li><a href="product-details.html">Harem Pants</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                <a class="menu-title" href="#">Technology</a>
-                                                <ul>
-                                                    <li><a href="product-details.html">Gaming Laptops</a></li>
-                                                    <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                                    <li><a href="product-details.html">Tablets</a></li>
-                                                    <li><a href="product-details.html">Laptop Accessories</a></li>
-                                                    <li><a href="product-details.html">Tablet Accessories</a></li>
-                                                </ul>
-                                            </li>
+                                            @foreach ($this->categories as $category)
+                                                <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                    {{-- Limit to 3 categories --}}
+                                                    @break($loop->iteration > 3)
+
+                                                    <a class="menu-title"
+                                                        href="{{ route('shop', ['category' => $category->slug]) }}">
+                                                        {{ $category->name }}
+                                                    </a>
+                                                    @if ($category->children->isNotEmpty())
+                                                        <ul>
+                                                            @foreach ($category->children as $childCategory)
+                                                                <li>
+                                                                    <a
+                                                                        href="{{ route('shop', ['category' => $childCategory->slug]) }}">
+                                                                        {{ $childCategory->name }}
+                                                                    </a>
+                                                                </li>
+                                                                {{-- Limit to 5 subcategories --}}
+                                                                @break($loop->iteration == 5)
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                            {{-- Todo: Dynamic with offer --}}
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
                                                     <a href="product-details.html"><img
@@ -448,8 +274,10 @@
                                     </li>
                                     <li><a href="{{ route('blog') }}">Blog </a></li>
                                     <li><a href="{{ route('contact') }}">Contact</a></li>
-                                    <li><a href="{{ route('my-account') }}">My Account<i
-                                                class="fi-rs-angle-down"></i></a>
+                                    <li>
+                                        <a href="{{ route('my-account') }}">
+                                            My Account<i class="fi-rs-angle-down"></i>
+                                        </a>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('my-account') }}">Dashboard</a></li>
                                             <li><a href="#">Products</a></li>
@@ -562,68 +390,56 @@
                         </a>
                         <div class="categori-dropdown-wrap categori-dropdown-active-small">
                             <ul>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a>
-                                </li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a>
-                                </li>
-                                <li> <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a>
-                                </li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer &
-                                        Office</a>
-                                </li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a>
-                                </li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-high-heels"></i>Shoes</a></li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-teddy-bear"></i>Mother & Kids</a>
-                                </li>
-                                <li><a href="shop.html"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a></li>
+                                @foreach ($this->categories as $category)
+                                    <li>
+                                        <a href="{{ route('shop', ['category' => $category->slug]) }}">
+                                            <i class="surfsidemedia-font-dress"></i>{{ $category->name }}
+                                        </a>
+                                    </li>
+                                    {{-- Limit to 10 categories --}}
+                                    @break($loop->iteration == 10)
+                                @endforeach
+
                             </ul>
                         </div>
                     </div>
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu">
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="index.html">Home</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="shop.html">shop</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Our
-                                    Collections</a>
+                            <li class="menu-item-has-children">
+                                <span class="menu-expand"></span>
+                                <a href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <span class="menu-expand"></span>
+                                <a href="{{ route('shop') }}">shop</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <span class="menu-expand"></span>
+                                <a href="{{ route('shop') }}">Our Collections</a>
                                 <ul class="dropdown">
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                            href="#">Women's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-details.html">Dresses</a></li>
-                                            <li><a href="product-details.html">Blouses & Shirts</a></li>
-                                            <li><a href="product-details.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="product-details.html">Women's Sets</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                            href="#">Men's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-details.html">Jackets</a></li>
-                                            <li><a href="product-details.html">Casual Faux Leather</a></li>
-                                            <li><a href="product-details.html">Genuine Leather</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                            href="#">Technology</a>
-                                        <ul class="dropdown">
-                                            <li><a href="product-details.html">Gaming Laptops</a></li>
-                                            <li><a href="product-details.html">Ultraslim Laptops</a></li>
-                                            <li><a href="product-details.html">Tablets</a></li>
-                                            <li><a href="product-details.html">Laptop Accessories</a></li>
-                                            <li><a href="product-details.html">Tablet Accessories</a></li>
-                                        </ul>
-                                    </li>
+                                    @foreach ($this->categories as $category)
+                                        <li class="menu-item-has-children">
+                                            <span class="menu-expand"></span>
+                                            <a href="#">{{ $category->name }}</a>
+                                            <ul class="dropdown">
+                                                @foreach ($category->children as $subcategory)
+                                                    <li>
+                                                        <a href="product-details.html">{{ $subcategory->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="blog.html">Blog</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="#">Language</a>
+                            <li class="menu-item-has-children">
+                                <span class="menu-expand"></span>
+                                <a href="{{ route('blog') }}">Blog</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <span class="menu-expand"></span>
+                                <a href="#">Language</a>
                                 <ul class="dropdown">
                                     <li><a href="#">English</a></li>
                                     <li><a href="#">French</a></li>
