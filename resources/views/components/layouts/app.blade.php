@@ -9,9 +9,9 @@
     </head>
 
     <body class="font-sans antialiased">
-        @include('partials.header')
+        @livewire('storefront.navigation')
         {{ $slot }}
-        @include('partials.footer')
+        @livewire('storefront.footer')
         @include('partials.frontend-scripts')
     </body>
 
