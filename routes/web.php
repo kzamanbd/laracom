@@ -18,6 +18,8 @@ Route::get('blog/{slug?}', function ($slug = null) {
     // Logic to display a list of blog posts
     return view('frontend.blog');
 })->name('blog');
+Route::view('privacy-policy', 'frontend.privacy-policy')->name('privacy-policy');
+Route::view('terms-conditions', 'frontend.terms-conditions')->name('terms-conditions');
 
 
 Route::view('dashboard', 'dashboard')

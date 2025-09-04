@@ -96,8 +96,7 @@
                                 <strong class="mr-10">Color</strong>
                                 <ul class="list-filter color-filter">
                                     <li>
-                                        <a href="#" data-color="Red"><span
-                                                class="product-color-red"></span></a>
+                                        <a href="#" data-color="Red"><span class="product-color-red"></span></a>
                                     </li>
                                     <li>
                                         <a href="#" data-color="Yellow"><span
