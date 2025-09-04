@@ -7915,6 +7915,7 @@ span.fi-rs-apps {
     position: relative;
     padding: 30px;
     border: 1px solid #e8e8e8;
+    border-radius: 8px;
 }
 
 .widget-category ul > li {
@@ -8024,7 +8025,7 @@ span.fi-rs-apps {
 
 .sidebar-widget.price_range,
 .sidebar-widget.product-sidebar {
-    border-radius: 0px;
+    border-radius: 8px;
     border: 1px solid #e2e9e1;
     padding: 30px;
 }
