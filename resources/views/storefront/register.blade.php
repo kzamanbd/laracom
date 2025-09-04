@@ -1,4 +1,4 @@
-<x-layouts.app title="Register">
+<x-storefront-layout title="Register">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -65,4 +65,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

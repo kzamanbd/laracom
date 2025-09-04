@@ -1,4 +1,4 @@
-<x-layouts.app title="Product">
+<x-storefront-layout title="Product">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -837,4 +837,4 @@
         </section>
     </main>
     @include('partials.product-quick-view')
-</x-layouts.app>
+</x-storefront-layout>

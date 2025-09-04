@@ -1,4 +1,4 @@
-<x-layouts.app title="Checkout">
+<x-storefront-layout title="Checkout">
 
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -778,4 +778,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

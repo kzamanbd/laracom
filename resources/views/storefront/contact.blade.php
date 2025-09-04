@@ -1,4 +1,4 @@
-<x-layouts.app title="Contact Us">
+<x-storefront-layout title="Contact Us">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -53,4 +53,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

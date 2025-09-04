@@ -1,4 +1,4 @@
-<x-layouts.app title="Wishlist">
+<x-storefront-layout title="Wishlist">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -522,4 +522,4 @@
             });
         </script>
     @endpush
-</x-layouts.app>
+</x-storefront-layout>

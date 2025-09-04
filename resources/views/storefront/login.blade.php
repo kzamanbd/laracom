@@ -1,4 +1,4 @@
-<x-layouts.app title="Login">
+<x-storefront-layout title="Login">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -58,4 +58,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

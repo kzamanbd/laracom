@@ -1,4 +1,4 @@
-<x-layouts.app title="Blog - Tech Ecom">
+<x-storefront-layout title="Blog - Tech Ecom">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -416,4 +416,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

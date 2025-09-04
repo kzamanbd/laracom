@@ -1,4 +1,4 @@
-<x-layouts.app title="Privacy Policy">
+<x-storefront-layout title="Privacy Policy">
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -219,4 +219,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>

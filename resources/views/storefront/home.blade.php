@@ -1,4 +1,4 @@
-<x-layouts.app title="Home">
+<x-storefront-layout title="Home">
     <main class="main">
         <section class="home-slider position-relative pt-50">
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
@@ -1621,4 +1621,4 @@
             </div>
         </section>
     </main>
-</x-layouts.app>
+</x-storefront-layout>
