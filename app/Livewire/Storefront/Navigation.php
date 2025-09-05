@@ -9,7 +9,7 @@ class Navigation extends Component
 {
     public function getCategoriesProperty()
     {
-        return Category::with('children')
+        return Category::with('children.children')
             ->whereNull('parent_id')
             ->limit(20)
             ->orderBy('order_column', 'asc')
