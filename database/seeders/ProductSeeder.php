@@ -8,10 +8,15 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Tax;
 use App\Models\Category;
-
+use Illuminate\Support\Facades\Http;
 
 class ProductSeeder extends Seeder
 {
+    public function getRemoteProducts()
+    {
+        $response = Http::get('hhttps://dummyjson.com/products?limit=2000');
+        return collect($response->json());
+    }
     public function run(): void
     {
         $taxes = Tax::all();
