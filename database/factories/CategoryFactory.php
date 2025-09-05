@@ -27,10 +27,6 @@ class CategoryFactory extends Factory
             'description' => $this->faker->sentence(10),
             'is_active' => $this->faker->boolean(90),
             'order_column' => $this->faker->numberBetween(0, 100),
-            'meta' => [
-                'seo_title' => $this->faker->sentence(3),
-                'seo_description' => $this->faker->sentence(6),
-            ],
         ];
     }
 
@@ -39,7 +35,7 @@ class CategoryFactory extends Factory
      */
     public function child(Category $parent): self
     {
-        return $this->state(fn () => [
+        return $this->state(fn() => [
             'parent_id' => $parent->id,
         ]);
     }
