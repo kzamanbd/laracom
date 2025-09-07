@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Exception;
 use App\Models\User;
 use App\Models\Media;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -100,8 +101,9 @@ class ProductSeeder extends Seeder
 
                 // store the product reviews
                 foreach ($product['reviews'] ?? [] as $review) {
-                    $p->reviews()->create([
-                        'user_id' => User::inRandomOrder()->first()->id,
+                    Comment::factory()->create([
+                        'model_type' => Product::class,
+                        'model_id' => $p->id,
                         'rating' => $review['rating'] ?? 5,
                         'comment' => $review['comment'] ?? fake()->sentence(),
                     ]);
@@ -109,7 +111,10 @@ class ProductSeeder extends Seeder
 
                 // store product tags
                 foreach ($product['tags'] ?? [] as $tag) {
-                    $p->tags()->firstOrCreate(['name' => $tag, 'slug' => Str::slug($tag)]);
+                    $p->tags()->firstOrCreate(
+                        ['slug' => Str::slug($tag)],
+                        ['name' => ucwords($tag)],
+                    );
                 }
 
                 $this->command->getOutput()->progressAdvance(); // move the bar one step
