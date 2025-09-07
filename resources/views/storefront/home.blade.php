@@ -1621,4 +1621,5 @@
             </div>
         </section>
     </main>
+    @livewire('storefront.product.quick-view')
 </x-storefront-layout>

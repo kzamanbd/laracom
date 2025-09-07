@@ -300,7 +300,8 @@
                     <div class="hotline d-none d-lg-block">
                         <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
                     </div>
-                    <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
+                    <p class="mobile-promotion">
+                        Happy <span class="text-brand"> Mother's Day</span>. Big Sale Up to 40%
                     </p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
@@ -477,16 +478,21 @@
                 </div>
                 <div class="mobile-social-icon">
                     <h5 class="mb-15 text-grey-4">Follow Us</h5>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
-                            alt=""></a>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}"
-                            alt=""></a>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}"
-                            alt=""></a>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}"
-                            alt=""></a>
-                    <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}"
-                            alt=""></a>
+                    <a href="#">
+                        <img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}" alt="">
+                    </a>
                 </div>
             </div>
         </div>

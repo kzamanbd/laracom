@@ -15,8 +15,6 @@ class Product extends Model
         'meta' => 'array',
     ];
 
-    protected $appends = ['thumbnail'];
-
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');

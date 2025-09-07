@@ -82,6 +82,7 @@ class ProductSeeder extends Seeder
                 if (!empty($product['category'])) {
                     $category = Category::firstOrCreate([
                         'slug' => Str::slug($product['category']),
+                        'parent_id' => null,
                     ], [
                         'name' => ucwords($product['category']),
                         'description' => fake()->sentence(),

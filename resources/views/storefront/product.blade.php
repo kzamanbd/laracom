@@ -836,5 +836,4 @@
             </div>
         </section>
     </main>
-    @include('partials.product-quick-view')
 </x-storefront-layout>
