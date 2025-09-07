@@ -4,14 +4,16 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Media;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+use Exception;
 use SplFileInfo;
+use App\Models\Media;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -76,5 +78,16 @@ class DatabaseSeeder extends Seeder
             }
         }
         return fake()->randomElement($productImages);
+    }
+
+    public static function getData(string $schema, string $obj = 'data', int $limit = 2000)
+    {
+        try {
+            $response = Http::get("https://dummyjson.com/$schema?limit=$limit");
+            $json = $response->json();
+            return $json[$obj] ?? $json;
+        } catch (Exception $e) {
+            return [];
+        }
     }
 }

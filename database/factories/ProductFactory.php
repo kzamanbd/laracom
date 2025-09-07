@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'slug' => Str::slug($name) . '-' . $this->faker->unique()->numberBetween(10000, 99999),
             'sku' => strtoupper($this->faker->unique()->bothify('SKU-#####')),
             'type' => 'simple',
-            'short_description' => $this->faker->sentence(10),
+            'excerpt' => $this->faker->sentence(10),
             'description' => $this->faker->paragraphs(3, true),
             'price' => $this->faker->randomFloat(2, 5, 500),
             'sale_price' => null,

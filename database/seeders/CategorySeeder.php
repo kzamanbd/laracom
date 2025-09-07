@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Category;
 use Exception;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 
 class CategorySeeder extends Seeder
@@ -46,8 +46,7 @@ class CategorySeeder extends Seeder
             "Crafts & Hobbies"
         ];
         try {
-            $response = Http::get('https://dummyjson.com/products/categories');
-            $categories = array_merge($response->json(), $localCategories);
+            $categories = array_merge(DatabaseSeeder::getData('products/categories', 'categories'), $localCategories);
 
             return collect($categories)
                 ->pluck('name')
@@ -62,6 +61,8 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = $this->getRemoteData();
+        // set max progress
+        $this->command->getOutput()->progressStart(count($categories));
         foreach ($categories as $categoryName) {
             $category = Category::firstOrCreate([
                 'name' => ucwords($categoryName),
@@ -85,6 +86,8 @@ class CategorySeeder extends Seeder
                     ->count(fake()->numberBetween(10, 15))
                     ->create(['parent_id' => $c->id]);
             });
+            $this->command->getOutput()->progressAdvance(); // move the bar one step
         }
+        $this->command->getOutput()->progressFinish();
     }
 }

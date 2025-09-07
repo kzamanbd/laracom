@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
             $table->morphs('model'); // model_type, model_id
-            $table->string('collection')->default('default')->index();
-            $table->string('disk')->default('public');
+            $table->string('collection')->default('default')->index(); // e.g. "images", "documents"
+            $table->string('disk')->default('public'); // storage disk
             $table->string('directory')->nullable();
             $table->string('filename');
             $table->string('extension', 16)->nullable();
@@ -23,10 +24,8 @@ return new class extends Migration
             $table->unsignedBigInteger('size_bytes')->default(0);
             $table->string('path')->index(); // full relative path
             $table->string('alt')->nullable();
-            $table->string('caption')->nullable();
             $table->unsignedInteger('order_column')->default(0)->index();
-            $table->json('variants')->nullable(); // thumbnails, conversions
-            $table->json('meta')->nullable();
+            $table->json('meta')->nullable(); // custom metadata
             $table->timestamps();
 
             $table->index(['model_type', 'model_id', 'collection']);

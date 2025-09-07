@@ -19,10 +19,9 @@ class MediaFactory extends Factory
         return [
             'model_type' => null,
             'model_id'   => null,
-            'disk' => 'public',
+            'title' => $this->faker->optional()->sentence(6),
             'alt' => $this->faker->sentence(3),
-            'caption' => $this->faker->optional()->sentence(6),
-            'order_column' => $this->faker->numberBetween(0, 5),
+            'disk' => 'public',
         ];
     }
 }

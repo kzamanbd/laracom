@@ -15,7 +15,7 @@ class Product extends Model
         'meta' => 'array',
     ];
 
-    protected $appends = ['feature_image'];
+    protected $appends = ['thumbnail'];
 
     public function categories()
     {
@@ -27,8 +27,21 @@ class Product extends Model
         return $this->morphMany(Media::class, 'model');
     }
 
-    public function getFeatureImageAttribute()
+    public function getThumbnailAttribute()
     {
-        return $this->images()->where('collection', 'product_feature')->first();
+        $thumbnail = $this->images()->where('collection', 'thumbnail')->first();
+        if ($thumbnail) {
+            return $thumbnail->file_path;
+        }
+        return null;
+    }
+
+    public function reviews()
+    {
+        return $this->morphMany(Comment::class, 'model');
+    }
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

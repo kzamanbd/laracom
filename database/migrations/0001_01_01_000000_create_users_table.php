@@ -18,8 +18,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // roles: admin, vendor, customer (multi-vendor enabled via 'vendor')
-            $table->enum('role', ['admin','vendor','customer'])->default('customer')->index();
+            $table->enum('role', ['admin', 'vendor', 'customer'])->default('customer')->index();
             // optional vendor profile fields
+            $table->string('store_name')->nullable()->index();
+            $table->string('store_description')->nullable();
+            $table->string('store_logo')->nullable();
+            $table->string('slug')->nullable()->index()->unique();
             $table->string('company_name')->nullable()->index();
             $table->boolean('is_active')->default(true)->index();
             $table->rememberToken();
