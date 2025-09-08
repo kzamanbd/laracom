@@ -13,7 +13,11 @@ class ProductService
     public function getShopProducts($perPage = 10)
     {
         return Product::query()
-            ->with(['categories', 'images'])
+            ->with([
+                'categories',
+                'thumbnail',
+                'images',
+            ])
             ->inRandomOrder()
             ->paginate($perPage);
     }

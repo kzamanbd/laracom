@@ -22,16 +22,34 @@ class Product extends Model
 
     public function images()
     {
-        return $this->morphMany(Media::class, 'model');
+        return $this->morphMany(Media::class, 'model')->whereNot('collection', 'thumbnail');
     }
 
-    public function getThumbnailAttribute()
+    /**
+     * Get the first thumbnail image
+     */
+    public function thumbnail()
     {
-        $thumbnail = $this->images()->where('collection', 'thumbnail')->first();
-        if ($thumbnail) {
-            return $thumbnail->file_path;
+        return $this->morphOne(Media::class, 'model')->where('collection', 'thumbnail');
+    }
+
+    public function getThumbnailPathAttribute()
+    {
+        // Try to get from loaded relationship first to avoid N+1
+        if ($this->relationLoaded('thumbnail')) {
+            return $this->thumbnail?->file_path;
         }
-        return null;
+
+        // Fallback to direct query if relationship not loaded
+        static $thumbnailCache = [];
+        $cacheKey = $this->id;
+
+        if (!isset($thumbnailCache[$cacheKey])) {
+            $thumbnail = $this->images()->where('collection', 'thumbnail')->first();
+            $thumbnailCache[$cacheKey] = $thumbnail?->file_path;
+        }
+
+        return $thumbnailCache[$cacheKey];
     }
 
     public function reviews()

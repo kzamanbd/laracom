@@ -3,8 +3,8 @@
         <div class="product-img-action-wrap">
             <div class="product-img product-img-zoom">
                 <a href="{{ route('product', ['slug' => $product->slug]) }}">
-                    <img class="default-img" src="{{ $product->thumbnail }}" alt="">
-                    <img class="hover-img" src="{{ $product->thumbnail }}" alt="">
+                    <img class="default-img" src="{{ $product->thumbnail_path }}" alt="">
+                    <img class="hover-img" src="{{ $product->thumbnail_path }}" alt="">
                 </a>
             </div>
             <div class="product-action-1">
