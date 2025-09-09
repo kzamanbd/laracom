@@ -45,9 +45,9 @@
                 </span>
             </div>
             <div class="product-price">
-                <span>${{ $product->sale_price }} </span>
+                <span>{{ formatPrice($product->sale_price) }} </span>
                 @if ($product->sale_price < $product->price)
-                    <span class="old-price">${{ $product->price }}</span>
+                    <span class="old-price">{{ formatPrice($product->price) }}</span>
                 @endif
             </div>
             <div class="product-action-1 show">

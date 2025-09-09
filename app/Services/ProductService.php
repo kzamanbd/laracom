@@ -18,7 +18,6 @@ class ProductService
                 'thumbnail',
                 'images',
             ])
-            ->inRandomOrder()
             ->paginate($perPage);
     }
 }

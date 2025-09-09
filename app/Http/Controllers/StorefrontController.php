@@ -2,23 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ProductService;
 use App\Http\Requests\ShopProductRequest;
+use App\Services\CartService;
+use App\Services\ProductService;
+use Illuminate\View\View;
 
 class StorefrontController extends Controller
 {
-    protected $productService;
+    public function __construct(public ProductService $productService) {}
 
-    public function __construct(ProductService $productService)
-    {
-        $this->productService = $productService;
-    }
-
-    public function shop(ShopProductRequest $request)
+    public function shop(ShopProductRequest $request): View
     {
         // You can use $request->validated() for filters, sorting, etc.
         $products = $this->productService->getShopProducts(12);
-        // dd($products);
+
         return view('storefront.shop', compact('products'));
+    }
+
+    public function cart(): View
+    {
+        return view('storefront.cart');
+    }
+
+    public function cartClear(CartService $cartService): void
+    {
+        $cartService->clearCart();
     }
 }
