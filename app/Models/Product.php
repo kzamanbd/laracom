@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, SoftDeletes;
+
     protected $casts = [
         'attributes' => 'array',
         'meta' => 'array',
@@ -33,7 +34,7 @@ class Product extends Model
         return $this->morphOne(Media::class, 'model')->where('collection', 'thumbnail');
     }
 
-    public function getThumbnailPathAttribute()
+    public function getThumbnailPathAttribute(): ?string
     {
         // Try to get from loaded relationship first to avoid N+1
         if ($this->relationLoaded('thumbnail')) {
@@ -44,8 +45,8 @@ class Product extends Model
         static $thumbnailCache = [];
         $cacheKey = $this->id;
 
-        if (!isset($thumbnailCache[$cacheKey])) {
-            $thumbnail = $this->images()->where('collection', 'thumbnail')->first();
+        if (! isset($thumbnailCache[$cacheKey])) {
+            $thumbnail = $this->thumbnail()->first();
             $thumbnailCache[$cacheKey] = $thumbnail?->file_path;
         }
 
@@ -56,6 +57,7 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class, 'model');
     }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
