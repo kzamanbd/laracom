@@ -7,15 +7,29 @@
                         <div class="header-info">
                             <ul>
                                 <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English
-                                        <i class="fi-rs-angle-small-down"></i></a>
+                                    <a class="language-dropdown-active" href="#">
+                                        <i class="fi-rs-world"></i> English
+                                        <i class="fi-rs-angle-small-down"></i>
+                                    </a>
                                     <ul class="language-dropdown">
-                                        <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-fr.png') }}"
-                                                    alt="">Français</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-dt.png') }}"
-                                                    alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="{{ asset('assets/imgs/theme/flag-ru.png') }}"
-                                                    alt="">Pусский</a></li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="{{ asset('assets/imgs/theme/flag-fr.png') }}" alt="">
+                                                Français
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="{{ asset('assets/imgs/theme/flag-dt.png') }}" alt="">
+                                                Deutsch
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="{{ asset('assets/imgs/theme/flag-ru.png') }}" alt="">
+                                                Pусский
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -25,9 +39,12 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a></li>
+                                    <li>Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a>
+                                    </li>
                                     <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="{{ route('shop') }}">Shop now</a>
+                                    <li>
+                                        Trendy 25silver jewelry, save up 35% off today
+                                        <a href="{{ route('shop') }}">Shop now</a>
                                     </li>
                                 </ul>
                             </div>
@@ -173,13 +190,12 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="{{ route('home') }}">Home </a></li>
-                                    <li><a href="{{ route('about') }}">About</a></li>
-                                    <li><a href="{{ route('shop') }}">Shop</a></li>
+                                    <li><x-storefront.link route="home">Home</x-storefront.link></li>
+                                    <li><x-storefront.link route="shop">Shop</x-storefront.link></li>
                                     <li class="position-static">
-                                        <a href="{{ route('shop') }}">
+                                        <x-storefront.link route="shop">
                                             Our Collections <i class="fi-rs-angle-down"></i>
-                                        </a>
+                                        </x-storefront.link>
                                         <ul class="mega-menu">
                                             @foreach ($this->categories as $category)
                                                 <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -232,12 +248,14 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{ route('blog') }}">Blog </a></li>
-                                    <li><a href="{{ route('contact') }}">Contact</a></li>
+                                    <li><x-storefront.link route="blog">Blog</x-storefront.link></li>
+                                    <li><x-storefront.link route="about">About</x-storefront.link></li>
+                                    <li><x-storefront.link route="contact">Contact</x-storefront.link></li>
                                     <li>
-                                        <a href="{{ route('my-account') }}">
-                                            My Account<i class="fi-rs-angle-down"></i>
-                                        </a>
+                                        <x-storefront.link route="my-account">
+                                            My Account
+                                            <i class="fi-rs-angle-down"></i>
+                                        </x-storefront.link>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('my-account') }}">Dashboard</a></li>
                                             <li><a href="#">Products</a></li>
