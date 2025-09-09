@@ -18,12 +18,12 @@ class ShippingFactory extends Factory
     {
         return [
             'order_id' => null, // set in seeder
-            'carrier' => $this->faker->randomElement(['DHL','FedEx','UPS','USPS','Aramex']),
-            'service' => $this->faker->randomElement(['Ground','Express','Priority','Economy']),
+            'carrier' => $this->faker->randomElement(['DHL', 'FedEx', 'UPS', 'USPS', 'Aramex']),
+            'service' => $this->faker->randomElement(['Ground', 'Express', 'Priority', 'Economy']),
             'tracking_number' => strtoupper($this->faker->bothify('???########')),
-            'status' => $this->faker->randomElement(['pending','label_printed','shipped','in_transit','delivered','returned']),
+            'status' => $this->faker->randomElement(['pending', 'label_printed', 'shipped', 'in_transit', 'delivered', 'returned']),
             'cost' => $this->faker->randomFloat(2, 5, 50),
-            'shipped_at' => $this->faker->optional(0.7)->dateTimeBetween('-30 days','now'),
+            'shipped_at' => $this->faker->optional(0.7)->dateTimeBetween('-30 days', 'now'),
             'delivered_at' => null, // will set if status delivered
             'meta' => null,
         ];

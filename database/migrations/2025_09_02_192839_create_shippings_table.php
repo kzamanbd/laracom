@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('service')->nullable();     // e.g., Express, Ground
             $table->string('tracking_number')->nullable()->index();
             $table->enum('status', [
-                'pending','label_printed','shipped','in_transit','delivered','returned'
+                'pending', 'label_printed', 'shipped', 'in_transit', 'delivered', 'returned',
             ])->default('pending')->index();
             $table->decimal('cost', 12, 2)->default(0);
             $table->timestamp('shipped_at')->nullable();

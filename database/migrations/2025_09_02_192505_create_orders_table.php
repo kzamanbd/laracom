@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->nullable()->constrained('customers')->nullOnDelete();
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete(); // placed by (if logged in)
             $table->enum('status', [
-                'pending','paid','processing','shipped','completed','cancelled','refunded'
+                'pending', 'paid', 'processing', 'shipped', 'completed', 'cancelled', 'refunded',
             ])->default('pending')->index();
 
             $table->string('currency', 3)->default('USD');
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->decimal('shipping_total', 14, 2)->default(0);
             $table->decimal('total', 14, 2)->default(0);
 
-            $table->enum('payment_status', ['unpaid','paid','partially_refunded','refunded'])->default('unpaid')->index();
+            $table->enum('payment_status', ['unpaid', 'paid', 'partially_refunded', 'refunded'])->default('unpaid')->index();
 
             // Snapshotted addresses for historical accuracy
             $table->unsignedBigInteger('billing_address_id')->nullable();

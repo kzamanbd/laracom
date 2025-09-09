@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use Exception;
-use SplFileInfo;
 use App\Models\Media;
-use Illuminate\Support\Str;
-use InvalidArgumentException;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use InvalidArgumentException;
+use SplFileInfo;
 
 class DatabaseSeeder extends Seeder
 {
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
 
         $total = $args['total'] ?? 1;
 
-        if (!$pattern) {
+        if (! $pattern) {
             throw new InvalidArgumentException('Pattern is required to fetch media file.');
         }
 
@@ -78,6 +78,7 @@ class DatabaseSeeder extends Seeder
                 $productImages[] = $file;
             }
         }
+
         return fake()->randomElement($productImages);
     }
 
@@ -86,6 +87,7 @@ class DatabaseSeeder extends Seeder
         try {
             $response = Http::get("https://dummyjson.com/$schema?limit=$limit");
             $json = $response->json();
+
             return $json[$obj] ?? $json;
         } catch (Exception $e) {
             return [];

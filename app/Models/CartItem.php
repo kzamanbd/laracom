@@ -137,10 +137,10 @@ class CartItem extends Model
 
         if (! empty($this->product_attributes)) {
             $attributes = collect($this->product_attributes)
-                ->map(fn($value, $key) => ucfirst($key) . ': ' . $value)
+                ->map(fn ($value, $key) => ucfirst($key).': '.$value)
                 ->implode(', ');
 
-            $name .= ' (' . $attributes . ')';
+            $name .= ' ('.$attributes.')';
         }
 
         return $name;

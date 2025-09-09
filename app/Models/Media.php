@@ -11,6 +11,7 @@ class Media extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     protected $casts = [
         'variants' => 'array',
         'meta' => 'array',
@@ -27,7 +28,6 @@ class Media extends Model
     {
         return $this->morphTo();
     }
-
 
     public function getFilePathAttribute()
     {

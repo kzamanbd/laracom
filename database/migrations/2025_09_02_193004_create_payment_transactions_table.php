@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('reference')->nullable()->index(); // gateway txn id
             $table->decimal('amount', 14, 2);
             $table->string('currency', 3)->default('USD');
-            $table->enum('status', ['initiated','succeeded','failed','refunded','partially_refunded'])->index();
+            $table->enum('status', ['initiated', 'succeeded', 'failed', 'refunded', 'partially_refunded'])->index();
             $table->json('payload')->nullable(); // gateway response snapshot
             $table->timestamp('processed_at')->nullable();
             $table->timestamps();

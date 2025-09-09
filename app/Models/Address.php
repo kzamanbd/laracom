@@ -9,6 +9,7 @@ class Address extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     protected $casts = [
         'meta' => 'array',
     ];

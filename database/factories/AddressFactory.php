@@ -18,8 +18,8 @@ class AddressFactory extends Factory
     {
         return [
             'addressable_type' => null, // set in seeder
-            'addressable_id'   => null, // set in seeder
-            'type' => $this->faker->randomElement(['billing','shipping']),
+            'addressable_id' => null, // set in seeder
+            'type' => $this->faker->randomElement(['billing', 'shipping']),
             'name' => $this->faker->name(),
             'company' => $this->faker->optional()->company(),
             'phone' => $this->faker->optional()->e164PhoneNumber(),
@@ -28,7 +28,7 @@ class AddressFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->optional()->state(),
             'postal_code' => $this->faker->optional()->postcode(),
-            'country' => $this->faker->randomElement(['US','CA','GB','AU','DE','BD']),
+            'country' => $this->faker->randomElement(['US', 'CA', 'GB', 'AU', 'DE', 'BD']),
             'is_default' => false,
             'meta' => null,
         ];

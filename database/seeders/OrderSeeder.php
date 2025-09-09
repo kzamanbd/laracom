@@ -2,15 +2,14 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
-use App\Models\Order;
-use App\Models\Customer;
-use App\Models\Product;
 use App\Models\Address;
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentTransaction;
+use App\Models\Product;
 use App\Models\Shipping;
+use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
 {
@@ -31,13 +30,13 @@ class OrderSeeder extends Seeder
                 'addressable_type' => Order::class,
                 'addressable_id' => $o->id,
                 'type' => 'billing',
-                'name' => $customer->first_name . ' ' . $customer->last_name,
+                'name' => $customer->first_name.' '.$customer->last_name,
             ]);
             $shipping = Address::factory()->create([
                 'addressable_type' => Order::class,
                 'addressable_id' => $o->id,
                 'type' => 'shipping',
-                'name' => $customer->first_name . ' ' . $customer->last_name,
+                'name' => $customer->first_name.' '.$customer->last_name,
             ]);
             $o->billing_address_id = $billing->id;
             $o->shipping_address_id = $shipping->id;

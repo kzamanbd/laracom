@@ -20,10 +20,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->unique()->words(3, true);
+
         return [
             'user_id' => null, // set in seeder
             'name' => Str::title($name),
-            'slug' => Str::slug($name) . '-' . $this->faker->unique()->numberBetween(10000, 99999),
+            'slug' => Str::slug($name).'-'.$this->faker->unique()->numberBetween(10000, 99999),
             'sku' => strtoupper($this->faker->unique()->bothify('SKU-#####')),
             'type' => 'simple',
             'excerpt' => $this->faker->sentence(10),

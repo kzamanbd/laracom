@@ -17,12 +17,12 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         $first = $this->faker->firstName();
-        $last  = $this->faker->lastName();
+        $last = $this->faker->lastName();
 
         return [
             'user_id' => null, // set in seeder when linking to a user
             'first_name' => $first,
-            'last_name'  => $last,
+            'last_name' => $last,
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->e164PhoneNumber(),
             'default_billing_address_id' => null,

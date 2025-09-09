@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use Exception;
-use App\Models\User;
-use App\Models\Media;
-use App\Models\Comment;
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use App\Models\Comment;
+use App\Models\Media;
+use App\Models\Product;
+use App\Models\User;
+use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -21,14 +21,14 @@ class ProductSeeder extends Seeder
     {
         try {
             $response = Http::get($imageUrl);
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 return;
             }
             $imageContents = $response->body();
             $extension = pathinfo($imageUrl, PATHINFO_EXTENSION);
-            $imageName = 'product-' . Str::uuid() . '.' . $extension;
+            $imageName = 'product-'.Str::uuid().'.'.$extension;
             $path = "products/$imageName";
-            if (!Storage::put($path, $imageContents)) {
+            if (! Storage::put($path, $imageContents)) {
                 return;
             }
             Media::factory()->create([
@@ -44,9 +44,10 @@ class ProductSeeder extends Seeder
             ]);
         } catch (Exception $e) {
             // Handle exceptions if needed
-            Log::error('Failed to fetch image: ' . $e->getMessage());
+            Log::error('Failed to fetch image: '.$e->getMessage());
         }
     }
+
     public function run(): void
     {
         $vendors = User::query()->where('role', 'vendor')->limit(10)->get();
@@ -66,7 +67,7 @@ class ProductSeeder extends Seeder
                 $p = Product::factory()->create([
                     'user_id' => $vendor->id,
                     'name' => $product['title'],
-                    'slug' => Str::slug($product['title']) . '-' . Str::random(5),
+                    'slug' => Str::slug($product['title']).'-'.Str::random(5),
                     'description' => $product['description'],
                     'price' => $product['price'],
                     'sale_price' => $product['price'],
@@ -79,7 +80,7 @@ class ProductSeeder extends Seeder
                 ]);
                 $p = Product::find($p->id); // reload to get the casts
                 // attach categories if exists
-                if (!empty($product['category'])) {
+                if (! empty($product['category'])) {
                     $category = Category::firstOrCreate([
                         'slug' => Str::slug($product['category']),
                         'parent_id' => null,
@@ -96,7 +97,7 @@ class ProductSeeder extends Seeder
                 }
 
                 // add feature image
-                if (!empty($product['thumbnail'])) {
+                if (! empty($product['thumbnail'])) {
                     $this->storeImage($product['thumbnail'], $p->id, 'thumbnail');
                 }
 

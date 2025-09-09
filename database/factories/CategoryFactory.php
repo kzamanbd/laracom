@@ -23,7 +23,7 @@ class CategoryFactory extends Factory
         return [
             'parent_id' => null, // set manually for subcategories
             'name' => Str::title($name),
-            'slug' => Str::slug($name) . '-' . $this->faker->unique()->numberBetween(1000, 9999),
+            'slug' => Str::slug($name).'-'.$this->faker->unique()->numberBetween(1000, 9999),
             'description' => $this->faker->sentence(10),
             'is_active' => $this->faker->boolean(90),
             'order_column' => $this->faker->numberBetween(0, 100),
@@ -35,7 +35,7 @@ class CategoryFactory extends Factory
      */
     public function child(Category $parent): self
     {
-        return $this->state(fn() => [
+        return $this->state(fn () => [
             'parent_id' => $parent->id,
         ]);
     }

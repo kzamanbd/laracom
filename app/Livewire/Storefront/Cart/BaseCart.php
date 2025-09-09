@@ -20,7 +20,6 @@ class BaseCart extends Component
     /**
      * Get the current cart
      */
-
     public function cart(): Cart
     {
         return $this->getCartService()->getCurrentCart()

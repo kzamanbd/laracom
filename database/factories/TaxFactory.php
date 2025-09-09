@@ -17,10 +17,10 @@ class TaxFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'VAT ' . $this->faker->numberBetween(5, 20) . '%',
-            'rate' => $this->faker->randomElement([0.05,0.07,0.10,0.12,0.15,0.18,0.20]),
+            'name' => 'VAT '.$this->faker->numberBetween(5, 20).'%',
+            'rate' => $this->faker->randomElement([0.05, 0.07, 0.10, 0.12, 0.15, 0.18, 0.20]),
             'inclusive' => false,
-            'country' => $this->faker->randomElement(['US','CA','GB','AU','DE','BD']),
+            'country' => $this->faker->randomElement(['US', 'CA', 'GB', 'AU', 'DE', 'BD']),
             'state' => null,
             'postal_code' => null,
             'priority' => 1,

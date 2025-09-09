@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Post;
 use App\Models\Comment;
-use Illuminate\Support\Str;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 
 class PostSeeder extends Seeder
 {
@@ -28,7 +26,7 @@ class PostSeeder extends Seeder
             // Create the post
             $post = Post::factory()->create([
                 'title' => $post['title'],
-                'slug' => Str::slug($post['title']) . '-' . Str::random(5),
+                'slug' => Str::slug($post['title']).'-'.Str::random(5),
                 'content' => $post['body'],
             ]);
             // Create post media

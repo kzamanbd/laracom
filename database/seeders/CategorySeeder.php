@@ -2,48 +2,46 @@
 
 namespace Database\Seeders;
 
-use Exception;
 use App\Models\Category;
-use Illuminate\Support\Str;
+use Exception;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
-
     public function getRemoteData()
     {
         $localCategories = [
-            "Electronics",
-            "Smartphones",
-            "Laptops",
-            "Cameras",
-            "Audio & Headphones",
-            "Wearable Tech",
-            "Home Appliances",
-            "Furniture",
-            "Kitchenware",
-            "Books",
-            "Fashion - Men",
-            "Fashion - Women",
-            "Shoes",
-            "Sports & Outdoors",
-            "Beauty & Personal Care",
-            "Health & Wellness",
-            "Toys & Games",
-            "Baby Products",
-            "Automotive",
-            "Jewelry & Watches",
-            "Office Supplies",
-            "Pet Supplies",
-            "Groceries",
-            "Musical Instruments",
-            "Garden & Outdoor",
-            "Lighting & Decor",
-            "Tools & Hardware",
-            "Travel & Luggage",
-            "Gaming",
-            "Crafts & Hobbies"
+            'Electronics',
+            'Smartphones',
+            'Laptops',
+            'Cameras',
+            'Audio & Headphones',
+            'Wearable Tech',
+            'Home Appliances',
+            'Furniture',
+            'Kitchenware',
+            'Books',
+            'Fashion - Men',
+            'Fashion - Women',
+            'Shoes',
+            'Sports & Outdoors',
+            'Beauty & Personal Care',
+            'Health & Wellness',
+            'Toys & Games',
+            'Baby Products',
+            'Automotive',
+            'Jewelry & Watches',
+            'Office Supplies',
+            'Pet Supplies',
+            'Groceries',
+            'Musical Instruments',
+            'Garden & Outdoor',
+            'Lighting & Decor',
+            'Tools & Hardware',
+            'Travel & Luggage',
+            'Gaming',
+            'Crafts & Hobbies',
         ];
         try {
             $categories = array_merge(DatabaseSeeder::getData('products/categories', 'categories'), $localCategories);
@@ -58,6 +56,7 @@ class CategorySeeder extends Seeder
                 ->values();
         }
     }
+
     public function run(): void
     {
         $categories = $this->getRemoteData();

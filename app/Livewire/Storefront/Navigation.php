@@ -15,6 +15,7 @@ class Navigation extends Component
             ->orderBy('order_column', 'asc')
             ->get();
     }
+
     public function render()
     {
         return view('livewire.storefront.navigation');

@@ -44,6 +44,7 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
     public function admin(): self
     {
         return $this->state(fn () => ['role' => 'admin']);

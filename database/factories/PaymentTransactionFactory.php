@@ -18,11 +18,11 @@ class PaymentTransactionFactory extends Factory
     {
         return [
             'order_id' => null,
-            'provider' => $this->faker->randomElement(['stripe','braintree','sslcommerz','paypal']),
+            'provider' => $this->faker->randomElement(['stripe', 'braintree', 'sslcommerz', 'paypal']),
             'reference' => strtoupper($this->faker->bothify('TXN########')),
             'amount' => 0,
             'currency' => 'USD',
-            'status' => $this->faker->randomElement(['initiated','succeeded','failed','refunded','partially_refunded']),
+            'status' => $this->faker->randomElement(['initiated', 'succeeded', 'failed', 'refunded', 'partially_refunded']),
             'payload' => null,
             'processed_at' => $this->faker->dateTimeBetween('-60 days', 'now'),
         ];

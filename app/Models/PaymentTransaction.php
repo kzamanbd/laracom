@@ -9,6 +9,7 @@ class PaymentTransaction extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     protected $casts = [
         'payload' => 'array',
     ];
