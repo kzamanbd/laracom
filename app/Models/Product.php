@@ -16,6 +16,8 @@ class Product extends Model
         'meta' => 'array',
     ];
 
+    protected $appends = ['thumbnail_path'];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product');
@@ -23,7 +25,8 @@ class Product extends Model
 
     public function images()
     {
-        return $this->morphMany(Media::class, 'model')->whereNot('collection', 'thumbnail');
+        return $this->morphMany(Media::class, 'model')
+            ->whereNot('collection', 'thumbnail');
     }
 
     /**
@@ -31,26 +34,14 @@ class Product extends Model
      */
     public function thumbnail()
     {
-        return $this->morphOne(Media::class, 'model')->where('collection', 'thumbnail');
+        return $this->morphOne(Media::class, 'model')
+            ->where('collection', 'thumbnail')
+            ->withDefault();
     }
 
     public function getThumbnailPathAttribute(): ?string
     {
-        // Try to get from loaded relationship first to avoid N+1
-        if ($this->relationLoaded('thumbnail')) {
-            return $this->thumbnail?->file_path;
-        }
-
-        // Fallback to direct query if relationship not loaded
-        static $thumbnailCache = [];
-        $cacheKey = $this->id;
-
-        if (! isset($thumbnailCache[$cacheKey])) {
-            $thumbnail = $this->thumbnail()->first();
-            $thumbnailCache[$cacheKey] = $thumbnail?->file_path;
-        }
-
-        return $thumbnailCache[$cacheKey];
+        return $this->thumbnail->file_path;
     }
 
     public function reviews()

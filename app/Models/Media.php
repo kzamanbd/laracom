@@ -31,6 +31,10 @@ class Media extends Model
 
     public function getFilePathAttribute()
     {
+        if (! $this->path) {
+            return 'https://placehold.co/400/png?text=No+Image';
+        }
+
         return Storage::url($this->path);
     }
 }

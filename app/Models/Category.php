@@ -31,6 +31,6 @@ class Category extends Model
 
     public function image()
     {
-        return $this->morphOne(Media::class, 'model');
+        return $this->morphOne(Media::class, 'model')->withDefault();
     }
 }
