@@ -9,6 +9,8 @@ class Card extends BaseCart
 {
     public Product $product;
 
+    public $class = 'col-lg-4 col-md-4 col-6 col-sm-6';
+
     public function addToCart(): void
     {
         $this->getCartService()->addToCart($this->product->id);
