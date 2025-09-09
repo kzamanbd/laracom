@@ -25,16 +25,21 @@
                                             <span><i class="fi-rs-apps"></i>Show:</span>
                                         </div>
                                         <div class="sort-by-dropdown-wrap">
-                                            <span> 50 <i class="fi-rs-angle-small-down"></i></span>
+                                            <span> {{ $products->perPage() }}
+                                                <i class="fi-rs-angle-small-down"></i>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="active" href="#">50</a></li>
-                                            <li><a href="#">100</a></li>
-                                            <li><a href="#">150</a></li>
-                                            <li><a href="#">200</a></li>
-                                            <li><a href="#">All</a></li>
+                                            @foreach ($perPageItems as $item)
+                                                <li>
+                                                    <a @class(['active' => $item == $products->perPage()])
+                                                        href="{{ route('shop', ['limit' => $item]) }}">
+                                                        {{ $item }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\ShopProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -11,8 +12,11 @@ class ProductService
      * Fetch products for the shop page.
      * You can add filters, sorting, pagination, etc. here.
      */
-    public function getShopProducts($perPage = 10)
+    public function getShopProducts(ShopProductRequest $request)
     {
+        $perPage = $request->input('limit', 15);
+        $orderby = $request->input('sort', 'created_at');
+
         return Product::query()
             ->with([
                 'categories',

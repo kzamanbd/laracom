@@ -29,9 +29,14 @@ class StorefrontController extends Controller
     public function shop(ShopProductRequest $request): View
     {
         // You can use $request->validated() for filters, sorting, etc.
-        $products = $this->productService->getShopProducts(12);
+        $products = $this->productService->getShopProducts($request);
 
-        return view('storefront.shop', compact('products'));
+        $perPageItems = [15, 30, 60, 120, 240];
+
+        return view('storefront.shop', [
+            'products' => $products,
+            'perPageItems' => $perPageItems,
+        ]);
     }
 
     public function cart(): View
