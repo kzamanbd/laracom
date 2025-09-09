@@ -4,7 +4,6 @@ namespace App\Livewire\Storefront\Cart;
 
 use App\Models\Cart;
 use App\Services\CartService;
-use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -21,7 +20,7 @@ class BaseCart extends Component
     /**
      * Get the current cart
      */
-    #[Computed]
+
     public function cart(): Cart
     {
         return $this->getCartService()->getCurrentCart()
@@ -75,6 +74,5 @@ class BaseCart extends Component
         if (property_exists($this, 'itemCount')) {
             unset($this->itemCount);
         }
-        $this->cart()->refresh();
     }
 }

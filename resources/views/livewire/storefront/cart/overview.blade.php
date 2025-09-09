@@ -4,9 +4,9 @@
         <span class="pro-count blue">{{ $this->itemCount }}</span>
     </a>
     <div class="cart-dropdown-wrap cart-dropdown-hm2">
-        @if ($this->cart->items->count() > 0)
+        @if ($cart->items->count() > 0)
             <ul>
-                @foreach ($this->cart->items as $item)
+                @foreach ($cart->items as $item)
                     <li wire:key="cart-item-{{ $item->id }}" class="d-flex align-items-center">
                         <div class="shopping-cart-img">
                             <a href="{{ $this->getProductUrl($item->product) }}">
@@ -31,7 +31,7 @@
             </ul>
             <div class="shopping-cart-footer">
                 <div class="shopping-cart-total">
-                    <h4>Total <span>{{ formatPrice($this->cart->total) }}</span></h4>
+                    <h4>Total <span>{{ formatPrice($cart->total) }}</span></h4>
                 </div>
                 <div class="shopping-cart-button">
                     <a href="{{ route('cart') }}" class="outline">View cart</a>

@@ -23,31 +23,31 @@
                 <tr>
                     <td class="cart_total_label">Cart Subtotal</td>
                     <td class="cart_total_amount">
-                        <span class="font-lg fw-900 text-brand">{{ formatPrice($this->cart->subtotal) }}</span>
+                        <span class="font-lg fw-900 text-brand">{{ formatPrice($cart->subtotal) }}</span>
                     </td>
                 </tr>
-                @if ($this->cart->shipping_cost > 0)
+                @if ($cart->shipping_cost > 0)
                     <tr>
                         <td class="cart_total_label">Shipping</td>
                         <td class="cart_total_amount">
-                            <span>{{ formatPrice($this->cart->shipping_cost) }}</span>
+                            <span>{{ formatPrice($cart->shipping_cost) }}</span>
                         </td>
                     </tr>
                 @endif
-                @if ($this->cart->tax_total > 0)
+                @if ($cart->tax_total > 0)
                     <tr>
                         <td class="cart_total_label">Tax</td>
                         <td class="cart_total_amount">
-                            <span>{{ formatPrice($this->cart->tax_total) }}</span>
+                            <span>{{ formatPrice($cart->tax_total) }}</span>
                         </td>
                     </tr>
                 @endif
-                @if ($this->cart->coupon_discount > 0)
+                @if ($cart->coupon_discount > 0)
                     <tr>
                         <td class="cart_total_label">
                             Discount
-                            @if ($this->cart->coupon_code)
-                                <span class="badge bg-success">{{ $this->cart->coupon_code }}</span>
+                            @if ($cart->coupon_code)
+                                <span class="badge bg-success">{{ $cart->coupon_code }}</span>
                                 <a href="#" wire:click="removeCoupon" class="text-danger ms-2"
                                     title="Remove coupon">
                                     <i class="fi-rs-cross-small"></i>
@@ -55,7 +55,7 @@
                             @endif
                         </td>
                         <td class="cart_total_amount">
-                            <span class="text-success">-{{ formatPrice($this->cart->coupon_discount) }}</span>
+                            <span class="text-success">-{{ formatPrice($cart->coupon_discount) }}</span>
                         </td>
                     </tr>
                 @endif
@@ -64,7 +64,7 @@
                         <strong>Total</strong>
                     </td>
                     <td class="cart_total_amount">
-                        <strong class="font-xl fw-900 text-brand">{{ formatPrice($this->cart->total) }}</strong>
+                        <strong class="font-xl fw-900 text-brand">{{ formatPrice($cart->total) }}</strong>
                     </td>
                 </tr>
             </tbody>
@@ -72,7 +72,7 @@
     </div>
 
     <!-- Coupon Code Section -->
-    @if (!$this->cart->coupon_code)
+    @if (!$cart->coupon_code)
         <div class="mb-30 mt-30">
             <div class="heading_s1 mb-3">
                 <h6>Apply Coupon</h6>

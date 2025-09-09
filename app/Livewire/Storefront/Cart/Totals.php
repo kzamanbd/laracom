@@ -50,6 +50,8 @@ class Totals extends BaseCart
 
     public function render()
     {
-        return view('livewire.storefront.cart.totals');
+        return view('livewire.storefront.cart.totals', [
+            'cart' => $this->cart(),
+        ]);
     }
 }

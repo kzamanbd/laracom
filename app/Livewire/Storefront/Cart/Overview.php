@@ -17,6 +17,9 @@ class Overview extends BaseCart
 
     public function render()
     {
-        return view('livewire.storefront.cart.overview');
+        return view('livewire.storefront.cart.overview', [
+            'cart' => $this->cart(),
+            'itemCount' => $this->itemCount(),
+        ]);
     }
 }
