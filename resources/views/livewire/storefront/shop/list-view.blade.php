@@ -58,7 +58,7 @@
         </div>
         <!--pagination-->
         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
-            {{ $this->products->links('partials.livewire-pagination') }}
+            {{ $this->products->links('livewire.pagination') }}
         </div>
     </div>
     <div class="col-lg-3 primary-sidebar sticky-sidebar">

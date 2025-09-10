@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\Storefront;
+namespace App\Livewire\Storefront\Shop;
 
 use App\Services\ProductService;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Shop extends Component
+class ListView extends Component
 {
     use WithPagination;
 
@@ -75,6 +75,6 @@ class Shop extends Component
 
     public function render()
     {
-        return view('livewire.storefront.shop');
+        return view('livewire.storefront.shop.list-view');
     }
 }
