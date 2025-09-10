@@ -20,6 +20,8 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->unique()->words(3, true);
+        $colors = ['red', 'blue', 'green', 'black', 'white', 'yellow', 'purple', 'orange', 'pink', 'brown'];
+        $conditions = ['new', 'refurbished', 'used'];
 
         return [
             'user_id' => null, // set in seeder
@@ -40,7 +42,11 @@ class ProductFactory extends Factory
             'width_cm' => $this->faker->randomFloat(2, 5, 100),
             'height_cm' => $this->faker->randomFloat(2, 1, 80),
             'tax_id' => null, // set in seeder
-            'attributes' => null,
+            'attributes' => [
+                'color' => $this->faker->randomElement($colors),
+                'condition' => $this->faker->randomElement($conditions),
+                'size' => $this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL', 'XXL']),
+            ],
             'meta' => null,
             'published_at' => now(),
         ];

@@ -5,20 +5,22 @@
     </div>
     <div class="widget-category mb-30">
         <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
-        <ul class="categories">
-            <li><a href="shop.html">Shoes & Bags</a></li>
-            <li><a href="shop.html">Blouses & Shirts</a></li>
-            <li><a href="shop.html">Dresses</a></li>
-            <li><a href="shop.html">Swimwear</a></li>
-            <li><a href="shop.html">Beauty</a></li>
-            <li><a href="shop.html">Jewelry & Watch</a></li>
-            <li><a href="shop.html">Accessories</a></li>
+        <ul class="categories custome-checkbox">
+            @foreach ($this->categories as $category)
+                <li class="d-flex align-items-center">
+                    <input type="checkbox" wire:model.live="selectedCategories" value="{{ $category->id }}"
+                        class="form-check-input me-2" id="category-{{ $category->id }}">
+                    <label for="category-{{ $category->id }}" class="form-check-label">
+                        {{ $category->name }} ({{ $category->products_count }})
+                    </label>
+                </li>
+            @endforeach
         </ul>
     </div>
-    <!-- Fillter By Price -->
+    <!-- Filter By Price -->
     <div class="sidebar-widget price_range range mb-30">
         <div class="widget-header position-relative mb-20 pb-10">
-            <h5 class="widget-title mb-10">Fill by price</h5>
+            <h5 class="widget-title mb-10">Filter by price</h5>
             <div class="bt-1 border-color-1"></div>
         </div>
         <div class="price-filter">
@@ -26,95 +28,81 @@
                 <div id="slider-range"></div>
                 <div class="price_slider_amount">
                     <div class="label-input">
-                        <span>Range:</span><input type="text" id="amount" name="price"
-                            placeholder="Add Your Price">
+                        <span>Range:</span>
+                        {{-- TODO: dynamic the price range --}}
+                        <input type="text" id="amount" name="price" placeholder="Add Your Price" readonly>
                     </div>
                 </div>
             </div>
         </div>
         <div class="list-group">
-            <div class="list-group-item mb-10 mt-10">
-                <label class="fw-900">Color</label>
-                <div class="custome-checkbox">
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox1"><span>Red
-                            (56)</span></label>
-                    <br>
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox2"><span>Green
-                            (78)</span></label>
-                    <br>
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox3"><span>Blue
-                            (54)</span></label>
+            @if (count($this->availableColors) > 0)
+                <div class="list-group-item mb-10 mt-10">
+                    <label class="fw-900">Color</label>
+                    <div class="custome-checkbox">
+                        @foreach ($this->availableColors as $color)
+                            <div class="mb-2">
+                                <input class="form-check-input" type="checkbox" wire:model.live="selectedColors"
+                                    id="color-{{ $loop->index }}" value="{{ $color }}">
+                                <label class="form-check-label" for="color-{{ $loop->index }}">
+                                    <span>{{ ucfirst($color) }}</span>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
+            @endif
+            <div class="list-group-item mb-10 mt-10">
                 <label class="fw-900 mt-15">Item Condition</label>
                 <div class="custome-checkbox">
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox11"><span>New
-                            (1506)</span></label>
-                    <br>
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
-                            (27)</span></label>
-                    <br>
-                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31"
-                        value="">
-                    <label class="form-check-label" for="exampleCheckbox31"><span>Used
-                            (45)</span></label>
+                    <div class="mb-2">
+                        <input class="form-check-input" type="checkbox" wire:model.live="selectedConditions"
+                            id="condition-new" value="new">
+                        <label class="form-check-label" for="condition-new">
+                            <span>New</span>
+                        </label>
+                    </div>
+                    <div class="mb-2">
+                        <input class="form-check-input" type="checkbox" wire:model.live="selectedConditions"
+                            id="condition-refurbished" value="refurbished">
+                        <label class="form-check-label" for="condition-refurbished">
+                            <span>Refurbished</span>
+                        </label>
+                    </div>
+                    <div class="mb-2">
+                        <input class="form-check-input" type="checkbox" wire:model.live="selectedConditions"
+                            id="condition-used" value="used">
+                        <label class="form-check-label" for="condition-used">
+                            <span>Used</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </div>
-        <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-            Fillter</a>
+        <button wire:click="resetFilters" class="btn btn-sm btn-default">
+            <i class="fi-rs-filter mr-5"></i> Clear Filters
+        </button>
     </div>
     <!-- Product sidebar Widget -->
-    <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+    <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
         <div class="widget-header position-relative mb-20 pb-10">
             <h5 class="widget-title mb-10">New products</h5>
             <div class="bt-1 border-color-1"></div>
         </div>
-        <div class="single-post clearfix">
-            <div class="image">
-                <img src="assets/imgs/shop/thumbnail-3.jpg" alt="#">
-            </div>
-            <div class="content pt-10">
-                <h5><a href="product-details.html">Chen Cardigan</a></h5>
-                <p class="price mb-0 mt-5">$99.50</p>
-                <div class="product-rate">
-                    <div class="product-rating" style="width:90%"></div>
+        @foreach ($this->newProducts as $product)
+            <div class="single-post clearfix">
+                <div class="image">
+                    <img src="{{ $product->thumbnail_path }}" alt="{{ $product->name }}">
+                </div>
+                <div class="content pt-10">
+                    <h5><a href="{{ route('product', $product->route_key) }}">{{ $product->name }}</a></h5>
+                    <p class="price mb-0 mt-5">{{ formatPrice($product->price) }}</p>
+                    <div class="product-rate">
+                        <div class="product-rating" style="width:90%"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="single-post clearfix">
-            <div class="image">
-                <img src="assets/imgs/shop/thumbnail-4.jpg" alt="#">
-            </div>
-            <div class="content pt-10">
-                <h6><a href="product-details.html">Chen Sweater</a></h6>
-                <p class="price mb-0 mt-5">$89.50</p>
-                <div class="product-rate">
-                    <div class="product-rating" style="width:80%"></div>
-                </div>
-            </div>
-        </div>
-        <div class="single-post clearfix">
-            <div class="image">
-                <img src="assets/imgs/shop/thumbnail-5.jpg" alt="#">
-            </div>
-            <div class="content pt-10">
-                <h6><a href="product-details.html">Colorful Jacket</a></h6>
-                <p class="price mb-0 mt-5">$25</p>
-                <div class="product-rate">
-                    <div class="product-rating" style="width:60%"></div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
     <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
         <img src="assets/imgs/banner/banner-11.jpg" alt="">

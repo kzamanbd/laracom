@@ -16,6 +16,7 @@ class ProductService
         $perPage = $args['limit'] ?? 15;
         $orderby = $args['sort'] ?? 'newest';
         $orderDir = $args['order'] ?? 'desc';
+        $filters = $args['filters'] ?? [];
 
         $supportedSorts = [
             'name' => 'name',
@@ -23,15 +24,52 @@ class ProductService
             'newest' => 'created_at',
         ];
 
-        return Product::query()
+        $query = Product::query()
             ->with([
                 'categories',
                 'thumbnail',
-            ])
-            ->when(array_key_exists($orderby, $supportedSorts), function ($query) use ($orderby, $orderDir, $supportedSorts) {
-                $query->orderBy($supportedSorts[$orderby], $orderDir);
-            })
-            ->paginate($perPage);
+            ]);
+
+        // Apply category filters
+        if (! empty($filters['categories'])) {
+            $query->whereHas('categories', function ($q) use ($filters) {
+                $q->whereIn('categories.id', $filters['categories']);
+            });
+        }
+
+        // Apply price range filters
+        if (! empty($filters['minPrice']) && is_numeric($filters['minPrice'])) {
+            $query->where('price', '>=', $filters['minPrice']);
+        }
+
+        if (! empty($filters['maxPrice']) && is_numeric($filters['maxPrice'])) {
+            $query->where('price', '<=', $filters['maxPrice']);
+        }
+
+        // Apply color filters
+        if (! empty($filters['colors'])) {
+            $query->where(function ($q) use ($filters) {
+                foreach ($filters['colors'] as $color) {
+                    $q->orWhereJsonContains('attributes->color', $color);
+                }
+            });
+        }
+
+        // Apply condition filters
+        if (! empty($filters['conditions'])) {
+            $query->where(function ($q) use ($filters) {
+                foreach ($filters['conditions'] as $condition) {
+                    $q->orWhereJsonContains('attributes->condition', $condition);
+                }
+            });
+        }
+
+        // Apply sorting
+        $query->when(array_key_exists($orderby, $supportedSorts), function ($query) use ($orderby, $orderDir, $supportedSorts) {
+            $query->orderBy($supportedSorts[$orderby], $orderDir);
+        });
+
+        return $query->paginate($perPage);
     }
 
     public function getFeaturedProducts($limit = 8)
