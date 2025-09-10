@@ -1,61 +1,232 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LaraEcom - Laravel E-commerce Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="public/favicon.png" width="100" alt="LaraEcom Logo">
 </p>
 
-## About Laravel
+A modern, full-featured e-commerce platform built with Laravel 12, Livewire 3, and Tailwind CSS 4. LaraEcom provides a complete online shopping solution with a beautiful storefront and comprehensive admin features.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🛍️ Storefront
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Modern Design**: Clean, responsive design built with Tailwind CSS 4
+- **Product Catalog**: Browse products with categories, search, and filtering
+- **Shopping Cart**: Real-time cart management with Livewire
+- **Quick View**: Product quick view modal for fast browsing
+- **Wishlist**: Save favorite products for later
+- **Checkout Process**: Streamlined checkout with multiple payment options
+- **User Account**: Customer registration, login, and account management
+- **Blog System**: Content management with blog posts
+- **SEO Friendly**: Optimized URLs and meta tags
 
-## Learning Laravel
+### 🎛️ Admin Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Product Management**: Full CRUD operations for products
+- **Category Management**: Organize products with hierarchical categories
+- **Order Management**: Track and manage customer orders
+- **Customer Management**: User account administration
+- **Media Management**: Image upload and management system
+- **Tax & Shipping**: Configure tax rates and shipping options
+- **Content Management**: Manage blog posts and static pages
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🚀 Technology Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Backend**: Laravel 12 with PHP 8.3+
+- **Frontend**: Livewire 3 + Volt for dynamic interactions
+- **Styling**: Tailwind CSS 4 with modern design system
+- **Database**: SQLite (development) / MySQL (production)
+- **Testing**: Pest PHP for comprehensive testing
+- **Code Quality**: Laravel Pint for code formatting
 
-## Laravel Sponsors
+## 📋 Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- PHP 8.3 or higher
+- Composer
+- Node.js 18+ and npm
+- SQLite (for development) or MySQL/PostgreSQL
 
-### Premium Partners
+## 🚀 Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. **Clone the repository**
 
-## Contributing
+   ```bash
+   git clone https://github.com/kzamanbd/laracom.git
+   cd laracom
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install PHP dependencies**
 
-## Code of Conduct
+   ```bash
+   composer install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Install Node.js dependencies**
 
-## Security Vulnerabilities
+   ```bash
+   npm install
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. **Environment setup**
 
-## License
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Database setup**
+
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate --seed
+   ```
+
+6. **Build assets**
+
+   ```bash
+   npm run build
+   # or for development
+   npm run dev
+   ```
+
+7. **Start the development server**
+
+   ```bash
+   php artisan serve
+   ```
+
+The application will be available at `http://localhost:8000` (or via Laravel Herd at `https://laracom.test`).
+
+## 🧪 Testing
+
+Run the test suite using Pest:
+
+```bash
+# Run all tests
+php artisan test
+
+# Run specific test file
+php artisan test tests/Feature/ProductTest.php
+
+# Run with coverage
+php artisan test --coverage
+```
+
+## 🏗️ Project Structure
+
+```
+app/
+├── Http/Controllers/          # Controllers
+├── Livewire/                  # Livewire components
+│   ├── Actions/              # Action classes
+│   ├── Forms/                # Form classes
+│   └── Storefront/           # Storefront components
+├── Models/                   # Eloquent models
+├── Services/                 # Business logic services
+└── View/Components/          # Blade components
+
+resources/
+├── views/
+│   ├── livewire/            # Livewire component views
+│   └── storefront/          # Frontend views
+├── css/                     # Tailwind CSS files
+└── js/                      # JavaScript files
+
+database/
+├── factories/               # Model factories
+├── migrations/              # Database migrations
+└── seeders/                 # Database seeders
+```
+
+## 🔧 Key Components
+
+### Models
+
+- **Product**: Core product model with categories, media, and pricing
+- **Cart & CartItem**: Shopping cart functionality
+- **Order & OrderItem**: Order management system
+- **Customer**: Customer account management
+- **Category**: Product categorization
+- **Media**: File and image management
+
+### Services
+
+- **CartService**: Shopping cart business logic
+- **ProductService**: Product-related operations
+
+### Livewire Components
+
+- **Cart Management**: Real-time cart updates
+- **Product Display**: Dynamic product cards and listings
+- **Quick View**: Modal product previews
+
+## 🎨 Frontend Features
+
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Interactive Components**: Livewire-powered dynamic interfaces
+- **Modern JavaScript**: ES6+ with Vite bundling
+- **Performance Optimized**: Lazy loading and efficient asset management
+
+## 🛠️ Development
+
+### Code Quality
+
+```bash
+# Format code with Pint
+vendor/bin/pint
+
+# Run tests
+php artisan test
+
+# Generate IDE helpers
+php artisan ide-helper:generate
+```
+
+### Asset Compilation
+
+```bash
+# Development with hot reload
+npm run dev
+
+# Production build
+npm run build
+```
+
+## 📝 API Routes
+
+The application includes RESTful routes for:
+
+- Product catalog (`/shop`, `/product/{slug}`)
+- Shopping cart (`/cart`)
+- Checkout process (`/checkout`)
+- User account (`/my-account`)
+- Blog system (`/blog`)
+
+## 🔒 Security
+
+- CSRF protection on all forms
+- SQL injection prevention with Eloquent ORM
+- XSS protection with Blade templating
+- Secure session management
+- Input validation and sanitization
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure your code follows the project's coding standards and includes appropriate tests.
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 🙏 Acknowledgments
+
+- Built with [Laravel](https://laravel.com) - The PHP Framework for Web Artisans
+- [Livewire](https://livewire.laravel.com) for dynamic frontend interactions
+- [Tailwind CSS](https://tailwindcss.com) for styling
+- [Pest PHP](https://pestphp.com) for testing
