@@ -32,7 +32,7 @@ jobs:
           cache: "npm"
 
       - name: Install Node Dependencies
-        run: npm i
+        run: npm install -g pnpm && pnpm install
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -44,7 +44,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Build Assets
-        run: npm run build
+        run: pnpm run build
 
       - name: Run Tests
         run: ./vendor/bin/pest
