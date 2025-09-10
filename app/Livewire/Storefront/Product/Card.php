@@ -4,17 +4,22 @@ namespace App\Livewire\Storefront\Product;
 
 use App\Livewire\Storefront\Cart\BaseCart;
 use App\Models\Product;
+use Livewire\Component;
 
-class Card extends BaseCart
+class Card extends Component
 {
     public Product $product;
 
     public $class = 'col-lg-4 col-md-4 col-6 col-sm-6';
 
+    public $addToCartText = 'Add To Cart';
+
     public function addToCart(): void
     {
-        $this->getCartService()->addToCart($this->product->id);
-        $this->dispatchCartUpdated('Product added to cart successfully!');
+        $cart = app(BaseCart::class);
+        $cart->getCartService()->addToCart($this->product->id);
+        $cart->dispatchCartUpdated('Product added to cart successfully!');
+        $this->addToCartText = 'Added';
     }
 
     public function quickView(): void

@@ -4,7 +4,7 @@ use App\Http\Controllers\StorefrontController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StorefrontController::class, 'index'])->name('home');
-Route::get('shop', [StorefrontController::class, 'shop'])->name('shop');
+Route::view('shop', 'storefront.shop')->name('shop');
 Route::view('product/{slug?}', 'storefront.product')->name('product');
 Route::get('cart', [StorefrontController::class, 'cart'])->name('cart');
 Route::post('cart/clear', [StorefrontController::class, 'cartClear'])->name('cart.clear');

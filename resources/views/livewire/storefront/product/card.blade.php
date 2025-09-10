@@ -51,8 +51,11 @@
                 @endif
             </div>
             <div class="product-action-1 show">
-                <a aria-label="Add To Cart" class="action-btn hover-up" wire:click="addToCart">
-                    <i class="fi-rs-shopping-bag-add"></i>
+                <a aria-label="{{ $addToCartText }}" class="action-btn hover-up" wire:click="addToCart"
+                    wire:loading.attr="disabled" wire:target="addToCart">
+                    <i class="fi-rs-shopping-bag-add" wire:loading.remove wire:target="addToCart"></i>
+                    <span wire:loading wire:target="addToCart"
+                        style="display: none; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid #333; border-radius: 50%; animation: spin 1s linear infinite;"></span>
                 </a>
             </div>
         </div>
