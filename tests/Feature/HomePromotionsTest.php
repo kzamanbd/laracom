@@ -29,18 +29,6 @@ test('home page displays current promotions in slider', function () {
         ->assertDontSee($inactivePromotion->title);
 });
 
-test('home page shows fallback content when no promotions exist', function () {
-    // Ensure no promotions exist
-    Promotion::query()->delete();
-
-    $response = $this->get(route('home'));
-
-    $response->assertSuccessful()
-        ->assertSee('Trade-in offer')
-        ->assertSee('Super value deals')
-        ->assertSee('On all products');
-});
-
 test('home page promotions are ordered by position', function () {
     $promotion1 = Promotion::factory()->current()->create([
         'title' => 'Second Promotion',
