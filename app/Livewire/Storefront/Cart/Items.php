@@ -6,7 +6,7 @@ use App\Models\CartItem;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 
-class Items extends BaseCart
+class Items extends CartComponentBase
 {
     public bool $updating = false;
 

@@ -4,7 +4,7 @@ namespace App\Livewire\Storefront\Cart;
 
 use Livewire\Attributes\Computed;
 
-class Overview extends BaseCart
+class Overview extends CartComponentBase
 {
     /**
      * Get cart item count

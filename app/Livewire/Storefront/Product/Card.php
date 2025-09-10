@@ -2,11 +2,10 @@
 
 namespace App\Livewire\Storefront\Product;
 
-use App\Livewire\Storefront\Cart\BaseCart;
+use App\Livewire\Storefront\Cart\CartComponentBase;
 use App\Models\Product;
-use Livewire\Component;
 
-class Card extends Component
+class Card extends CartComponentBase
 {
     public Product $product;
 
@@ -16,9 +15,8 @@ class Card extends Component
 
     public function addToCart(): void
     {
-        $cart = app(BaseCart::class);
-        $cart->getCartService()->addToCart($this->product->id);
-        $cart->dispatchCartUpdated('Product added to cart successfully!');
+        $this->getCartService()->addToCart($this->product->id);
+        $this->dispatchCartUpdated('Product added to cart successfully!');
         $this->addToCartText = 'Added';
     }
 
