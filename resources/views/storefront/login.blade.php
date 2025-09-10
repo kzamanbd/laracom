@@ -20,31 +20,7 @@
                                         <div class="heading_s1">
                                             <h3 class="mb-30">Login</h3>
                                         </div>
-                                        <form method="post">
-                                            <div class="form-group">
-                                                <input type="text" required="" name="email"
-                                                    placeholder="Your Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <input required="" type="password" name="password"
-                                                    placeholder="Password">
-                                            </div>
-                                            <div class="login_footer form-group">
-                                                <div class="chek-form">
-                                                    <div class="custome-checkbox">
-                                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                                            id="exampleCheckbox1" value="">
-                                                        <label class="form-check-label"
-                                                            for="exampleCheckbox1"><span>Remember me</span></label>
-                                                    </div>
-                                                </div>
-                                                <a class="text-muted" href="#">Forgot password?</a>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-fill-out btn-block hover-up"
-                                                    name="login">Log in</button>
-                                            </div>
-                                        </form>
+                                        @livewire('storefront.auth.login')
                                     </div>
                                 </div>
                             </div>

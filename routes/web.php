@@ -25,7 +25,7 @@ Route::get('blog/{slug?}', function ($slug = null) {
 Route::view('privacy-policy', 'storefront.privacy-policy')->name('privacy-policy');
 Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-conditions');
 Route::view('register', 'storefront.register')->name('register');
-Route::view('login', 'storefront.login')->name('login');
+Route::view('login', 'storefront.login')->name('login')->middleware('guest');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
