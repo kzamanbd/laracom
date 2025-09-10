@@ -9,7 +9,7 @@ test('registration screen can be rendered', function () {
 
     $response
         ->assertOk()
-        ->assertSeeVolt('pages.auth.register');
+        ->assertSee('Create an Account');
 });
 
 test('new users can register', function () {
