@@ -1,4 +1,4 @@
-name: tests
+name: 🚀 Perform Tests
 
 on:
   push:
@@ -12,8 +12,8 @@ on:
 
 jobs:
   ci:
+    name: Run Tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4

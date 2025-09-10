@@ -1,4 +1,4 @@
-name: linter
+name: 🚀 Linter
 
 on:
   push:
@@ -15,6 +15,7 @@ permissions:
 
 jobs:
   quality:
+    name: Run Linter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
