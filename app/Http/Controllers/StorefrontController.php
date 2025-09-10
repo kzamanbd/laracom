@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Promotion;
 use App\Services\CartService;
 use App\Services\ProductService;
 use Illuminate\View\View;
@@ -16,12 +17,14 @@ class StorefrontController extends Controller
         $popularProducts = $this->productService->getPopularProducts(8);
         $newArrivals = $this->productService->getNewArrivals(8);
         $popularCategories = $this->productService->getPopularCategories(10);
+        $promotions = Promotion::current()->ordered()->with('image')->get();
 
         return view('storefront.home', [
             'featuredProducts' => $featuredProducts,
             'popularProducts' => $popularProducts,
             'newArrivals' => $newArrivals,
             'popularCategories' => $popularCategories,
+            'promotions' => $promotions,
         ]);
     }
 
