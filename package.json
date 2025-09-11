@@ -4,14 +4,27 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "lint-staged": "lint-staged",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{vue,js,ts,tsx,jsx}": [
+            "prettier --write",
+            "eslint"
+        ],
+        "*.php": [
+            "./vendor/bin/pint --dirty"
+        ]
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/vite": "^4.1.12",
         "axios": "^1.11.0",
         "concurrently": "^9.0.1",
+        "husky": "^9.1.7",
         "laravel-vite-plugin": "^2.0.0",
+        "lint-staged": "^16.1.6",
         "postcss": "^8.4.31",
         "tailwindcss": "^4.1.12",
         "vite": "^7.0.4"

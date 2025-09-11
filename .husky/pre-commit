@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+echo "Pre-commit hook: Linting staged files..."
+
+npm run lint-staged
