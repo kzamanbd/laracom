@@ -54,7 +54,7 @@ class Filters extends Component
         // Get unique colors from product attributes
         return Product::query()->whereNotNull('attributes->color')
             ->pluck('attributes')
-            ->map(fn($attrs) => $attrs['color'] ?? null)
+            ->map(fn ($attrs) => $attrs['color'] ?? null)
             ->filter()
             ->unique()
             ->values()
