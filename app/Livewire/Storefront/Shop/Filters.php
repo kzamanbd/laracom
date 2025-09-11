@@ -26,6 +26,13 @@ class Filters extends Component
     public function mount(): void
     {
         $this->initializePriceRange();
+        if (request()->has('category')) {
+            $category = $this->categories->firstWhere('slug', request()->query('category'));
+            if ($category) {
+                $this->selectedCategories = [$category->id];
+                $this->dispatchFiltersChanged();
+            }
+        }
     }
 
     public function initializePriceRange(): void
