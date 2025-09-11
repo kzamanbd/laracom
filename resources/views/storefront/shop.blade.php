@@ -10,7 +10,7 @@
         </div>
         <section class="mt-50 mb-50">
             <div class="container">
-                @livewire('storefront.shop')
+                @livewire('storefront.shop.list-view')
             </div>
         </section>
     </main>

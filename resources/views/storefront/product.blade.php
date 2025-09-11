@@ -742,8 +742,11 @@
                                 <div class="price-filter-inner">
                                     <div id="slider-range"></div>
                                     <div class="price_slider_amount">
-                                        <div class="label-input"><span>Range:</span><input type="text"
-                                                id="amount" name="price" placeholder="Add Your Price" /></div>
+                                        <div class="label-input">
+                                            <span>Range:</span>
+                                            <input type="text" id="amount" name="price"
+                                                placeholder="Add Your Price" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

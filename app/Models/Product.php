@@ -44,6 +44,11 @@ class Product extends Model
         return $this->thumbnail->file_path;
     }
 
+    public function getRouteKeyAttribute(): string
+    {
+        return $this->slug ?? $this->id;
+    }
+
     public function reviews()
     {
         return $this->morphMany(Comment::class, 'model');

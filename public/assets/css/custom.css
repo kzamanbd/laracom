@@ -1,6 +1,45 @@
-@media (max-width:420px)
-{
-	.product-grid-4 .col-12{
-    width:50% !important;
-  }
+@media (max-width: 420px) {
+    .product-grid-4 .col-12 {
+        width: 50% !important;
+    }
+}
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.placeholder {
+    background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+    height: 1rem;
+}
+
+.placeholder-glow .placeholder {
+    animation: shimmer 1.5s infinite;
+}
+
+/* Prevent slider blink */
+.slider-loading {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.slider-loaded {
+    opacity: 1;
+}
+
+/* Hide slider arrows and dots until initialized */
+.product-image-slider:not(.slick-initialized) {
+    visibility: hidden;
+}
+
+.slider-nav-thumbnails:not(.slick-initialized) {
+    visibility: hidden;
 }

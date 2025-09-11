@@ -5,14 +5,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> {{ $title ? $title . ' - ' : '' }} {{ config('app.name') }}</title>
-        @include('partials.frontend-head')
+        @include('storefront.partials.frontend-head')
     </head>
 
     <body class="font-sans antialiased">
         @livewire('storefront.navigation')
         {{ $slot }}
         @livewire('storefront.footer')
-        @include('partials.frontend-scripts')
+        @include('storefront.partials.frontend-scripts')
     </body>
 
 </html>

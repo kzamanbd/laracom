@@ -8,14 +8,14 @@
                 </a>
             </div>
             <div class="product-action-1">
-                <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal"
-                    data-bs-target="#quickViewModal" wire:click="quickView">
+                <a aria-label="Quick view" class="action-btn hover-up" wire:click="quickView" data-bs-toggle="modal"
+                    data-bs-target="#quickViewModal">
                     <i class="fi-rs-search"></i>
                 </a>
-                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php">
+                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#">
                     <i class="fi-rs-heart"></i>
                 </a>
-                <a aria-label="Compare" class="action-btn hover-up" href="compare.php">
+                <a aria-label="Compare" class="action-btn hover-up" href="#">
                     <i class="fi-rs-shuffle"></i>
                 </a>
             </div>
@@ -31,7 +31,7 @@
                         {{ $category->name }}
                     </a>
                     {{-- Max 2 category show in product card --}}
-                    @break($loop->iteration > 2)
+                    @break($loop->iteration == 2)
                 @endforeach
             </div>
             <h2>
