@@ -8,8 +8,8 @@
                 </a>
             </div>
             <div class="product-action-1">
-                <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal"
-                    data-bs-target="#quickViewModal" wire:click="quickView">
+                <a aria-label="Quick view" class="action-btn hover-up" wire:click="quickView" data-bs-toggle="modal"
+                    data-bs-target="#quickViewModal">
                     <i class="fi-rs-search"></i>
                 </a>
                 <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#">

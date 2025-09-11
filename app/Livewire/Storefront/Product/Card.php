@@ -22,7 +22,7 @@ class Card extends CartComponentBase
 
     public function quickView(): void
     {
-        $this->dispatch('quick-view', ['product' => $this->product]);
+        $this->dispatch('quick-view', $this->product);
     }
 
     public function render()
