@@ -53,11 +53,18 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
-                                <li>
-                                    <i class="fi-rs-key"></i>
-                                    <a href="{{ route('login') }}">Log In </a>
-                                    / <a href="{{ route('register') }}">Sign Up</a>
-                                </li>
+                                @auth
+                                    <li>
+                                        <i class="fi-rs-user"></i>
+                                        <a href="{{ route('my-account') }}">My Account</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <i class="fi-rs-key"></i>
+                                        <a href="{{ route('login') }}">Log In </a>
+                                        / <a href="{{ route('register') }}">Sign Up</a>
+                                    </li>
+                                @endauth
                             </ul>
                         </div>
                     </div>

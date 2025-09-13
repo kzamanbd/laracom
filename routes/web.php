@@ -15,9 +15,7 @@ Route::get('cart', ShoppingCart::class)->name('cart');
 Route::post('cart/clear', [StorefrontController::class, 'cartClear'])->name('cart.clear');
 Route::view('wishlist', 'storefront.wishlist')->name('wishlist');
 Route::get('checkout', Checkout::class)->name('checkout');
-
 Route::get('order/{order}/confirmation', [OrderController::class, 'confirmOrder'])->name('order.confirmation');
-Route::get('my-account', Dashboard::class)->name('my-account');
 Route::view('about', 'storefront.about')->name('about');
 Route::view('contact', 'storefront.contact')->name('contact');
 Route::get('blog/{slug?}', function ($slug = null) {
@@ -34,12 +32,18 @@ Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-cond
 Route::view('register', 'storefront.register')->name('register');
 Route::view('login', 'storefront.login')->name('login')->middleware('guest');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+/*
+Auth routes
+*/
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+Route::group(['middleware' => 'auth'], function () {
+
+    // customer routes
+    Route::get('my-account', Dashboard::class)->name('my-account');
+
+    // admin routes
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::view('profile', 'profile')->name('profile');
+});
 
 require __DIR__.'/auth.php';
