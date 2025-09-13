@@ -74,7 +74,7 @@
                         {{ $this->products->links('livewire.pagination') }}
                     </div>
                 </div>
-                @livewire('storefront.shop.filters')
+                @livewire('storefront.catalog.filters')
             </div>
         </div>
     </section>

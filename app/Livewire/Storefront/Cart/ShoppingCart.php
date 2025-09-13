@@ -8,7 +8,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 
 #[Layout('layouts.storefront', ['title' => 'Cart'])]
-class Cart extends CartBase
+class ShoppingCart extends CartBase
 {
     public bool $updating = false;
 
@@ -76,6 +76,6 @@ class Cart extends CartBase
 
     public function render()
     {
-        return view('livewire.storefront.cart.cart');
+        return view('livewire.storefront.cart.shopping-cart');
     }
 }

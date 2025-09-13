@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Storefront\Shop;
+namespace App\Livewire\Storefront\Catalog;
 
 use App\Models\Category;
 use App\Models\Product;
@@ -125,6 +125,6 @@ class Filters extends Component
 
     public function render()
     {
-        return view('livewire.storefront.shop.filters');
+        return view('livewire.storefront.catalog.filters');
     }
 }

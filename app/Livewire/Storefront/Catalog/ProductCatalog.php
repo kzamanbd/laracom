@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Storefront\Shop;
+namespace App\Livewire\Storefront\Catalog;
 
 use App\Services\ProductService;
 use Livewire\Attributes\Computed;
@@ -10,7 +10,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Layout('layouts.storefront', ['title' => 'Shop'])]
-class Shop extends Component
+class ProductCatalog extends Component
 {
     use WithPagination;
 
@@ -95,6 +95,6 @@ class Shop extends Component
 
     public function render()
     {
-        return view('livewire.storefront.shop.shop');
+        return view('livewire.storefront.catalog.product-catalog');
     }
 }
