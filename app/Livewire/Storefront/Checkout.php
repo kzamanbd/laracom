@@ -39,6 +39,12 @@ class Checkout extends Component
 
         // Pre-fill form with authenticated user data if available
         $this->form->fillWithUserData();
+
+        // Auto-enable save address checkboxes for logged-in users
+        if (auth()->check()) {
+            $this->form->save_billing_address = true;
+            $this->form->save_shipping_address = true;
+        }
     }
 
     public function getCartProperty(): Cart

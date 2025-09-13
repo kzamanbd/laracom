@@ -4,11 +4,13 @@ namespace App\Livewire\Storefront\Shop;
 
 use App\Services\ProductService;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ListView extends Component
+#[Layout('layouts.storefront', ['title' => 'Shop'])]
+class Shop extends Component
 {
     use WithPagination;
 
@@ -93,6 +95,6 @@ class ListView extends Component
 
     public function render()
     {
-        return view('livewire.storefront.shop.list-view');
+        return view('livewire.storefront.shop.shop');
     }
 }

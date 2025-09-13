@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderService
@@ -18,8 +19,11 @@ class OrderService
     public function createFromCart(Cart $cart, array $checkoutData): Order
     {
         return DB::transaction(function () use ($cart, $checkoutData) {
+            // Handle guest account creation if requested
+            $user = $this->handleGuestAccountCreation($checkoutData);
+
             // Create or get customer
-            $customer = $this->createCustomer($checkoutData, auth()->user());
+            $customer = $this->createCustomer($checkoutData, $user);
 
             // Create billing address
             $billingAddress = $this->createBillingAddress($customer, $checkoutData['billing']);
@@ -31,11 +35,14 @@ class OrderService
                 $checkoutData['ship_to_different_address'] ?? false
             );
 
+            // Set addresses as default if requested
+            $this->handleDefaultAddresses($customer, $billingAddress, $shippingAddress, $checkoutData);
+
             // Create order
             $order = Order::create([
                 'number' => Order::generateOrderNumber(),
                 'customer_id' => $customer->id,
-                'user_id' => auth()->id(),
+                'user_id' => $user?->id ?? auth()->id(),
                 'status' => 'pending',
                 'currency' => $cart->currency,
                 'subtotal' => $cart->subtotal,
@@ -51,6 +58,7 @@ class OrderService
                 'meta' => [
                     'payment_method' => $checkoutData['payment_method'] ?? null,
                     'coupon_code' => $cart->coupon_code,
+                    'guest_account_created' => isset($checkoutData['create_account']) && $checkoutData['create_account'],
                 ],
             ]);
 
@@ -60,8 +68,32 @@ class OrderService
             // Mark cart as converted
             $cart->markAsConverted();
 
+            // Auto-login if guest account was created
+            if ($user && ! Auth::check()) {
+                Auth::login($user);
+            }
+
             return $order;
         });
+    }
+
+    /**
+     * Handle guest account creation if requested
+     */
+    protected function handleGuestAccountCreation(array $checkoutData): ?User
+    {
+        if (! isset($checkoutData['create_account']) || ! $checkoutData['create_account'] || auth()->check()) {
+            return auth()->user();
+        }
+
+        // Create new user account
+        return User::create([
+            'name' => trim($checkoutData['billing']['first_name'].' '.$checkoutData['billing']['last_name']),
+            'email' => $checkoutData['billing']['email'],
+            'password' => bcrypt($checkoutData['account_password']),
+            'role' => 'customer',
+            'is_active' => true,
+        ]);
     }
 
     /**
@@ -77,6 +109,28 @@ class OrderService
         ];
 
         return Customer::createFromCheckout($customerData, $user);
+    }
+
+    /**
+     * Handle setting addresses as default if requested
+     */
+    protected function handleDefaultAddresses(
+        Customer $customer,
+        Address $billingAddress,
+        Address $shippingAddress,
+        array $checkoutData
+    ): void {
+        // Set billing address as default if requested or if customer has no default billing address
+        if (isset($checkoutData['save_billing_address']) && $checkoutData['save_billing_address'] || ! $customer->default_billing_address_id) {
+            $billingAddress->setAsDefault();
+            $customer->update(['default_billing_address_id' => $billingAddress->id]);
+        }
+
+        // Set shipping address as default if requested or if customer has no default shipping address
+        if (isset($checkoutData['save_shipping_address']) && $checkoutData['save_shipping_address'] || ! $customer->default_shipping_address_id) {
+            $shippingAddress->setAsDefault();
+            $customer->update(['default_shipping_address_id' => $shippingAddress->id]);
+        }
     }
 
     /**
