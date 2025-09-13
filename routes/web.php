@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Storefront\OrderController;
 use App\Http\Controllers\Storefront\StorefrontController;
 use App\Livewire\Storefront\Cart\ShoppingCart;
@@ -18,15 +19,7 @@ Route::get('checkout', Checkout::class)->name('checkout');
 Route::get('order/{order}/confirmation', [OrderController::class, 'confirmOrder'])->name('order.confirmation');
 Route::view('about', 'storefront.about')->name('about');
 Route::view('contact', 'storefront.contact')->name('contact');
-Route::get('blog/{slug?}', function ($slug = null) {
-    // Logic to fetch and display a specific blog post based on the slug
-    if ($slug) {
-        return view('storefront.blog-show', ['slug' => $slug]);
-    }
-
-    // Logic to display a list of blog posts
-    return view('storefront.blog');
-})->name('blog');
+Route::get('blog/{slug?}', [BlogController::class, 'index'])->name('blog');
 Route::view('privacy-policy', 'storefront.privacy-policy')->name('privacy-policy');
 Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-conditions');
 Route::view('register', 'storefront.register')->name('register');
@@ -37,13 +30,29 @@ Auth routes
 */
 
 Route::group(['middleware' => 'auth'], function () {
-
-    // customer routes
-    Route::get('my-account', Dashboard::class)->name('my-account');
-
-    // admin routes
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    // Profile route accessible to all authenticated users
     Route::view('profile', 'profile')->name('profile');
+});
+
+// Customer-only routes
+Route::group(['middleware' => ['auth', 'role:customer']], function () {
+    Route::get('my-account', Dashboard::class)->name('my-account');
+});
+
+// Admin-only routes
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+    // TODO: Add admin routes
+});
+
+// Vendor-only routes
+Route::group(['middleware' => ['auth', 'role:vendor']], function () {
+    // TODO: Add vendor routes
+});
+
+// Multi-role routes (admin and vendor)
+Route::group(['middleware' => ['auth', 'role:admin,vendor']], function () {
+    // TODO: Add admin and vendor routes
 });
 
 require __DIR__.'/auth.php';
