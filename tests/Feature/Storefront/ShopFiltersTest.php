@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Storefront\Shop\Filters;
-use App\Livewire\Storefront\Shop\ListView;
+use App\Livewire\Storefront\Catalog\Filters;
+use App\Livewire\Storefront\Catalog\ProductCatalog;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -18,7 +18,7 @@ test('shop filters component can be rendered', function () {
 });
 
 test('shop list view component can be rendered', function () {
-    Livewire::test(ListView::class)
+    Livewire::test(ProductCatalog::class)
         ->assertStatus(200);
 });
 
@@ -39,7 +39,7 @@ test('can filter products by price range', function () {
         'status' => 'active',
     ]);
 
-    $listView = Livewire::test(ListView::class);
+    $listView = Livewire::test(ProductCatalog::class);
 
     // Filter by price range 0-50
     $listView->dispatch('filtersChanged', [
@@ -73,7 +73,7 @@ test('can filter products by color', function () {
         'attributes' => ['color' => 'blue'],
     ]);
 
-    $listView = Livewire::test(ListView::class);
+    $listView = Livewire::test(ProductCatalog::class);
 
     // Filter by red color
     $listView->dispatch('filtersChanged', [

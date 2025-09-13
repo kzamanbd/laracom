@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Storefront;
+namespace App\Livewire\Storefront\Layout;
 
 use App\Models\Category;
 use Livewire\Component;
@@ -18,6 +18,6 @@ class Navigation extends Component
 
     public function render()
     {
-        return view('livewire.storefront.navigation');
+        return view('livewire.storefront.layout.navigation');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Storefront;
 
+use App\Http\Controllers\Controller;
 use App\Models\Promotion;
 use App\Services\CartService;
 use App\Services\ProductService;
@@ -26,11 +27,6 @@ class StorefrontController extends Controller
             'popularCategories' => $popularCategories,
             'promotions' => $promotions,
         ]);
-    }
-
-    public function cart(): View
-    {
-        return view('storefront.cart');
     }
 
     public function cartClear(CartService $cartService): void

@@ -5,8 +5,10 @@ namespace App\Livewire\Storefront\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 
-class Items extends CartComponentBase
+#[Layout('layouts.storefront', ['title' => 'Cart'])]
+class ShoppingCart extends CartBase
 {
     public bool $updating = false;
 
@@ -74,6 +76,6 @@ class Items extends CartComponentBase
 
     public function render()
     {
-        return view('livewire.storefront.cart.items');
+        return view('livewire.storefront.cart.shopping-cart');
     }
 }

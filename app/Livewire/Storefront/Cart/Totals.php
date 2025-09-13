@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\Cart;
 
-class Totals extends CartComponentBase
+class Totals extends CartBase
 {
     public string $couponCode = '';
 

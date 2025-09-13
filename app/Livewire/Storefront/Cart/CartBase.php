@@ -7,7 +7,7 @@ use App\Services\CartService;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class CartComponentBase extends Component
+class CartBase extends Component
 {
     /**
      * Get the cart service instance

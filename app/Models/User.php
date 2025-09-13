@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +25,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'store_name',
+        'store_description',
+        'store_logo',
+        'slug',
+        'company_name',
+        'is_active',
     ];
 
     /**
@@ -45,7 +53,33 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the customer associated with the user.
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class);
+    }
+
+    /**
+     * Get all orders for this user through their customer relationship.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get orders through customer relationship with eager loading.
+     */
+    public function ordersWithDetails(): HasMany
+    {
+        return $this->orders()->with(['items.product', 'customer', 'billingAddress', 'shippingAddress'])
+            ->orderBy('created_at', 'desc');
     }
 
     /**
