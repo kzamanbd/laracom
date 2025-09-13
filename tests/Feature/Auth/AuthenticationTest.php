@@ -12,7 +12,10 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'admin',
+        'is_active' => true,
+    ]);
 
     $component = Volt::test('pages.auth.login')
         ->set('form.email', $user->email)
@@ -44,7 +47,10 @@ test('users can not authenticate with invalid password', function () {
 });
 
 test('navigation menu can be rendered', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'admin',
+        'is_active' => true,
+    ]);
 
     $this->actingAs($user);
 
@@ -56,7 +62,10 @@ test('navigation menu can be rendered', function () {
 });
 
 test('users can logout', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'admin',
+        'is_active' => true,
+    ]);
 
     $this->actingAs($user);
 
