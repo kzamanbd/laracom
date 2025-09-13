@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Storefront\Product;
 
-use App\Livewire\Storefront\Cart\CartComponentBase;
+use App\Livewire\Storefront\Cart\CartBase;
 use App\Models\Product;
 
-class Card extends CartComponentBase
+class Card extends CartBase
 {
     public Product $product;
 

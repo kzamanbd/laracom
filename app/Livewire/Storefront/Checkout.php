@@ -4,9 +4,9 @@ namespace App\Livewire\Storefront;
 
 use App\Livewire\Forms\CheckoutForm;
 use App\Models\Cart;
-use App\Models\Order;
 use App\Services\CartService;
 use App\Services\OrderService;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
@@ -138,7 +138,7 @@ class Checkout extends Component
         } catch (ValidationException $e) {
             session()->flash('error', 'Please fix the errors below');
             throw $e;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             session()->flash('error', 'An error occurred while processing your order. Please try again.');
             Log::error('Checkout error: '.$e->getMessage(), [
                 'user_id' => auth()->id(),

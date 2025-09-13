@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Storefront\Product;
 
-use App\Livewire\Storefront\Cart\CartComponentBase;
+use App\Livewire\Storefront\Cart\CartBase;
 use App\Models\Product;
 use Livewire\Attributes\On;
 
-class QuickView extends CartComponentBase
+class QuickView extends CartBase
 {
     public ?Product $product = null;
 
