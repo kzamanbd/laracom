@@ -36,7 +36,9 @@ class Dashboard extends Component
     #[Computed]
     public function recentOrders(): Collection
     {
-        return auth()->user()->ordersWithDetails()
+        $user = auth()->user();
+
+        return $user->ordersWithDetails()
             ->limit(5)
             ->get();
     }
@@ -47,16 +49,9 @@ class Dashboard extends Component
     #[Computed]
     public function orders()
     {
-        return auth()->user()->ordersWithDetails()->paginate(10);
-    }
+        $user = auth()->user();
 
-    /**
-     * Get all user's orders (non-paginated)
-     */
-    #[Computed]
-    public function allOrders(): Collection
-    {
-        return auth()->user()->ordersWithDetails()->get();
+        return $user->ordersWithDetails()->paginate(10);
     }
 
     /**
@@ -66,6 +61,11 @@ class Dashboard extends Component
     public function userName(): string
     {
         $user = auth()->user();
+
+        // Handle unauthenticated users
+        if (! $user) {
+            return 'Guest';
+        }
 
         // Try to get name from customer first
         if ($user->customer) {

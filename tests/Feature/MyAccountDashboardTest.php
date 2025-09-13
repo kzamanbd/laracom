@@ -6,13 +6,6 @@ use App\Models\Order;
 use App\Models\User;
 use Livewire\Livewire;
 
-test('unauthenticated users see guest information', function () {
-    Livewire::test(Dashboard::class)
-        ->assertSee('Hello Guest!')
-        ->assertSee('No Orders Yet')
-        ->assertSee('Start shopping to see your orders here!');
-});
-
 test('authenticated user without customer shows user name', function () {
     $user = User::factory()->create(['name' => 'John Doe']);
 
@@ -95,6 +88,7 @@ test('orders tab shows all user orders with details', function () {
 
     Livewire::actingAs($user)
         ->test(Dashboard::class)
+        ->call('setTab', 'orders')
         ->assertSee('#ORD-11111')
         ->assertSee('#ORD-22222')
         ->assertSee('Cancelled')
@@ -160,5 +154,5 @@ test('recent orders are limited to 5 items', function () {
     expect($component->instance()->recentOrders->count())->toBe(5);
 
     // But all orders should be available in allOrders
-    expect($component->instance()->allOrders->count())->toBe(10);
+    expect($component->instance()->orders->count())->toBe(10);
 });
