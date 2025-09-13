@@ -28,11 +28,6 @@ class StorefrontController extends Controller
         ]);
     }
 
-    public function cart(): View
-    {
-        return view('storefront.cart');
-    }
-
     public function cartClear(CartService $cartService): void
     {
         $cartService->clearCart();

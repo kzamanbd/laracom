@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\Storefront\OrderController;
 use App\Http\Controllers\StorefrontController;
+use App\Livewire\Storefront\Cart\Cart;
 use App\Livewire\Storefront\Checkout;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StorefrontController::class, 'index'])->name('home');
 Route::view('shop', 'storefront.shop')->name('shop');
 Route::view('product/{slug?}', 'storefront.product')->name('product');
-Route::get('cart', [StorefrontController::class, 'cart'])->name('cart');
+Route::get('cart', Cart::class)->name('cart');
 Route::post('cart/clear', [StorefrontController::class, 'cartClear'])->name('cart.clear');
 Route::view('wishlist', 'storefront.wishlist')->name('wishlist');
 Route::get('checkout', Checkout::class)->name('checkout');
