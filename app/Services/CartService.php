@@ -59,8 +59,59 @@ class CartService
 
         if (auth()->check()) {
             $data['user_id'] = auth()->id();
+
+            // Check for existing converted cart for this user and reactivate it
+            $existingCart = Cart::where('user_id', auth()->id())
+                ->whereIn('status', ['converted', 'abandoned'])
+                ->first();
+
+            if ($existingCart) {
+                $existingCart->update([
+                    'status' => 'active',
+                    'last_activity_at' => now(),
+                    'expires_at' => now()->addDays(30),
+                    'subtotal' => 0,
+                    'discount_total' => 0,
+                    'tax_total' => 0,
+                    'shipping_total' => 0,
+                    'total' => 0,
+                    'coupon_code' => null,
+                    'coupon_discount' => 0,
+                ]);
+
+                // Clear any existing items
+                $existingCart->items()->delete();
+
+                return $existingCart;
+            }
         } else {
-            $data['session_id'] = Session::getId();
+            $sessionId = Session::getId();
+            $data['session_id'] = $sessionId;
+
+            // Check for existing converted cart for this session and reactivate it
+            $existingCart = Cart::where('session_id', $sessionId)
+                ->whereIn('status', ['converted', 'abandoned'])
+                ->first();
+
+            if ($existingCart) {
+                $existingCart->update([
+                    'status' => 'active',
+                    'last_activity_at' => now(),
+                    'expires_at' => now()->addDays(30),
+                    'subtotal' => 0,
+                    'discount_total' => 0,
+                    'tax_total' => 0,
+                    'shipping_total' => 0,
+                    'total' => 0,
+                    'coupon_code' => null,
+                    'coupon_discount' => 0,
+                ]);
+
+                // Clear any existing items
+                $existingCart->items()->delete();
+
+                return $existingCart;
+            }
         }
 
         return Cart::create($data);

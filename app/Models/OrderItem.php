@@ -10,6 +10,19 @@ class OrderItem extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'order_id',
+        'product_id',
+        'sku',
+        'name',
+        'quantity',
+        'unit_price',
+        'discount_total',
+        'tax_total',
+        'total',
+        'meta',
+    ];
+
     protected $casts = [
         'meta' => 'array',
     ];

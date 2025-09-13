@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Storefront\OrderController;
 use App\Http\Controllers\StorefrontController;
+use App\Livewire\Storefront\Checkout;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StorefrontController::class, 'index'])->name('home');
@@ -9,7 +11,9 @@ Route::view('product/{slug?}', 'storefront.product')->name('product');
 Route::get('cart', [StorefrontController::class, 'cart'])->name('cart');
 Route::post('cart/clear', [StorefrontController::class, 'cartClear'])->name('cart.clear');
 Route::view('wishlist', 'storefront.wishlist')->name('wishlist');
-Route::view('checkout', 'storefront.checkout')->name('checkout');
+Route::get('checkout', Checkout::class)->name('checkout');
+
+Route::get('order/{order}/confirmation', [OrderController::class, 'confirmOrder'])->name('order.confirmation');
 Route::view('my-account', 'storefront.my-account')->name('my-account');
 Route::view('about', 'storefront.about')->name('about');
 Route::view('contact', 'storefront.contact')->name('contact');
