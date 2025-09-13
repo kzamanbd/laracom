@@ -7,6 +7,7 @@ use App\Livewire\Storefront\Cart\ShoppingCart;
 use App\Livewire\Storefront\Catalog\ProductCatalog;
 use App\Livewire\Storefront\Checkout;
 use App\Livewire\Storefront\MyAccount\Dashboard;
+use App\Livewire\Storefront\MyAccount\OrderDetail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StorefrontController::class, 'index'])->name('home');
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Customer-only routes
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('my-account', Dashboard::class)->name('my-account');
+    Route::get('my-account/order/{order}', OrderDetail::class)->name('my-account.order');
 });
 
 // Admin-only routes

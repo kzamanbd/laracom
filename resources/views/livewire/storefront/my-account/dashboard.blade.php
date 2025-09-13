@@ -218,14 +218,11 @@
                                                                             @endif
                                                                         </td>
                                                                         <td>
-                                                                            <a href="#"
-                                                                                class="btn-small d-block mb-1"
-                                                                                wire:click="$dispatch('order-details', { orderId: {{ $order->id }} })">View</a>
+                                                                            <a href="{{ route('my-account.order', $order) }}"
+                                                                                class="btn-small d-block mb-1">View</a>
                                                                             @if ($order->canBeCancelled())
                                                                                 <a href="#"
-                                                                                    class="btn-small btn-secondary d-block"
-                                                                                    wire:click="$dispatch('cancel-order', { orderId: {{ $order->id }} })"
-                                                                                    onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</a>
+                                                                                    class="text-danger">Cancel</a>
                                                                             @endif
                                                                         </td>
                                                                     </tr>
