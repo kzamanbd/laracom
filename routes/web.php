@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Storefront\OrderController;
-use App\Http\Controllers\StorefrontController;
+use App\Http\Controllers\Storefront\StorefrontController;
 use App\Livewire\Storefront\Cart\ShoppingCart;
 use App\Livewire\Storefront\Catalog\ProductCatalog;
 use App\Livewire\Storefront\Checkout;
