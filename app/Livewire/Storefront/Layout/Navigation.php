@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Storefront\Layout;
 
+use App\Livewire\Actions\Logout;
 use App\Models\Catalog\Category;
 use App\Services\Cart\CartService;
 use App\Services\Cart\WishlistService;
@@ -38,6 +39,13 @@ class Navigation extends Component
     public function cartItemCount()
     {
         return app(CartService::class)->getCartItemCount();
+    }
+
+    public function logout(Logout $logout): void
+    {
+        $logout();
+
+        $this->redirect('/');
     }
 
     public function render()

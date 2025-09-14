@@ -4,7 +4,6 @@
             <div class="toast-header">
                 <i class="{{ $message['icon'] }} me-2"></i>
                 <strong class="me-auto">{{ $message['title'] }}</strong>
-                <small>{{ $message['time'] }}</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"
                     wire:click="closeToast({{ $loop->index }})"></button>
             </div>

@@ -14,6 +14,7 @@
         {{ $slot }}
         @livewire('storefront.layout.footer')
         @include('storefront.partials.frontend-scripts')
+        @livewire('toast-notification')
         @livewireScripts
     </body>
 

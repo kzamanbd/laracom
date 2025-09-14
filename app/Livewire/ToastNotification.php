@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Toast extends Component
+class ToastNotification extends Component
 {
     public array $messages = [];
 
@@ -28,6 +28,6 @@ class Toast extends Component
 
     public function render()
     {
-        return view('livewire.toast');
+        return view('livewire.toast-notification');
     }
 }

@@ -280,7 +280,7 @@
                                             <li><a href="#">Coupons</a></li>
                                             <li><a href="#">Orders</a></li>
                                             <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>
+                                            <li><a wire:click="logout">Logout</a></li>
                                         </ul>
                                     </li>
                                 </ul>
