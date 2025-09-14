@@ -632,10 +632,11 @@
     });
 
     /*--- VSticker ----*/
-    $('#news-flash').vTicker({
+    $("#news-flash").removeClass("d-none");
+    $("#news-flash").vTicker({
         speed: 500,
         pause: 3000,
-        animation: 'fade',
+        animation: "fade",
         mousePause: false,
         showItems: 1,
     });

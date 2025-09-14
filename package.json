@@ -9,7 +9,7 @@
         "prepare": "husky"
     },
     "lint-staged": {
-        "*.{vue,js,ts,tsx,jsx}": [
+        "*.{vue,ts,tsx,jsx}": [
             "prettier --write",
             "eslint"
         ],

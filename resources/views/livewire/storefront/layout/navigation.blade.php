@@ -37,9 +37,10 @@
                     </div>
                     <div class="col-xl-6 col-lg-4">
                         <div class="text-center">
-                            <div id="news-flash" class="d-inline-block">
+                            <div id="news-flash" class="d-inline-block d-none">
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a>
+                                    <li>
+                                        Get great devices up to 50% off <a href="{{ route('shop') }}">View details</a>
                                     </li>
                                     <li>Supper Value Deals - Save more with coupons</li>
                                     <li>
@@ -209,18 +210,18 @@
                                                     {{-- Limit to 3 categories --}}
                                                     @break($loop->iteration > 3)
 
-                                                    <a class="menu-title"
-                                                        href="{{ route('shop', ['category' => $category->slug]) }}">
+                                                    <x-storefront.link class="menu-title" route="shop"
+                                                        :params="['category' => $category->slug]">
                                                         {{ $category->name }}
-                                                    </a>
+                                                    </x-storefront.link>
                                                     @if ($category->children->isNotEmpty())
                                                         <ul>
                                                             @foreach ($category->children as $childCategory)
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('shop', ['category' => $childCategory->slug]) }}">
+                                                                    <x-storefront.link route="shop"
+                                                                        :params="['category' => $childCategory->slug]">
                                                                         {{ $childCategory->name }}
-                                                                    </a>
+                                                                    </x-storefront.link>
                                                                 </li>
                                                                 {{-- Limit to 5 subcategories --}}
                                                                 @break($loop->iteration == 5)
@@ -232,9 +233,9 @@
                                             {{-- Todo: Dynamic with offer --}}
                                             <li class="sub-mega-menu sub-mega-menu-width-34">
                                                 <div class="menu-banner-wrap">
-                                                    <a href="product-details.html"><img
-                                                            src="{{ asset('assets/imgs/banner/menu-banner.jpg') }}"
-                                                            alt="DraftScripts"></a>
+                                                    <a href="product-details.html">
+                                                        <img src="{{ asset('assets/imgs/banner/menu-banner.jpg') }}">
+                                                    </a>
                                                     <div class="menu-banner-content">
                                                         <h4>Hot deals</h4>
                                                         <h3>Don't miss<br> Trending</h3>
@@ -264,7 +265,9 @@
                                             <i class="fi-rs-angle-down"></i>
                                         </x-storefront.link>
                                         <ul class="sub-menu">
-                                            <li><a href="{{ route('my-account') }}">Dashboard</a></li>
+                                            <li>
+                                                <x-storefront.link route="my-account">Dashboard</x-storefront.link>
+                                            </li>
                                             <li><a href="#">Products</a></li>
                                             <li><a href="#">Categories</a></li>
                                             <li><a href="#">Coupons</a></li>
@@ -355,7 +358,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('home') }}" wire:navigate>
                         <img src="{{ asset('assets/imgs/logo/logo.png') }}" alt="logo">
                     </a>
                 </div>
@@ -382,10 +385,10 @@
                             <ul>
                                 @foreach ($this->categories as $category)
                                     <li>
-                                        <a href="{{ route('shop', ['category' => $category->slug]) }}">
+                                        <x-storefront.link route="shop" :params="['category' => $category->slug]">
                                             {{-- Todo: Category icon  --}}
                                             {{ $category->name }}
-                                        </a>
+                                        </x-storefront.link>
                                     </li>
                                     {{-- Limit to 10 categories --}}
                                     @break($loop->iteration == 10)
@@ -399,24 +402,28 @@
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children">
                                 <span class="menu-expand"></span>
-                                <a href="{{ route('home') }}">Home</a>
+                                <x-storefront.link route="home">Home</x-storefront.link>
                             </li>
                             <li class="menu-item-has-children">
                                 <span class="menu-expand"></span>
-                                <a href="{{ route('shop') }}">shop</a>
+                                <x-storefront.link route="shop">Shop</x-storefront.link>
                             </li>
                             <li class="menu-item-has-children">
                                 <span class="menu-expand"></span>
-                                <a href="{{ route('shop') }}">Our Collections</a>
+                                <x-storefront.link route="shop">Our Collections</x-storefront.link>
                                 <ul class="dropdown">
                                     @foreach ($this->categories as $category)
                                         <li class="menu-item-has-children">
                                             <span class="menu-expand"></span>
-                                            <a href="#">{{ $category->name }}</a>
+                                            <x-storefront.link route="shop" :params="['category' => $category->slug]">
+                                                {{ $category->name }}
+                                            </x-storefront.link>
                                             <ul class="dropdown">
                                                 @foreach ($category->children as $subcategory)
                                                     <li>
-                                                        <a href="product-details.html">{{ $subcategory->name }}</a>
+                                                        <x-storefront.link route="shop" :params="['category' => $subcategory->slug]">
+                                                            {{ $subcategory->name }}
+                                                        </x-storefront.link>
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -426,7 +433,7 @@
                             </li>
                             <li class="menu-item-has-children">
                                 <span class="menu-expand"></span>
-                                <a href="{{ route('blog') }}">Blog</a>
+                                <x-storefront.link route="blog">Blog</x-storefront.link>
                             </li>
                             <li class="menu-item-has-children">
                                 <span class="menu-expand"></span>
@@ -444,13 +451,13 @@
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
                     <div class="single-mobile-header-info mt-30">
-                        <a href="contact.html"> Our location </a>
+                        <x-storefront.link route="contact"> Our location </x-storefront.link>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="login.html">Log In </a>
+                        <x-storefront.link route="login">Log In </x-storefront.link>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="register.html">Sign Up</a>
+                        <x-storefront.link route="register">Sign Up</x-storefront.link>
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="#">(+1) 0000-000-000 </a>
