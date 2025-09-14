@@ -9,19 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="max-w-xl">
-                    @livewire('profile.update-profile-information')
+                    @livewire('admin.profile.update-profile-information')
                 </div>
             </div>
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="max-w-xl">
-                    @livewire('profile.update-password')
+                    @livewire('admin.profile.update-password')
                 </div>
             </div>
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="max-w-xl">
-                    @livewire('profile.delete-user')
+                    @livewire('admin.profile.delete-user')
                 </div>
             </div>
         </div>

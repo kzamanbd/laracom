@@ -1,8 +1,8 @@
 <?php
 
-use App\Livewire\Profile\DeleteUser;
-use App\Livewire\Profile\UpdatePassword;
-use App\Livewire\Profile\UpdateProfileInformation;
+use App\Livewire\Admin\Profile\DeleteUser;
+use App\Livewire\Admin\Profile\UpdatePassword;
+use App\Livewire\Admin\Profile\UpdateProfileInformation;
 use App\Models\User;
 use Livewire\Livewire;
 

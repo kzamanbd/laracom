@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Profile;
+namespace App\Livewire\Admin\Profile;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +66,6 @@ class UpdateProfileInformation extends Component
 
     public function render()
     {
-        return view('livewire.profile.update-profile-information-form');
+        return view('livewire.admin.profile.update-profile-information-form');
     }
 }

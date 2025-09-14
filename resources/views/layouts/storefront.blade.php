@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title> {{ $title ? $title . ' - ' : '' }} {{ config('app.name') }}</title>
         @include('storefront.partials.frontend-head')
+        @livewireStyles
     </head>
 
     <body class="font-sans antialiased">
@@ -13,6 +14,7 @@
         {{ $slot }}
         @livewire('storefront.layout.footer')
         @include('storefront.partials.frontend-scripts')
+        @livewireScripts
     </body>
 
 </html>

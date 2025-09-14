@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Profile;
+namespace App\Livewire\Admin\Profile;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +43,6 @@ class UpdatePassword extends Component
 
     public function render()
     {
-        return view('livewire.profile.update-password-form');
+        return view('livewire.admin.profile.update-password-form');
     }
 }

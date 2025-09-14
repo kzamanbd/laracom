@@ -19,6 +19,6 @@ class Navigation extends Component
 
     public function render()
     {
-        return view('livewire.layout.navigation');
+        return view('livewire.admin.layout.navigation');
     }
 }

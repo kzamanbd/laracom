@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Livewire\Profile\UpdatePassword;
+use App\Livewire\Admin\Profile\UpdatePassword;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
