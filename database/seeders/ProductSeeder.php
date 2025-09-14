@@ -75,17 +75,14 @@ class ProductSeeder extends Seeder
                     'sale_price' => $product['price'],
                     'attributes' => [
                         'brand' => $product['brand'] ?? null,
-                        'category' => $product['category'] ?? null,
                         'rating' => $product['rating'] ?? 0,
                         'stock' => $product['stock'] ?? 0,
                     ],
                 ]);
                 $p = Product::find($p->id); // reload to get the casts
                 // attach categories if exists
-                if (! empty($product['category'])) {
-                    $categoryId = $this->getCategory($product['category']);
-                    $p->categories()->syncWithoutDetaching([$categoryId]);
-                }
+                $categoryId = $this->getCategory($product['category']);
+                $p->categories()->syncWithoutDetaching([$categoryId]);
                 // add product images
                 foreach ($product['images'] as $imageUrl) {
                     $this->storeImage($imageUrl, $p->id);
@@ -126,11 +123,19 @@ class ProductSeeder extends Seeder
         if (isset($this->cachedCategories[$categoryName])) {
             return $this->cachedCategories[$categoryName];
         }
+
+        if (empty($categoryName)) {
+            $category = Category::query()->where('slug', 'uncategorized')->first();
+            $this->cachedCategories[$categoryName] = $category->id;
+
+            return $category->id;
+        }
+
         $category = Category::firstOrCreate([
             'slug' => Str::slug($categoryName),
-            'parent_id' => null,
         ], [
-            'name' => ucwords($categoryName),
+            'parent_id' => null,
+            'name' => Str::title($categoryName),
             'description' => fake()->sentence(),
             'is_active' => true,
         ]);
