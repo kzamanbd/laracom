@@ -20,7 +20,7 @@ class OrderDetail extends Component
         }
 
         $this->order = $order->load([
-            'items.product',
+            'items.product.thumbnail',
             'customer',
             'billingAddress',
             'shippingAddress',

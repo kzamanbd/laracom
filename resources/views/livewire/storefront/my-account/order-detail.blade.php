@@ -72,101 +72,106 @@
                             <!-- Order Items -->
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <h5 class="mb-3">Order Items</h5>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>SKU</th>
-                                                    <th>Price</th>
-                                                    <th>Qty</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($order->items as $item)
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                @if ($item->product && $item->product->image)
-                                                                    <img src="{{ $item->product->image }}"
-                                                                        alt="{{ $item->name }}" class="me-3"
-                                                                        style="width: 50px; height: 50px; object-fit: cover;">
-                                                                @endif
-                                                                <div>
-                                                                    <h6 class="mb-0">{{ $item->name }}</h6>
-                                                                    @if ($item->product)
-                                                                        <small class="text-muted">
-                                                                            <a href="{{ route('product', $item->product->slug ?? '#') }}"
-                                                                                class="text-decoration-none">
-                                                                                View Product
-                                                                            </a>
-                                                                        </small>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td><code>{{ $item->sku }}</code></td>
-                                                        <td>${{ number_format($item->unit_price, 2) }}</td>
-                                                        <td>{{ $item->quantity }}</td>
-                                                        <td class="fw-bold">${{ number_format($item->total, 2) }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    @if ($order->customer_note)
-                                        <div class="mt-4">
-                                            <h6>Customer Note</h6>
-                                            <div class="bg-light p-3 rounded">
-                                                {{ $order->customer_note }}
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h6 class="mb-0">Order Items</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>SKU</th>
+                                                            <th>Price</th>
+                                                            <th>Qty</th>
+                                                            <th>Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($order->items as $item)
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        @if ($item->product && $item->product->thumbnail)
+                                                                            <img src="{{ $item->product->thumbnail_path }}"
+                                                                                alt="{{ $item->name }}"
+                                                                                class="me-3"
+                                                                                style="width: 50px; height: 50px; object-fit: cover;">
+                                                                        @endif
+                                                                        <div>
+                                                                            <h6 class="mb-0">
+                                                                                @if ($item->product)
+                                                                                    <a
+                                                                                        href="{{ route('product', $item->product->slug) }}">
+                                                                                        {{ $item->name }}
+                                                                                    </a>
+                                                                                @else
+                                                                                    {{ $item->name }}
+                                                                                @endif
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td><code>{{ $item->sku }}</code></td>
+                                                                <td>{{ formatPrice($item->unit_price, 2) }}</td>
+                                                                <td>{{ $item->quantity }}</td>
+                                                                <td class="fw-bold">
+                                                                    {{ formatPrice($item->total, 2) }}
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                    @endif
-                                </div>
+                                    </div>
 
-                                <!-- Order Summary -->
-                                <div class="col-lg-4">
-                                    <div class="card bg-light">
+                                    <!-- Order Totals -->
+                                    <div class="card mt-3">
                                         <div class="card-header">
                                             <h6 class="mb-0">Order Summary</h6>
                                         </div>
                                         <div class="card-body">
-                                            <div class="d-flex justify-content-between mb-2">
+                                            <div class="d-flex justify-content-between">
                                                 <span>Subtotal:</span>
-                                                <span>${{ number_format($order->subtotal, 2) }}</span>
+                                                <span class="fw-bold">{{ formatPrice($order->subtotal, 2) }}</span>
                                             </div>
-                                            @if ($order->discount_total > 0)
-                                                <div class="d-flex justify-content-between mb-2 text-success">
-                                                    <span>Discount:</span>
-                                                    <span>-${{ number_format($order->discount_total, 2) }}</span>
-                                                </div>
-                                            @endif
                                             @if ($order->tax_total > 0)
-                                                <div class="d-flex justify-content-between mb-2">
+                                                <div class="d-flex justify-content-between">
                                                     <span>Tax:</span>
-                                                    <span>${{ number_format($order->tax_total, 2) }}</span>
+                                                    <span
+                                                        class="fw-bold">{{ formatPrice($order->tax_total, 2) }}</span>
                                                 </div>
                                             @endif
                                             @if ($order->shipping_total > 0)
-                                                <div class="d-flex justify-content-between mb-2">
+                                                <div class="d-flex justify-content-between">
                                                     <span>Shipping:</span>
-                                                    <span>${{ number_format($order->shipping_total, 2) }}</span>
+                                                    <span
+                                                        class="fw-bold">{{ formatPrice($order->shipping_total, 2) }}</span>
+                                                </div>
+                                            @endif
+                                            @if ($order->discount_total > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Discount:</span>
+                                                    <span
+                                                        class="fw-bold text-success">-{{ formatPrice($order->discount_total, 2) }}</span>
                                                 </div>
                                             @endif
                                             <hr>
-                                            <div class="d-flex justify-content-between fw-bold fs-5">
-                                                <span>Total:</span>
-                                                <span>${{ number_format($order->total, 2) }}</span>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="fw-bold">Total:</span>
+                                                <span
+                                                    class="fw-bold text-primary">{{ formatPrice($order->total, 2) }}</span>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <!-- Billing Address -->
+                                <!-- Billing Address -->
+                                <div class="col-lg-4">
                                     @if ($order->billingAddress)
-                                        <div class="card mt-3">
+                                        <div class="card">
                                             <div class="card-header">
                                                 <h6 class="mb-0">Billing Address</h6>
                                             </div>
@@ -182,7 +187,9 @@
                                                     @if ($order->billingAddress->line2)
                                                         {{ $order->billingAddress->line2 }}<br>
                                                     @endif
-                                                    {{ $order->billingAddress->city }}, {{ $order->billingAddress->state }} {{ $order->billingAddress->postal_code }}<br>
+                                                    {{ $order->billingAddress->city }},
+                                                    {{ $order->billingAddress->state }}
+                                                    {{ $order->billingAddress->postal_code }}<br>
                                                     {{ $order->billingAddress->country }}
                                                     @if ($order->billingAddress->phone)
                                                         <br>Phone: {{ $order->billingAddress->phone }}
@@ -210,7 +217,9 @@
                                                     @if ($order->shippingAddress->line2)
                                                         {{ $order->shippingAddress->line2 }}<br>
                                                     @endif
-                                                    {{ $order->shippingAddress->city }}, {{ $order->shippingAddress->state }} {{ $order->shippingAddress->postal_code }}<br>
+                                                    {{ $order->shippingAddress->city }},
+                                                    {{ $order->shippingAddress->state }}
+                                                    {{ $order->shippingAddress->postal_code }}<br>
                                                     {{ $order->shippingAddress->country }}
                                                     @if ($order->shippingAddress->phone)
                                                         <br>Phone: {{ $order->shippingAddress->phone }}
@@ -232,22 +241,37 @@
                                                         <small
                                                             class="text-muted">{{ $transaction->created_at->format('M d, Y g:i A') }}</small><br>
                                                         <span class="fw-bold">Payment</span>:
-                                                        ${{ number_format($transaction->amount, 2) }}
+                                                        {{ formatPrice($transaction->amount, 2) }}
                                                         <span
                                                             class="badge bg-{{ $transaction->status === 'succeeded' ? 'success' : ($transaction->status === 'initiated' ? 'warning' : 'danger') }} ms-2">
                                                             {{ ucfirst($transaction->status) }}
                                                         </span>
                                                         @if ($transaction->provider)
-                                                            <br><small class="text-muted">via {{ ucfirst($transaction->provider) }}</small>
+                                                            <br><small class="text-muted">via
+                                                                {{ ucfirst($transaction->provider) }}</small>
                                                         @endif
                                                         @if ($transaction->reference)
-                                                            <br><small class="text-muted">Ref: {{ $transaction->reference }}</small>
+                                                            <br><small class="text-muted">Ref:
+                                                                {{ $transaction->reference }}</small>
                                                         @endif
                                                     </div>
                                                     @if (!$loop->last)
                                                         <hr>
                                                     @endif
                                                 @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <!-- Customer Note -->
+                                    @if ($order->customer_note)
+                                        <div class="card mt-3">
+                                            <div class="card-header">
+                                                <h6 class="mb-0">Customer Note</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="bg-light p-3 rounded">
+                                                    {{ $order->customer_note }}
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
