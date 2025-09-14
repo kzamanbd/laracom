@@ -7,6 +7,7 @@ use App\Livewire\Storefront\Cart\ShoppingCart;
 use App\Livewire\Storefront\Catalog\ProductCatalog;
 use App\Livewire\Storefront\Checkout;
 use App\Livewire\Storefront\MyAccount\Dashboard;
+use App\Livewire\Storefront\MyAccount\OrderDetail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StorefrontController::class, 'index'])->name('home');
@@ -25,34 +26,22 @@ Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-cond
 Route::view('register', 'storefront.register')->name('register');
 Route::view('login', 'storefront.login')->name('login')->middleware('guest');
 
-/*
-Auth routes
-*/
-
-Route::group(['middleware' => 'auth'], function () {
-    // Profile route accessible to all authenticated users
-    Route::view('profile', 'profile')->name('profile');
-});
-
 // Customer-only routes
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('my-account', Dashboard::class)->name('my-account');
+    Route::get('my-account/order/{order}', OrderDetail::class)->name('my-account.order');
 });
 
 // Admin-only routes
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
+Route::group(['middleware' => ['admin']], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::view('profile', 'profile')->name('profile');
     // TODO: Add admin routes
 });
 
-// Vendor-only routes
-Route::group(['middleware' => ['auth', 'role:vendor']], function () {
+// Vendor routes
+Route::group(['middleware' => ['vendor']], function () {
     // TODO: Add vendor routes
-});
-
-// Multi-role routes (admin and vendor)
-Route::group(['middleware' => ['auth', 'role:admin,vendor']], function () {
-    // TODO: Add admin and vendor routes
 });
 
 require __DIR__.'/auth.php';

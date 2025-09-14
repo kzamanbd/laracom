@@ -11,11 +11,6 @@ class OrderItem extends Model
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
-    public function product(): BelongsTo
-    {
-        return $this->belongsTo(Product::class);
-    }
-
     protected $fillable = [
         'order_id',
         'product_id',
@@ -29,7 +24,30 @@ class OrderItem extends Model
         'meta',
     ];
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'meta' => 'array',
+            'unit_price' => 'decimal:2',
+            'discount_total' => 'decimal:2',
+            'tax_total' => 'decimal:2',
+            'total' => 'decimal:2',
+        ];
+    }
+
+    /**
+     * Get the order this item belongs to
+     */
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Get the product for this order item
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
