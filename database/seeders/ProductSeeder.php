@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Media;
-use App\Models\Product;
+use App\Models\Catalog\Category;
+use App\Models\Catalog\Product;
+use App\Models\Content\Comment;
+use App\Models\Content\Media;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -17,6 +17,8 @@ use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
+    public $cachedCategories = [];
+
     public function storeImage(string $imageUrl, int $modelId, $collection = 'product_images')
     {
         try {
@@ -81,15 +83,8 @@ class ProductSeeder extends Seeder
                 $p = Product::find($p->id); // reload to get the casts
                 // attach categories if exists
                 if (! empty($product['category'])) {
-                    $category = Category::firstOrCreate([
-                        'slug' => Str::slug($product['category']),
-                        'parent_id' => null,
-                    ], [
-                        'name' => ucwords($product['category']),
-                        'description' => fake()->sentence(),
-                        'is_active' => true,
-                    ]);
-                    $p->categories()->syncWithoutDetaching([$category->id]);
+                    $categoryId = $this->getCategory($product['category']);
+                    $p->categories()->syncWithoutDetaching([$categoryId]);
                 }
                 // add product images
                 foreach ($product['images'] as $imageUrl) {
@@ -124,5 +119,23 @@ class ProductSeeder extends Seeder
         });
 
         $this->command->getOutput()->progressFinish();
+    }
+
+    public function getCategory($categoryName): int
+    {
+        if (isset($this->cachedCategories[$categoryName])) {
+            return $this->cachedCategories[$categoryName];
+        }
+        $category = Category::firstOrCreate([
+            'slug' => Str::slug($categoryName),
+            'parent_id' => null,
+        ], [
+            'name' => ucwords($categoryName),
+            'description' => fake()->sentence(),
+            'is_active' => true,
+        ]);
+        $this->cachedCategories[$categoryName] = $category->id;
+
+        return $category->id;
     }
 }

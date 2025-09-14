@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Address;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\PaymentTransaction;
-use App\Models\Product;
+use App\Models\Catalog\Product;
+use App\Models\Core\Address;
+use App\Models\Core\Customer;
+use App\Models\Orders\Order;
+use App\Models\Orders\OrderItem;
+use App\Models\Payment\PaymentTransaction;
 use App\Models\User;
 use Livewire\Livewire;
 
@@ -152,8 +152,8 @@ test('customer can cancel cancellable orders', function () {
         ->test('storefront.my-account.order-detail', ['order' => $order])
         ->assertSee('Cancel Order')
         ->call('cancelOrder')
-        ->assertRedirect(route('my-account', ['tab' => 'orders']))
-        ->assertSessionHas('success', 'Order has been cancelled successfully.');
+        ->assertDispatched('toast', 'Order has been cancelled successfully.', 'success')
+        ->assertRedirect(route('my-account', ['tab' => 'orders']));
 
     expect($order->fresh()->status)->toBe('cancelled');
 });

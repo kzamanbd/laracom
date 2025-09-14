@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Storefront\Cart;
 
-use App\Models\Cart;
-use App\Services\CartService;
+use App\Models\Cart\Cart;
+use App\Services\Cart\CartService;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -32,7 +32,7 @@ class CartBase extends Component
     public function dispatchCartUpdated(string $message = 'Cart updated successfully!'): void
     {
         $this->dispatch('cart-updated');
-        session()->flash('cart_message', $message);
+        $this->dispatch('toast', $message, 'success');
     }
 
     /**

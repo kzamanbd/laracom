@@ -3,19 +3,6 @@
         <h4>Cart Totals</h4>
     </div>
 
-    @if (session('coupon_message'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('coupon_message') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
-    @if (session('coupon_error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('coupon_error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
 
     <div class="table-responsive">
         <table class="table">
@@ -80,7 +67,7 @@
             <form wire:submit.prevent="applyCoupon">
                 <div class="d-flex">
                     <input wire:model="couponCode" type="text" placeholder="Enter coupon code"
-                        class="form-control me-2" @error('couponCode') is-invalid @enderror>
+                        class="form-control me-2" wire:validate>
                     <button type="submit" wire:loading.attr="disabled" wire:target="applyCoupon" class="btn btn-sm">
                         <span wire:loading.remove wire:target="applyCoupon">Apply</span>
                         <span wire:loading wire:target="applyCoupon">

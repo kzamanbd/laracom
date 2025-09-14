@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\Layout;
 
-use App\Models\Category;
+use App\Models\Catalog\Category;
 use Livewire\Component;
 
 class Navigation extends Component

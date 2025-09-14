@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Storefront;
 
 use App\Http\Controllers\Controller;
-use App\Models\Promotion;
-use App\Services\CartService;
-use App\Services\ProductService;
+use App\Models\Marketing\Promotion;
+use App\Services\Cart\CartService;
+use App\Services\Product\ProductService;
 use Illuminate\View\View;
 
 class StorefrontController extends Controller

@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Storefront\Product\QuickView;
-use App\Models\Product;
+use App\Models\Catalog\Product;
 use App\Models\User;
 use Livewire\Livewire;
 

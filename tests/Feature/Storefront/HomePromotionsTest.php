@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Promotion;
+use App\Models\Marketing\Promotion;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);

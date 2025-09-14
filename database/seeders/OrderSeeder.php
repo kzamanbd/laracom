@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Address;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\PaymentTransaction;
-use App\Models\Product;
-use App\Models\Shipping;
+use App\Models\Catalog\Product;
+use App\Models\Core\Address;
+use App\Models\Core\Customer;
+use App\Models\Orders\Order;
+use App\Models\Orders\OrderItem;
+use App\Models\Payment\PaymentTransaction;
+use App\Models\Shipping\Shipping;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\MyAccount;
 
-use App\Models\Order;
+use App\Models\Orders\Order;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -115,7 +115,7 @@ class OrderDetail extends Component
             'status' => 'cancelled',
         ]);
 
-        session()->flash('success', 'Order has been cancelled successfully.');
+        $this->dispatch('toast', 'Order has been cancelled successfully.', 'success');
         $this->redirectRoute('my-account', ['tab' => 'orders']);
     }
 

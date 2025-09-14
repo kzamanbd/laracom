@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Storefront\Cart;
 
+use Livewire\Attributes\Validate;
+
 class Totals extends CartBase
 {
+    #[Validate('required|string|min:3|max:50')]
     public string $couponCode = '';
 
     public bool $applyingCoupon = false;
@@ -13,10 +16,6 @@ class Totals extends CartBase
      */
     public function applyCoupon(): void
     {
-        $this->validate([
-            'couponCode' => 'required|string|min:3|max:50',
-        ]);
-
         $this->applyingCoupon = true;
 
         $success = $this->getCartService()->applyCoupon($this->couponCode);
@@ -25,7 +24,7 @@ class Totals extends CartBase
             $this->dispatchCartUpdated('Coupon applied successfully!');
             $this->couponCode = '';
         } else {
-            session()->flash('coupon_error', 'Invalid coupon code. Please try again.');
+            $this->dispatch('toast', 'Invalid coupon code. Please try again.', 'error');
         }
 
         $this->applyingCoupon = false;

@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Storefront;
 
-use App\Livewire\Forms\CheckoutForm;
-use App\Models\Cart;
-use App\Services\CartService;
-use App\Services\OrderService;
+use App\Livewire\Storefront\Forms\CheckoutForm;
+use App\Models\Cart\Cart;
+use App\Services\Cart\CartService;
+use App\Services\Orders\OrderService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
@@ -99,11 +99,11 @@ class Checkout extends Component
         $success = $this->cartService->applyCoupon($this->form->coupon_code);
 
         if ($success) {
-            session()->flash('coupon_success', 'Coupon applied successfully!');
+            $this->dispatch('toast', 'Coupon applied successfully!', 'success');
             $this->form->clearCouponCode();
             $this->dispatch('cart-updated');
         } else {
-            session()->flash('coupon_error', 'Invalid coupon code');
+            $this->dispatch('toast', 'Invalid coupon code', 'error');
         }
     }
 
@@ -116,7 +116,7 @@ class Checkout extends Component
 
             // Check if cart is empty
             if ($this->cart->isEmpty()) {
-                session()->flash('error', 'Your cart is empty');
+                $this->dispatch('toast', 'Your cart is empty', 'error');
                 $this->processing = false;
 
                 return;
@@ -136,16 +136,16 @@ class Checkout extends Component
             $paymentSuccess = $this->orderService->processPayment($order, $paymentData);
 
             if ($paymentSuccess) {
-                session()->flash('success', 'Order placed successfully!');
+                $this->dispatch('toast', 'Order placed successfully!', 'success');
                 $this->redirect(route('order.confirmation', $order->id));
             } else {
-                session()->flash('error', 'Payment processing failed. Please try again.');
+                $this->dispatch('toast', 'Payment processing failed. Please try again.', 'error');
             }
         } catch (ValidationException $e) {
-            session()->flash('error', 'Please fix the errors below');
+            $this->dispatch('toast', 'Please fix the errors below', 'error');
             throw $e;
         } catch (Exception $e) {
-            session()->flash('error', 'An error occurred while processing your order. Please try again.');
+            $this->dispatch('toast', 'An error occurred while processing your order. Please try again.', 'error');
             Log::error('Checkout error: '.$e->getMessage(), [
                 'user_id' => auth()->id(),
                 'cart_id' => $this->cart->id,

@@ -19,11 +19,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
         ]);
 
-        User::factory()->customer()->create([
-            'name' => 'Site Customer',
-            'email' => 'customer@example.com',
-        ]);
-
         User::factory()->vendor()->create([
             'name' => 'Site Vendor',
             'email' => 'vendor@example.com',

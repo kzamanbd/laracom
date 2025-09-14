@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\Cart;
 
-use App\Models\CartItem;
+use App\Models\Cart\CartItem;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
