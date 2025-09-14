@@ -26,15 +26,6 @@ Route::view('terms-conditions', 'storefront.terms-conditions')->name('terms-cond
 Route::view('register', 'storefront.register')->name('register');
 Route::view('login', 'storefront.login')->name('login')->middleware('guest');
 
-/*
-Auth routes
-*/
-
-Route::group(['middleware' => 'auth'], function () {
-    // Profile route accessible to all authenticated users
-    Route::view('profile', 'profile')->name('profile');
-});
-
 // Customer-only routes
 Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('my-account', Dashboard::class)->name('my-account');
@@ -42,19 +33,15 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
 });
 
 // Admin-only routes
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
+Route::group(['middleware' => ['admin']], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::view('profile', 'profile')->name('profile');
     // TODO: Add admin routes
 });
 
-// Vendor-only routes
-Route::group(['middleware' => ['auth', 'role:vendor']], function () {
+// Vendor routes
+Route::group(['middleware' => ['vendor']], function () {
     // TODO: Add vendor routes
-});
-
-// Multi-role routes (admin and vendor)
-Route::group(['middleware' => ['auth', 'role:admin,vendor']], function () {
-    // TODO: Add admin and vendor routes
 });
 
 require __DIR__.'/auth.php';
