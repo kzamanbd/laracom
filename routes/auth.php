@@ -1,28 +1,32 @@
 <?php
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Livewire\Admin\Auth\ConfirmPassword;
+use App\Livewire\Admin\Auth\ForgotPassword;
+use App\Livewire\Admin\Auth\Login;
+use App\Livewire\Admin\Auth\ResetPassword;
+use App\Livewire\Admin\Auth\VerifyEmail;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
-    Volt::route('admin/login', 'pages.auth.login')
+    Route::get('admin/login', Login::class)
         ->name('admin.login');
 
-    Volt::route('forgot-password', 'pages.auth.forgot-password')
+    Route::get('forgot-password', ForgotPassword::class)
         ->name('password.request');
 
-    Volt::route('reset-password/{token}', 'pages.auth.reset-password')
+    Route::get('reset-password/{token}', ResetPassword::class)
         ->name('password.reset');
 });
 
 Route::middleware('auth')->group(function () {
-    Volt::route('verify-email', 'pages.auth.verify-email')
+    Route::get('verify-email', VerifyEmail::class)
         ->name('verification.notice');
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 
-    Volt::route('confirm-password', 'pages.auth.confirm-password')
+    Route::get('confirm-password', ConfirmPassword::class)
         ->name('password.confirm');
 });

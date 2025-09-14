@@ -5,7 +5,7 @@ use App\Models\User;
 test('unauthenticated user is redirected to login', function () {
     $response = $this->get(route('dashboard'));
 
-    $response->assertRedirect(route('login'));
+    $response->assertRedirect(route('admin.login'));
 });
 
 test('customer cannot access admin dashboard', function () {
@@ -53,7 +53,7 @@ test('inactive user is logged out and redirected', function () {
 
     $response = $this->actingAs($user)->get(route('dashboard'));
 
-    $response->assertRedirect(route('login'));
+    $response->assertRedirect(route('admin.login'));
     $this->assertGuest();
 });
 

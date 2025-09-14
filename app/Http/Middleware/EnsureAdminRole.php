@@ -18,7 +18,7 @@ class EnsureAdminRole
     {
         // Check if user is authenticated
         if (! Auth::check()) {
-            return redirect()->route('login');
+            return redirect()->route('admin.login');
         }
 
         $user = Auth::user();
@@ -27,7 +27,7 @@ class EnsureAdminRole
         if (! $user->is_active) {
             Auth::logout();
 
-            return redirect()->route('login')->withErrors(['account' => 'Your account has been deactivated.']);
+            return redirect()->route('admin.login')->withErrors(['account' => 'Your account has been deactivated.']);
         }
 
         // Check if user has admin role
