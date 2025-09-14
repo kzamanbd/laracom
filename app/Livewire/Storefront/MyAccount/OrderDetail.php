@@ -115,7 +115,7 @@ class OrderDetail extends Component
             'status' => 'cancelled',
         ]);
 
-        session()->flash('success', 'Order has been cancelled successfully.');
+        $this->dispatch('toast', 'Order has been cancelled successfully.', 'success');
         $this->redirectRoute('my-account', ['tab' => 'orders']);
     }
 

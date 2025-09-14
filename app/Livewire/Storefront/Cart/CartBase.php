@@ -32,7 +32,7 @@ class CartBase extends Component
     public function dispatchCartUpdated(string $message = 'Cart updated successfully!'): void
     {
         $this->dispatch('cart-updated');
-        session()->flash('cart_message', $message);
+        $this->dispatch('toast', $message, 'success');
     }
 
     /**

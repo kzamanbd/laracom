@@ -11,13 +11,6 @@
 
     <section class="mt-50 mb-50">
         <div class="container">
-            <!-- Flash Messages -->
-            @if (session('success'))
-                <div class="alert alert-success mb-25">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger mb-25">{{ session('error') }}</div>
-            @endif
 
             <!-- Coupon Section -->
             <div class="row">
@@ -51,12 +44,6 @@
                                     <button type="submit" class="btn btn-md">Apply Coupon</button>
                                 </div>
                             </form>
-                            @if (session('coupon_success'))
-                                <div class="alert alert-success mt-10">{{ session('coupon_success') }}</div>
-                            @endif
-                            @if (session('coupon_error'))
-                                <div class="alert alert-danger mt-10">{{ session('coupon_error') }}</div>
-                            @endif
                         </div>
                     </div>
                 </div>

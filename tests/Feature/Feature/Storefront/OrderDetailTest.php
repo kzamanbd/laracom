@@ -152,8 +152,8 @@ test('customer can cancel cancellable orders', function () {
         ->test('storefront.my-account.order-detail', ['order' => $order])
         ->assertSee('Cancel Order')
         ->call('cancelOrder')
-        ->assertRedirect(route('my-account', ['tab' => 'orders']))
-        ->assertSessionHas('success', 'Order has been cancelled successfully.');
+        ->assertDispatched('toast', 'Order has been cancelled successfully.', 'success')
+        ->assertRedirect(route('my-account', ['tab' => 'orders']));
 
     expect($order->fresh()->status)->toBe('cancelled');
 });
