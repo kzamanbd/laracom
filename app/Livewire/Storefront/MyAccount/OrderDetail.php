@@ -57,6 +57,50 @@ class OrderDetail extends Component
     }
 
     /**
+     * Get formatted billing address
+     */
+    public function getFormattedBillingAddress(): ?string
+    {
+        if (! $this->order->billingAddress) {
+            return null;
+        }
+
+        $address = $this->order->billingAddress;
+
+        return "{$address->city}, {$address->state} {$address->postal_code}";
+    }
+
+    /**
+     * Get formatted shipping address
+     */
+    public function getFormattedShippingAddress(): ?string
+    {
+        if (! $this->order->shippingAddress) {
+            return null;
+        }
+
+        $address = $this->order->shippingAddress;
+
+        return "{$address->city}, {$address->state} {$address->postal_code}";
+    }
+
+    /**
+     * Get formatted payment provider
+     */
+    public function getFormattedPaymentProvider($provider): string
+    {
+        return 'via '.ucfirst($provider);
+    }
+
+    /**
+     * Get formatted payment reference
+     */
+    public function getFormattedPaymentReference($reference): string
+    {
+        return 'Ref: '.$reference;
+    }
+
+    /**
      * Cancel the order if allowed
      */
     public function cancelOrder(): void
