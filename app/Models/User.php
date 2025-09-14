@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Cart\Wishlist;
 use App\Models\Core\Customer;
 use App\Models\Orders\Order;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -80,7 +81,8 @@ class User extends Authenticatable
      */
     public function ordersWithDetails(): HasMany
     {
-        return $this->orders()->with(['items.product', 'customer', 'billingAddress', 'shippingAddress'])
+        return $this->orders()
+            ->with(['items.product', 'customer', 'billingAddress', 'shippingAddress'])
             ->orderBy('created_at', 'desc');
     }
 
@@ -106,5 +108,13 @@ class User extends Authenticatable
     public function scopeWhereRole($query, string $role)
     {
         return $query->where('role', $role);
+    }
+
+    /**
+     * Get the user's wishlist items
+     */
+    public function wishlistItems(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

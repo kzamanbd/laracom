@@ -12,8 +12,11 @@
                     data-bs-target="#quickViewModal">
                     <i class="fi-rs-search"></i>
                 </a>
-                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#">
-                    <i class="fi-rs-heart"></i>
+                <a aria-label="{{ $addToWishlistText }}" class="action-btn hover-up" wire:click="addToWishlist"
+                    wire:loading.attr="disabled" wire:target="addToWishlist">
+                    <i class="fi-rs-heart" wire:loading.remove wire:target="addToWishlist"></i>
+                    <span wire:loading wire:target="addToWishlist"
+                        style="display: none; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid #333; border-radius: 50%; animation: spin 1s linear infinite;"></span>
                 </a>
                 <a aria-label="Compare" class="action-btn hover-up" href="#">
                     <i class="fi-rs-shuffle"></i>

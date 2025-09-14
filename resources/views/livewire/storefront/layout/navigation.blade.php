@@ -92,10 +92,17 @@
                                     <a href="{{ route('wishlist') }}">
                                         <img class="svgInject" alt="DraftScripts"
                                             src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
-                                        <span class="pro-count blue">4</span>
+                                        <span class="pro-count blue">{{ $this->wishlistItemCount }}</span>
                                     </a>
                                 </div>
-                                @livewire('storefront.cart.overview')
+                                <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="{{ route('cart') }}">
+                                        <img alt="DraftScripts"
+                                            src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
+                                        <span class="pro-count blue">{{ $this->cartItemCount }}</span>
+                                    </a>
+                                    @livewire('storefront.cart.overview')
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -292,14 +299,14 @@
                                 <a href="{{ route('wishlist') }}">
                                     <img alt="DraftScripts"
                                         src="{{ asset('assets/imgs/theme/icons/icon-heart.svg') }}">
-                                    <span class="pro-count white">4</span>
+                                    <span class="pro-count white">{{ $this->wishlistItemCount }}</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('cart') }}">
                                     <img alt="DraftScripts"
                                         src="{{ asset('assets/imgs/theme/icons/icon-cart.svg') }}">
-                                    <span class="pro-count white">2</span>
+                                    <span class="pro-count white">{{ $this->cartItemCount }}</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul>

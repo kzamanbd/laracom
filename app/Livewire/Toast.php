@@ -10,14 +10,14 @@ class Toast extends Component
     public array $messages = [];
 
     #[On('toast')]
-    public function showToast($message, $type = 'success')
+    public function showToast($args)
     {
         $this->messages[] = [
-            'message' => $message,
-            'type' => $type,
-            'title' => ucfirst($type),
+            'message' => $args['message'],
+            'type' => $args['type'],
+            'title' => ucfirst($args['type']),
             'time' => now()->format('H:i:s'),
-            'icon' => $type == 'success' ? 'fi-rs-check' : 'fi-rs-cross',
+            'icon' => $args['type'] == 'success' ? 'fi-rs-check' : 'fi-rs-cross',
         ];
     }
 

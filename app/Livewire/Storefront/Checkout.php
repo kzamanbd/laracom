@@ -99,11 +99,17 @@ class Checkout extends Component
         $success = $this->cartService->applyCoupon($this->form->coupon_code);
 
         if ($success) {
-            $this->dispatch('toast', 'Coupon applied successfully!', 'success');
+            $this->dispatch('toast', [
+                'type' => 'success',
+                'message' => 'Coupon applied successfully!',
+            ]);
             $this->form->clearCouponCode();
             $this->dispatch('cart-updated');
         } else {
-            $this->dispatch('toast', 'Invalid coupon code', 'error');
+            $this->dispatch('toast', [
+                'type' => 'error',
+                'message' => 'Invalid coupon code',
+            ]);
         }
     }
 
@@ -116,7 +122,10 @@ class Checkout extends Component
 
             // Check if cart is empty
             if ($this->cart->isEmpty()) {
-                $this->dispatch('toast', 'Your cart is empty', 'error');
+                $this->dispatch('toast', [
+                    'type' => 'error',
+                    'message' => 'Your cart is empty',
+                ]);
                 $this->processing = false;
 
                 return;
@@ -136,16 +145,28 @@ class Checkout extends Component
             $paymentSuccess = $this->orderService->processPayment($order, $paymentData);
 
             if ($paymentSuccess) {
-                $this->dispatch('toast', 'Order placed successfully!', 'success');
+                $this->dispatch('toast', [
+                    'type' => 'success',
+                    'message' => 'Order placed successfully!',
+                ]);
                 $this->redirect(route('order.confirmation', $order->id));
             } else {
-                $this->dispatch('toast', 'Payment processing failed. Please try again.', 'error');
+                $this->dispatch('toast', [
+                    'type' => 'error',
+                    'message' => 'Payment processing failed. Please try again.',
+                ]);
             }
         } catch (ValidationException $e) {
-            $this->dispatch('toast', 'Please fix the errors below', 'error');
+            $this->dispatch('toast', [
+                'type' => 'error',
+                'message' => 'Please fix the errors below',
+            ]);
             throw $e;
         } catch (Exception $e) {
-            $this->dispatch('toast', 'An error occurred while processing your order. Please try again.', 'error');
+            $this->dispatch('toast', [
+                'type' => 'error',
+                'message' => 'An error occurred while processing your order. Please try again.',
+            ]);
             Log::error('Checkout error: '.$e->getMessage(), [
                 'user_id' => auth()->id(),
                 'cart_id' => $this->cart->id,
