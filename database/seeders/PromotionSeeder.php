@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Promotion;
+use App\Models\Marketing\Promotion;
 use Illuminate\Database\Seeder;
 
 class PromotionSeeder extends Seeder

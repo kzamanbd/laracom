@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Media;
-use App\Models\Product;
+use App\Models\Catalog\Category;
+use App\Models\Catalog\Product;
+use App\Models\Content\Comment;
+use App\Models\Content\Media;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Seeder;

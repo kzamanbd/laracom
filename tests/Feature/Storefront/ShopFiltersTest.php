@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Livewire\Storefront\Catalog\Filters;
 use App\Livewire\Storefront\Catalog\ProductCatalog;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Catalog\Category;
+use App\Models\Catalog\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;

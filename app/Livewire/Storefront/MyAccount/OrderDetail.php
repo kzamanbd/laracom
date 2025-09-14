@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\MyAccount;
 
-use App\Models\Order;
+use App\Models\Orders\Order;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;

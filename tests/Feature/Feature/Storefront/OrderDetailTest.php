@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Address;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Models\PaymentTransaction;
-use App\Models\Product;
+use App\Models\Catalog\Product;
+use App\Models\Core\Address;
+use App\Models\Core\Customer;
+use App\Models\Orders\Order;
+use App\Models\Orders\OrderItem;
+use App\Models\Payment\PaymentTransaction;
 use App\Models\User;
 use Livewire\Livewire;
 

@@ -3,7 +3,7 @@
 namespace App\Livewire\Storefront\Product;
 
 use App\Livewire\Storefront\Cart\CartBase;
-use App\Models\Product;
+use App\Models\Catalog\Product;
 use Livewire\Attributes\On;
 
 class QuickView extends CartBase

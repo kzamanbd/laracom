@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Storefront\Cart;
 
-use App\Models\Cart;
-use App\Services\CartService;
+use App\Models\Cart\Cart;
+use App\Services\Cart\CartService;
 use Livewire\Attributes\On;
 use Livewire\Component;
 

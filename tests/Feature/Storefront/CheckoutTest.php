@@ -1,15 +1,15 @@
 <?php
 
-use App\Livewire\Forms\CheckoutForm;
 use App\Livewire\Storefront\Checkout;
-use App\Models\Address;
-use App\Models\Cart;
-use App\Models\CartItem;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Models\Product;
+use App\Livewire\Storefront\Forms\CheckoutForm;
+use App\Models\Cart\Cart;
+use App\Models\Cart\CartItem;
+use App\Models\Catalog\Product;
+use App\Models\Core\Address;
+use App\Models\Core\Customer;
+use App\Models\Orders\Order;
 use App\Models\User;
-use App\Services\OrderService;
+use App\Services\Orders\OrderService;
 use Livewire\Livewire;
 
 beforeEach(function () {

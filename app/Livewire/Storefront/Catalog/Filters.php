@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Storefront\Catalog;
 
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Catalog\Category;
+use App\Models\Catalog\Product;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 

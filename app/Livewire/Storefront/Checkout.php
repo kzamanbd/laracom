@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Storefront;
 
-use App\Livewire\Forms\CheckoutForm;
-use App\Models\Cart;
-use App\Services\CartService;
-use App\Services\OrderService;
+use App\Livewire\Storefront\Forms\CheckoutForm;
+use App\Models\Cart\Cart;
+use App\Services\Cart\CartService;
+use App\Services\Orders\OrderService;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;

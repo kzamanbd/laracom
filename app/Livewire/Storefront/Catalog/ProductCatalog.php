@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Storefront\Catalog;
 
-use App\Services\ProductService;
+use App\Services\Product\ProductService;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;

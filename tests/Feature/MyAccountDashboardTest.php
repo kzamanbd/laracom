@@ -1,8 +1,8 @@
 <?php
 
 use App\Livewire\Storefront\MyAccount\Dashboard;
-use App\Models\Customer;
-use App\Models\Order;
+use App\Models\Core\Customer;
+use App\Models\Orders\Order;
 use App\Models\User;
 use Livewire\Livewire;
 

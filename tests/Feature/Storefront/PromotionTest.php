@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\Promotion;
+use App\Models\Marketing\Promotion;
 
 test('promotion factory creates valid promotion', function () {
     $promotion = Promotion::factory()->create();
