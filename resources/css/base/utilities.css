@@ -1,0 +1,20 @@
+/* Utility classes and helper styles will be added here as needed */
+@utility theme-surface {
+    @apply dark:bg-dark-primary bg-white;
+}
+@utility theme-surface-hover {
+    @apply dark:bg-dark-secondary bg-gray-100;
+}
+@utility theme-surface-secondary {
+    @apply dark:bg-dark-secondary bg-gray-100;
+}
+@utility theme-surface-secondary-hover {
+    @apply dark:bg-dark-tertiary bg-gray-200;
+}
+@utility theme-surface-tertiary {
+    @apply dark:bg-dark-tertiary bg-gray-200;
+}
+
+@layer utilities {
+    /* Custom utilities can be added here */
+}

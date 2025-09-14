@@ -1,0 +1,44 @@
+/* Activity Timeline Styles */
+@layer components {
+    .activity-timeline {
+        @apply flex h-full flex-col;
+    }
+    .activity-timeline-list {
+        @apply relative flex-1 space-y-6 overflow-y-auto px-4;
+        @apply before:absolute before:top-4 before:bottom-4 before:left-[42px] before:w-0.5 before:bg-gray-200 before:dark:bg-gray-600;
+    }
+    .activity-item {
+        @apply relative mb-6 flex gap-3 rounded-lg p-3;
+    }
+    .activity-avatar {
+        @apply relative z-20 flex-shrink-0;
+    }
+    .activity-content {
+        @apply min-w-0 flex-1;
+    }
+    .activity-header {
+        @apply flex items-start justify-between;
+    }
+    .activity-load-more {
+        @apply flex justify-center border-t border-gray-100 px-4 py-3 pb-0 dark:border-gray-700;
+    }
+    /* Scrollbar styling for activity timeline */
+    .activity-timeline-list::-webkit-scrollbar {
+        @apply w-1;
+    }
+    .activity-timeline-list::-webkit-scrollbar-track {
+        @apply bg-gray-100 dark:bg-gray-700;
+    }
+    .activity-timeline-list::-webkit-scrollbar-thumb {
+        @apply rounded-full bg-gray-300 dark:bg-gray-600;
+    }
+    .activity-timeline-list::-webkit-scrollbar-thumb:hover {
+        @apply bg-gray-400 dark:bg-gray-500;
+    }
+    .activity-avatar > div {
+        @apply shadow-sm transition-all duration-200;
+    }
+    .activity-item:hover .activity-avatar > div {
+        @apply scale-105 shadow-md;
+    }
+}

@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+@import 'preline/variants.css';
+@plugin '@tailwindcss/forms';
+@plugin "@iconify/tailwind4" {
+    scale: 1.4;
+}
+
+@source "../../../node_modules/preline/dist/*.js";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@custom-variant dark (&:where(.dark, .dark *));
+
+@custom-variant vertical {
+    &:where(.vertical *) {
+        @slot;
+    }
+}
+@custom-variant horizontal {
+    &:where(.horizontal *) {
+        @slot;
+    }
+}
+@custom-variant semi-dark {
+    &:where(.semi-dark *) {
+        @slot;
+    }
+}
+@custom-variant collapsed-menu {
+    &:where(.collapsed-menu *) {
+        @slot;
+    }
+}
+@custom-variant hidden-menu {
+    &:where(.hidden-menu *) {
+        @slot;
+    }
+}

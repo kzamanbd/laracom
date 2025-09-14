@@ -1,0 +1,296 @@
+/* ================================ Forms ================================ */
+@layer components {
+    /* ================================ Alert ================================ */
+    .alert {
+        @apply rounded border px-5 py-3;
+    }
+    .alert-icon {
+        @apply flex items-center space-x-3;
+    }
+    .alert-dismiss {
+        @apply flex items-center justify-between space-x-3;
+    }
+    .form-group {
+        @apply mb-2;
+    }
+    .form-label,
+    label:has(+ .form-control),
+    label:has(+ .input-group) {
+        @apply relative mb-1.5 block text-sm font-semibold;
+    }
+    .label-required {
+        @apply after:ml-[0.125rem] after:text-red-500 after:content-['*'];
+    }
+    .form-control {
+        @apply focus:border-primary-500 focus:ring-primary-500 dark:bg-dark-primary dark:border-dark-border block w-full rounded-md border-gray-200 bg-white text-sm focus:ring;
+    }
+    .form-select-sm {
+        @apply py-1.5 text-xs;
+    }
+    .form-check-input {
+        @apply focus:border-primary-300 checked:border-primary-300 text-primary-600 focus:ring-primary-500 dark:checked:border-primary-500 dark:checked:bg-primary-500 shrink-0 rounded-sm focus:ring focus:ring-offset-0 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-800 dark:focus:ring-offset-gray-800;
+    }
+    .form-check-input[type='checkbox'] {
+        @apply rounded-sm;
+    }
+    .form-check-input[type='radio'] {
+        @apply text-primary-600 checked:border-primary-500 focus:ring-primary-500 dark:checked:border-primary-500 dark:checked:bg-primary-500 dark:bg-dark-primary dark:focus:ring-offset-dark-primary rounded-full disabled:pointer-events-none disabled:opacity-50;
+    }
+    .input-group {
+        @apply focus-within:ring-primary-500 dark:bg-dark-primary dark:ring-dark-border flex rounded-md bg-white ring-1 ring-neutral-200 focus-within:ring-2;
+    }
+    .input-group .form-control {
+        @apply border-0 ring-0;
+    }
+    .input-group-prepend {
+        @apply dark:bg-dark-tertiary flex items-center justify-center rounded-tl-md rounded-bl-md bg-gray-100 px-3;
+    }
+    .input-group-append {
+        @apply dark:bg-dark-tertiary flex items-center justify-center rounded-tr-md rounded-br-md bg-gray-100 px-3;
+    }
+    .input-group:has(.input-group-prepend) .form-control {
+        @apply rounded-l-none;
+    }
+    .input-group:has(.input-group-append) .form-control {
+        @apply rounded-r-none;
+    }
+    .form-control.is-invalid {
+        @apply border-red-500 focus:border-red-300 focus:ring focus:ring-red-200;
+    }
+    .form-control.is-valid {
+        @apply border-green-500 focus:border-green-300 focus:ring focus:ring-green-200;
+    }
+    /* form control sm */
+    .form-control-sm {
+        @apply h-8 px-2 text-xs;
+    }
+    /* form control large */
+    .form-control-lg {
+        @apply px-2 text-2xl;
+    }
+    .has-success .form-control {
+        @apply border-success bg-green-100 focus:border-green-300 focus:ring focus:ring-green-200;
+    }
+    .has-error .form-control {
+        @apply border-danger bg-red-100 focus:border-red-300 focus:ring focus:ring-red-200;
+    }
+}
+
+/* ================================ DROPDOWN ================================ */
+@layer components {
+    .dropdown,
+    .hs-dropdown {
+        @apply relative;
+    }
+    .dropdown-toggle {
+        @apply flex cursor-pointer items-center;
+    }
+    .dropdown-menu {
+        @apply hs-dropdown-open:opacity-100 dark:bg-dark-primary z-20 hidden rounded-md border bg-white p-1 opacity-0 shadow-lg transition-[opacity,margin] duration-300 outline-none [&.show]:block;
+    }
+    .dropdown-item {
+        @apply dark:hover:bg-dark-tertiary flex w-full cursor-pointer items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-neutral-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden dark:text-neutral-400 dark:hover:text-neutral-300;
+    }
+    .dropdown-btn {
+        @apply flex w-full items-center gap-2 px-4 py-1 text-sm text-neutral-700 hover:bg-gray-50 dark:text-neutral-300 dark:hover:bg-gray-700;
+    }
+    .dropdown-btn.active {
+        @apply text-primary dark:text-primary;
+    }
+    .list-group-item {
+        @apply border-s border-e border-t border-b-0 border-solid border-inherit px-5 py-[0.65rem];
+    }
+    .tw-tooltip {
+        @apply hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible invisible absolute z-10 inline-block rounded-md bg-gray-900 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-2xs transition-opacity dark:bg-neutral-700;
+    }
+}
+
+/* ================================ FILE UPLOAD ================================ */
+/* custom file uploader  */
+.custom-file-container {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+}
+.custom-file-container * {
+    box-sizing: border-box;
+}
+.custom-file-container .label-container label {
+    color: var(--primary);
+    font-size: 16px;
+}
+.custom-file-container .label-container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.custom-file-container .clear-button {
+    color: #333;
+    font-size: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+.custom-file-container .clear-button:hover {
+    color: #777;
+}
+.custom-file-container .input-container {
+    display: inline-block;
+    height: 40px;
+    margin-bottom: 8px;
+    position: relative;
+    width: 100%;
+}
+.custom-file-container .input-container:hover {
+    cursor: pointer;
+}
+.custom-file-container .input-hidden {
+    height: 40px;
+    margin: 0;
+    max-width: 100%;
+    min-width: 220px;
+    opacity: 0;
+    width: 100%;
+}
+.custom-file-container .input-visible {
+    background-clip: padding-box;
+    background-color: #f1f2f3;
+    border-radius: 4px;
+    border: 1px solid #f1f2f3;
+    color: #333;
+    height: 40px;
+    left: 0;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 8px 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    user-select: none;
+    z-index: 5;
+}
+.custom-file-container .browse-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 6;
+    display: block;
+    height: auto;
+    padding: 10px 16px;
+    line-height: 1.25;
+    background-color: rgba(27, 85, 226, 0.239);
+    color: var(--primary);
+    border-left: 1px solid #e0e6ed;
+    box-sizing: border-box;
+}
+.custom-file-container .image-preview {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 4px;
+    height: 300px;
+    overflow: auto;
+    padding: 4px;
+    transition: background 0.2s ease-in-out;
+    width: 100%;
+    margin-top: 54px;
+    margin-bottom: 40px;
+}
+.custom-file-container .image-preview-item {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px 0 rgba(51, 51, 51, 0.25);
+    float: left;
+    height: 180px;
+    margin: 1.858736059%;
+    position: relative;
+    transition:
+        background 0.2s ease-in-out,
+        opacity 0.2s ease-in-out;
+    width: 29.615861214%;
+}
+.custom-file-container .image-preview-item.multi-item-clear-animation {
+    opacity: 0;
+}
+.custom-file-container .image-preview-item-clear {
+    background: #edede8;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px 0 rgba(51, 51, 51, 0.25);
+    height: 20px;
+    left: -6px;
+    margin-top: -6px;
+    position: absolute;
+    text-align: center;
+    transition:
+        background 0.2s ease-in-out,
+        color 0.2s ease-in-out;
+    width: 20px;
+}
+.custom-file-container .image-preview-item-clear:hover {
+    background: #e2e2da;
+    cursor: pointer;
+}
+.custom-file-container .image-preview-item-clear-icon {
+    color: #333;
+    display: block;
+    margin-top: -2px;
+}
+
+/* choose js */
+.choices__input {
+    border-radius: 4px;
+    background: transparent;
+}
+.icon-change .left svg.feather-heart,
+.icon-change .right svg.feather-star {
+    display: none;
+}
+
+/* Drag and Drop Enhancements */
+.dragndrop .selected > div {
+    @apply bg-primary-100 ring-primary-400 dark:bg-primary-900/50 dark:ring-primary-500 ring-2;
+}
+
+.dragndrop .sortable-swap-highlight > div {
+    @apply bg-primary-400;
+}
+
+.gu-transit {
+    @apply ring-primary-300 dark:ring-primary-600 scale-105 opacity-60 shadow-lg ring-2;
+    transform: rotate(2deg) !important;
+}
+
+.dragndrop .multi-drag-item.selected > div {
+    @apply bg-primary-50 ring-primary-400 dark:bg-primary-900/30 dark:ring-primary-500 ring-2;
+}
+
+.dragndrop .multi-drag-item.selected .bg-white {
+    @apply bg-primary-50 dark:bg-primary-900/30;
+}
+
+/* Kanban specific styles */
+.kanban-card {
+    @apply transition-all duration-200 hover:shadow-md;
+}
+
+.kanban-card:hover {
+    @apply scale-[1.02];
+}
+
+/* Handle styles */
+.handle {
+    @apply transition-all duration-200;
+}
+
+.handle:hover {
+    @apply scale-110;
+}
+
+/* Drop zone highlighting */
+.sortable-drag-over {
+    @apply ring-primary-400 dark:ring-primary-500 bg-primary-50 dark:bg-primary-900/20 ring-2;
+}

@@ -27,5 +27,10 @@
         "lint-staged": "^16.1.6",
         "tailwindcss": "^4.1.12",
         "vite": "^7.0.4"
+    },
+    "dependencies": {
+        "@iconify/tailwind4": "^1.0.6",
+        "preline": "^3.2.3",
+        "simplebar": "^6.3.2"
     }
 }
