@@ -19,7 +19,7 @@ class Login extends Component
         Session::regenerate();
 
         if (auth()->user()->hasRole('admin')) {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+            $this->redirectIntended(default: route('dashboard', absolute: false));
 
             return;
         }

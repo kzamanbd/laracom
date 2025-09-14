@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Layout;
+namespace App\Livewire\Admin\Layout;
 
 use App\Livewire\Actions\Logout;
 use Livewire\Component;
@@ -14,7 +14,7 @@ class Navigation extends Component
     {
         $logout();
 
-        $this->redirect('/', navigate: true);
+        $this->redirect('/');
     }
 
     public function render()

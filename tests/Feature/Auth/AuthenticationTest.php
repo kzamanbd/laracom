@@ -1,7 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Auth\Login;
-use App\Livewire\Layout\Navigation;
+use App\Livewire\Admin\Layout\Navigation;
 use App\Models\User;
 use Livewire\Livewire;
 
