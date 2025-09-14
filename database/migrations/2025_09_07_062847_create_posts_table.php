@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-
-            // Author
-            $table->foreignId('user_id')->constrained()->nullOnDelete();
-
-            // Content
-            $table->string('title');
+            $table->foreignId('user_id')->constrained();
+            $table->string('title')->index();
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable(); // short description / preview
             $table->longText('content'); // full body
@@ -33,10 +29,6 @@ return new class extends Migration
 
             // Timestamps
             $table->timestamps();
-
-            // Indexes
-            $table->index('title');
-            $table->index('status');
         });
     }
 

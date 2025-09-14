@@ -45,7 +45,7 @@ return new class extends Migration
             $table->index(['product_id']);
 
             // Prevent duplicate items with same attributes
-            $table->unique(['cart_id', 'product_id', 'product_attributes'], 'unique_cart_product_attributes');
+            $table->unique(['cart_id', 'product_id'], 'unique_cart_product_attributes');
         });
     }
 
