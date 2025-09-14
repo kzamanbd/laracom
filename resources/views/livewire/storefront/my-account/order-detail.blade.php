@@ -182,9 +182,7 @@
                                                     @if ($order->billingAddress->line2)
                                                         {{ $order->billingAddress->line2 }}<br>
                                                     @endif
-                                                    {{ $order->billingAddress->city }},
-                                                    {{ $order->billingAddress->state }}
-                                                    {{ $order->billingAddress->postal_code }}<br>
+                                                    {{ $order->billingAddress->city }}, {{ $order->billingAddress->state }} {{ $order->billingAddress->postal_code }}<br>
                                                     {{ $order->billingAddress->country }}
                                                     @if ($order->billingAddress->phone)
                                                         <br>Phone: {{ $order->billingAddress->phone }}
@@ -212,9 +210,7 @@
                                                     @if ($order->shippingAddress->line2)
                                                         {{ $order->shippingAddress->line2 }}<br>
                                                     @endif
-                                                    {{ $order->shippingAddress->city }},
-                                                    {{ $order->shippingAddress->state }}
-                                                    {{ $order->shippingAddress->postal_code }}<br>
+                                                    {{ $order->shippingAddress->city }}, {{ $order->shippingAddress->state }} {{ $order->shippingAddress->postal_code }}<br>
                                                     {{ $order->shippingAddress->country }}
                                                     @if ($order->shippingAddress->phone)
                                                         <br>Phone: {{ $order->shippingAddress->phone }}
@@ -242,12 +238,10 @@
                                                             {{ ucfirst($transaction->status) }}
                                                         </span>
                                                         @if ($transaction->provider)
-                                                            <br><small class="text-muted">via
-                                                                {{ ucfirst($transaction->provider) }}</small>
+                                                            <br><small class="text-muted">via {{ ucfirst($transaction->provider) }}</small>
                                                         @endif
                                                         @if ($transaction->reference)
-                                                            <br><small class="text-muted">Ref:
-                                                                {{ $transaction->reference }}</small>
+                                                            <br><small class="text-muted">Ref: {{ $transaction->reference }}</small>
                                                         @endif
                                                     </div>
                                                     @if (!$loop->last)
