@@ -152,4 +152,33 @@ class Order extends Model
     {
         return in_array($this->status, ['pending', 'paid']);
     }
+
+    /**
+     * Get formatted billing address as a single string.
+     */
+    public function formattedBillingAddress(): ?string
+    {
+        if (! $this->billingAddress) {
+            return '-';
+        }
+
+        return $this->billingAddress->full_address;
+    }
+
+    /**
+     * Get formatted shipping address as a single string.
+     */
+    public function formattedShippingAddress(): ?string
+    {
+        if (! $this->shippingAddress) {
+            return '-';
+        }
+
+        return $this->shippingAddress->full_address;
+    }
+
+    public function getFormattedPlacedAtAttribute(): string
+    {
+        return $this->placed_at ? $this->placed_at->format('d M, Y, g:i a') : '-';
+    }
 }

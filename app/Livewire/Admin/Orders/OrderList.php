@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Livewire\Admin\Dashboard;
+namespace App\Livewire\Admin\Orders;
 
 use App\Models\Orders\Order;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class RecentOrders extends Component
+class OrderList extends Component
 {
     use WithPagination;
 
-    public $perPage = 10;
+    public int $perPage = 15;
 
     #[Computed]
     public function orders()
@@ -22,13 +22,8 @@ class RecentOrders extends Component
             ->paginate($this->perPage);
     }
 
-    public function loadMore()
-    {
-        $this->perPage += 10;
-    }
-
     public function render()
     {
-        return view('livewire.admin.dashboard.recent-orders');
+        return view('livewire.admin.orders.order-list');
     }
 }

@@ -57,7 +57,7 @@ class Address extends Model
             $this->country,
         ]);
 
-        return implode(', ', $parts);
+        return implode('<br />', $parts);
     }
 
     /**

@@ -3,6 +3,8 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Storefront\OrderController;
 use App\Http\Controllers\Storefront\StorefrontController;
+use App\Livewire\Admin\Orders\OrderDetail as AdminOrderDetail;
+use App\Livewire\Admin\Orders\OrderList;
 use App\Livewire\Storefront\Cart\ShoppingCart;
 use App\Livewire\Storefront\Cart\Wishlist\WishlistPage;
 use App\Livewire\Storefront\Catalog\ProductCatalog;
@@ -34,10 +36,11 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
 });
 
 // Admin-only routes
-Route::group(['middleware' => ['admin']], function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+Route::group(['middleware' => ['admin'], 'prefix' => 'dashboard'], function () {
+    Route::view('/', 'dashboard')->name('dashboard');
     Route::view('profile', 'profile')->name('profile');
-    // TODO: Add admin routes
+    Route::get('orders', OrderList::class)->name('admin.orders.index');
+    Route::get('orders/{order}', AdminOrderDetail::class)->name('admin.orders.show');
 });
 
 // Vendor routes

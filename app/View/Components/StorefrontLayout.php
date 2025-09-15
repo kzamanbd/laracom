@@ -18,6 +18,6 @@ class StorefrontLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.storefront');
+        return view('components.layouts.storefront');
     }
 }
