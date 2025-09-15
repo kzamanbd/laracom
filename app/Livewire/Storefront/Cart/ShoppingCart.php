@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 
-#[Layout('layouts.storefront', ['title' => 'Cart'])]
+#[Layout('components.layouts.storefront', ['title' => 'Cart'])]
 class ShoppingCart extends CartBase
 {
     public bool $updating = false;

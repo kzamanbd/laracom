@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.storefront', ['title' => 'Order Details'])]
+#[Layout('components.layouts.storefront', ['title' => 'Order Details'])]
 class OrderDetail extends Component
 {
     public Order $order;

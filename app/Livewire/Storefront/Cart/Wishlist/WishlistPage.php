@@ -11,7 +11,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-#[Layout('layouts.storefront', ['title' => 'My Wishlist'])]
+#[Layout('components.layouts.storefront', ['title' => 'My Wishlist'])]
 class WishlistPage extends Component
 {
     public $wishlistItems = [];

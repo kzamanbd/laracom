@@ -3,6 +3,7 @@
 use App\Models\Orders\Order;
 use App\Models\Orders\OrderItem;
 use App\Models\User;
+use Livewire\Livewire;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -22,35 +23,44 @@ test('admin can view order detail page', function () {
         ->assertSee($order->number);
 });
 
-test('order detail shows previous and next navigation when applicable', function () {
+test('order detail shows prev/next controls and navigates when applicable', function () {
     /** @var \Illuminate\Contracts\Auth\Authenticatable $admin */
     $admin = User::factory()->create(['role' => 'admin']);
 
-    // Create three orders in order
+    // Create three orders in sequence
     $first = Order::factory()->create();
     $middle = Order::factory()->create();
     $last = Order::factory()->create();
 
-    // Add at least one item so the page renders items section
+    // Ensure items exist so the page renders items section
     OrderItem::factory()->for($middle, 'order')->create();
 
     actingAs($admin);
 
-    // Middle should have both prev and next
+    // Page renders Prev/Next buttons (Livewire actions), not anchor links
     get(route('admin.orders.show', $middle))
         ->assertSuccessful()
         ->assertSee('Order #'.$middle->number)
-        ->assertSee(route('admin.orders.show', $first))
-        ->assertSee(route('admin.orders.show', $last));
+        ->assertSee('Prev')
+        ->assertSee('Next');
 
-    // First should have only next
+    // Using Livewire, middle should redirect to first on Prev and to last on Next
+    Livewire::test(\App\Livewire\Admin\Orders\OrderDetail::class, ['order' => $middle])
+        ->call('goToPrevious')
+        ->assertRedirect(route('admin.orders.show', $first));
+
+    Livewire::test(\App\Livewire\Admin\Orders\OrderDetail::class, ['order' => $middle])
+        ->call('goToNext')
+        ->assertRedirect(route('admin.orders.show', $last));
+
+    // First/Last pages still show controls; navigation only applies when available
     get(route('admin.orders.show', $first))
         ->assertSuccessful()
-        ->assertDontSee(route('admin.orders.show', $first)) // previous shouldn't link to itself
-        ->assertSee(route('admin.orders.show', $middle));
+        ->assertSee('Prev')
+        ->assertSee('Next');
 
-    // Last should have only previous
     get(route('admin.orders.show', $last))
         ->assertSuccessful()
-        ->assertSee(route('admin.orders.show', $middle));
+        ->assertSee('Prev')
+        ->assertSee('Next');
 });

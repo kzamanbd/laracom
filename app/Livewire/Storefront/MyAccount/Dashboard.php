@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Layout('layouts.storefront', ['title' => 'My Account'])]
+#[Layout('components.layouts.storefront', ['title' => 'My Account'])]
 class Dashboard extends Component
 {
     use WithPagination;

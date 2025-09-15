@@ -7,7 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.guest')]
+#[Layout('components.layouts.guest')]
 class ConfirmPassword extends Component
 {
     public string $password = '';

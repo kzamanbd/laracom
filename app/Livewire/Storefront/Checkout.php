@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.storefront', ['title' => 'Checkout'])]
+#[Layout('components.layouts.storefront', ['title' => 'Checkout'])]
 class Checkout extends Component
 {
     public CheckoutForm $form;

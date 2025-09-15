@@ -9,7 +9,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Layout('layouts.storefront', ['title' => 'Shop'])]
+#[Layout('components.layouts.storefront', ['title' => 'Shop'])]
 class ProductCatalog extends Component
 {
     use WithPagination;
