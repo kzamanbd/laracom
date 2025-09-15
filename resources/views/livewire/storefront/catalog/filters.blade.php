@@ -8,9 +8,9 @@
         <ul class="categories custome-checkbox">
             @foreach ($this->categories as $category)
                 <li class="d-flex align-items-center">
-                    <input type="checkbox" wire:model.live="selectedCategories" value="{{ $category->id }}"
-                        class="form-check-input me-2" id="category-{{ $category->id }}">
-                    <label for="category-{{ $category->id }}" class="form-check-label">
+                    <input type="checkbox" wire:model.live="selectedCategories" value="{{ $category->slug }}"
+                        class="form-check-input me-2" id="category-{{ $category->slug }}">
+                    <label for="category-{{ $category->slug }}" class="form-check-label">
                         {{ $category->name }} ({{ $category->products_count }})
                     </label>
                 </li>

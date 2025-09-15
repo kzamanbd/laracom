@@ -4,14 +4,13 @@ namespace App\Livewire\Storefront\Catalog;
 
 use App\Models\Catalog\Category;
 use App\Models\Catalog\Product;
+use Illuminate\Support\Arr;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class Filters extends Component
 {
     public $selectedCategories = [];
-
-    public $priceRange = [0, 1000];
 
     public $minPrice = 0;
 
@@ -25,23 +24,10 @@ class Filters extends Component
 
     public function mount(): void
     {
-        $this->initializePriceRange();
         if (request()->has('category')) {
-            $category = $this->categories->firstWhere('slug', request()->query('category'));
-            if ($category) {
-                $this->selectedCategories = [$category->id];
-                $this->dispatchFiltersChanged();
-            }
+            $this->selectedCategories = [request('category')];
+            $this->dispatchFiltersChanged();
         }
-    }
-
-    public function initializePriceRange(): void
-    {
-        $priceRange = Product::query()
-            ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
-            ->first();
-        $this->minPrice = $priceRange->min_price ?? 0;
-        $this->maxPrice = $priceRange->max_price ?? 1000;
     }
 
     #[Computed]
@@ -105,11 +91,11 @@ class Filters extends Component
     protected function dispatchFiltersChanged(): void
     {
         $this->dispatch('filtersChanged', [
-            'categories' => $this->selectedCategories,
+            'categories' => Arr::join($this->selectedCategories, ','),
             'minPrice' => $this->minPrice,
             'maxPrice' => $this->maxPrice,
-            'colors' => $this->selectedColors,
-            'conditions' => $this->selectedConditions,
+            'colors' => Arr::join($this->selectedColors, ','),
+            'conditions' => Arr::join($this->selectedConditions, ','),
         ]);
     }
 
@@ -118,7 +104,6 @@ class Filters extends Component
         $this->selectedCategories = [];
         $this->selectedColors = [];
         $this->selectedConditions = [];
-        $this->initializePriceRange();
 
         $this->dispatchFiltersChanged();
     }

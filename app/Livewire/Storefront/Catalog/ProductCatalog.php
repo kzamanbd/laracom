@@ -35,19 +35,25 @@ class ProductCatalog extends Component
 
     public $order = 'desc';
 
-    // Filter properties
-    public $filters = [
-        'categories' => [],
-        'minPrice' => null,
-        'maxPrice' => null,
-        'colors' => [],
-        'conditions' => [],
-    ];
+    public $category = null;
+
+    public $min_price = null;
+
+    public $max_price = null;
+
+    public $colors = [];
+
+    public $conditions = [];
 
     protected $queryString = [
-        'limit' => ['except' => ''], // "except" removes it when null/empty
+        'limit' => ['except' => ''],
         'sort' => ['except' => 'newest'],
         'order' => ['except' => 'desc'],
+        'category' => ['except' => ''],
+        'min_price' => ['except' => 0],
+        'max_price' => ['except' => 1000],
+        'colors' => ['except' => ''],
+        'conditions' => ['except' => ''],
     ];
 
     #[Computed]
@@ -57,14 +63,24 @@ class ProductCatalog extends Component
             'limit' => $this->limit,
             'sort' => $this->sort,
             'order' => $this->order,
-            'filters' => $this->filters,
+            'filters' => [
+                'categories' => $this->category,
+                'minPrice' => $this->min_price,
+                'maxPrice' => $this->max_price,
+                'colors' => $this->colors,
+                'conditions' => $this->conditions,
+            ],
         ]);
     }
 
     #[On('filtersChanged')]
     public function updateFilters($filters)
     {
-        $this->filters = $filters;
+        $this->category = $filters['categories'];
+        $this->min_price = $filters['minPrice'];
+        $this->max_price = $filters['maxPrice'];
+        $this->colors = $filters['colors'];
+        $this->conditions = $filters['conditions'];
         $this->resetPage();
     }
 

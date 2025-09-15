@@ -13,16 +13,16 @@ class ProductService
      */
     public function getShopProducts($args)
     {
-        $perPage = $args['limit'] ?? 15;
-        $orderby = $args['sort'] ?? 'newest';
-        $orderDir = $args['order'] ?? 'desc';
-        $filters = $args['filters'] ?? [];
-
-        $supportedSorts = [
-            'name' => 'name',
-            'price' => 'price',
-            'newest' => 'created_at',
+        $defaultArgs = [
+            'limit' => 15,
+            'sort' => 'newest',
+            'order' => 'desc',
+            'filters' => [],
         ];
+        $args = array_merge($defaultArgs, $args);
+
+        $orderDir = $args['order'];
+        $filters = $args['filters'];
 
         $query = Product::query()
             ->with([
@@ -33,7 +33,7 @@ class ProductService
         // Apply category filters
         if (! empty($filters['categories'])) {
             $query->whereHas('categories', function ($q) use ($filters) {
-                $q->whereIn('categories.id', $filters['categories']);
+                $q->whereIn('categories.slug', explode(',', $filters['categories']));
             });
         }
 
@@ -49,7 +49,7 @@ class ProductService
         // Apply color filters
         if (! empty($filters['colors'])) {
             $query->where(function ($q) use ($filters) {
-                foreach ($filters['colors'] as $color) {
+                foreach (explode(',', $filters['colors']) as $color) {
                     $q->orWhereJsonContains('attributes->color', $color);
                 }
             });
@@ -58,18 +58,24 @@ class ProductService
         // Apply condition filters
         if (! empty($filters['conditions'])) {
             $query->where(function ($q) use ($filters) {
-                foreach ($filters['conditions'] as $condition) {
+                foreach (explode(',', $filters['conditions']) as $condition) {
                     $q->orWhereJsonContains('attributes->condition', $condition);
                 }
             });
         }
 
+        $supportedSortOrder = [
+            'name' => 'name',
+            'price' => 'price',
+            'newest' => 'created_at',
+        ];
+
         // Apply sorting
-        $query->when(array_key_exists($orderby, $supportedSorts), function ($query) use ($orderby, $orderDir, $supportedSorts) {
-            $query->orderBy($supportedSorts[$orderby], $orderDir);
+        $query->when(array_key_exists($args['sort'], $supportedSortOrder), function ($query) use ($args, $supportedSortOrder) {
+            $query->orderBy($supportedSortOrder[$args['sort']], $args['order']);
         });
 
-        return $query->paginate($perPage);
+        return $query->paginate($args['limit']);
     }
 
     public function getFeaturedProducts($limit = 8)

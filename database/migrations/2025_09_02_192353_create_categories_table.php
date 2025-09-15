@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->index();
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true)->index();
             $table->unsignedInteger('order_column')->default(0)->index();

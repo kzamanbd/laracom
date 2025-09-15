@@ -77,11 +77,11 @@ test('can filter products by color', function () {
 
     // Filter by red color
     $listView->dispatch('filtersChanged', [
-        'categories' => [],
-        'minPrice' => null,
-        'maxPrice' => null,
-        'colors' => ['red'],
-        'conditions' => [],
+        'categories' => '',
+        'minPrice' => 0,
+        'maxPrice' => 1000,
+        'colors' => 'red',
+        'conditions' => '',
     ]);
 
     expect($listView->get('products')->count())->toBe(1);
