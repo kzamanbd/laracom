@@ -17,12 +17,13 @@ class ProductService
             'limit' => 15,
             'sort' => 'newest',
             'order' => 'desc',
-            'filters' => [],
+            'categories' => '',
+            'minPrice' => 0,
+            'maxPrice' => 1000,
+            'colors' => '',
+            'conditions' => '',
         ];
         $args = array_merge($defaultArgs, $args);
-
-        $orderDir = $args['order'];
-        $filters = $args['filters'];
 
         $query = Product::query()
             ->with([
@@ -31,34 +32,34 @@ class ProductService
             ]);
 
         // Apply category filters
-        if (! empty($filters['categories'])) {
-            $query->whereHas('categories', function ($q) use ($filters) {
-                $q->whereIn('categories.slug', explode(',', $filters['categories']));
+        if (! empty($args['categories'])) {
+            $query->whereHas('categories', function ($q) use ($args) {
+                $q->whereIn('categories.slug', explode(',', $args['categories']));
             });
         }
 
         // Apply price range filters
-        if (! empty($filters['minPrice']) && is_numeric($filters['minPrice'])) {
-            $query->where('price', '>=', $filters['minPrice']);
+        if (! empty($args['minPrice']) && is_numeric($args['minPrice'])) {
+            $query->where('price', '>=', $args['minPrice']);
         }
 
-        if (! empty($filters['maxPrice']) && is_numeric($filters['maxPrice'])) {
-            $query->where('price', '<=', $filters['maxPrice']);
+        if (! empty($args['maxPrice']) && is_numeric($args['maxPrice'])) {
+            $query->where('price', '<=', $args['maxPrice']);
         }
 
         // Apply color filters
-        if (! empty($filters['colors'])) {
-            $query->where(function ($q) use ($filters) {
-                foreach (explode(',', $filters['colors']) as $color) {
+        if (! empty($args['colors'])) {
+            $query->where(function ($q) use ($args) {
+                foreach (explode(',', $args['colors']) as $color) {
                     $q->orWhereJsonContains('attributes->color', $color);
                 }
             });
         }
 
         // Apply condition filters
-        if (! empty($filters['conditions'])) {
-            $query->where(function ($q) use ($filters) {
-                foreach (explode(',', $filters['conditions']) as $condition) {
+        if (! empty($args['conditions'])) {
+            $query->where(function ($q) use ($args) {
+                foreach (explode(',', $args['conditions']) as $condition) {
                     $q->orWhereJsonContains('attributes->condition', $condition);
                 }
             });

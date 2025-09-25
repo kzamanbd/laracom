@@ -63,13 +63,11 @@ class ProductCatalog extends Component
             'limit' => $this->limit,
             'sort' => $this->sort,
             'order' => $this->order,
-            'filters' => [
-                'categories' => $this->category,
-                'minPrice' => $this->min_price,
-                'maxPrice' => $this->max_price,
-                'colors' => $this->colors,
-                'conditions' => $this->conditions,
-            ],
+            'categories' => $this->category,
+            'minPrice' => $this->min_price,
+            'maxPrice' => $this->max_price,
+            'colors' => $this->colors,
+            'conditions' => $this->conditions,
         ]);
     }
 
